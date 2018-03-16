@@ -1,14 +1,18 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dangan Dodge Proto", "Assembly-CSharp.csproj", "{EEA28E2F-AE99-B2FC-B985-55788C173196}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-
+		{EEA28E2F-AE99-B2FC-B985-55788C173196}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EEA28E2F-AE99-B2FC-B985-55788C173196}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EEA28E2F-AE99-B2FC-B985-55788C173196}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EEA28E2F-AE99-B2FC-B985-55788C173196}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
