@@ -140,7 +140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7f6e3234a54f44b19a011cdbae208a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 20
+  movementSpeed: 40
   playerNumber: One
 --- !u!4 &299470247
 Transform:
