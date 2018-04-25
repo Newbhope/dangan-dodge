@@ -16,30 +16,29 @@ public class PlayerController : MonoBehaviour {
 	private string horizontalAxis;
 	private string verticalAxis;
 
-	// Use this for initialization
-	void Start () {
+	private Transform playerTransform;
+
+	void Start() {
+		playerTransform = GetComponent<Transform>();
 		horizontalAxis = playerNumber + "Horizontal";
 		verticalAxis = playerNumber + "Vertical";
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		var xTranslate = Input.GetAxis (horizontalAxis) * Time.deltaTime * movementSpeed;
-		var yTranslate = Input.GetAxis (verticalAxis) * Time.deltaTime * movementSpeed;
+	void Update() {
+		var xTranslate = Input.GetAxis(horizontalAxis) * Time.deltaTime * movementSpeed;
 
-		if (xTranslate + GetComponent<Transform> ().position.x < xMin ||
-		    xTranslate + GetComponent<Transform> ().position.x > xMax) {
+		var yTranslate = Input.GetAxis(verticalAxis) * Time.deltaTime * movementSpeed;
+
+		if (xTranslate + playerTransform.position.x < xMin 
+			|| xTranslate + playerTransform.position.x > xMax) {
 			xTranslate = 0;
-			print ("test");
-
 		}
 
-		if (yTranslate + GetComponent<Transform> ().position.y < yMin ||
-			yTranslate + GetComponent<Transform> ().position.y > yMax) {
+		if (yTranslate + playerTransform.position.y < yMin 
+			|| yTranslate + playerTransform.position.y > yMax) {
 			yTranslate = 0;
-			print ("test");
 		}
 
-		transform.Translate (xTranslate, yTranslate, 0);
+		transform.Translate(xTranslate, yTranslate, 0);
 	}
 }
