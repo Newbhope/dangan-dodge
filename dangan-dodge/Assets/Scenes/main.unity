@@ -142,10 +142,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 20
   playerNumber: Two
-  xMin: 0
-  xMax: 17
-  yMin: -10
-  yMax: 10
+  bounds:
+    xMin: 0
+    xMax: 17.775
+    yMin: -10
+    yMax: 10
 --- !u!4 &935734708
 Transform:
   m_ObjectHideFlags: 0
@@ -281,7 +282,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4187014882824860, guid: fa412900266664e7497d7d8d4483f6a1, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -17.5
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 4187014882824860, guid: fa412900266664e7497d7d8d4483f6a1, type: 2}
       propertyPath: m_LocalPosition.y
@@ -360,6 +361,41 @@ Prefab:
       propertyPath: m_TagString
       value: PlayerSprite
       objectReference: {fileID: 0}
+    - target: {fileID: 114138592198797738, guid: fa412900266664e7497d7d8d4483f6a1,
+        type: 2}
+      propertyPath: boundaries.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114138592198797738, guid: fa412900266664e7497d7d8d4483f6a1,
+        type: 2}
+      propertyPath: boundaries.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114138592198797738, guid: fa412900266664e7497d7d8d4483f6a1,
+        type: 2}
+      propertyPath: boundaries.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114138592198797738, guid: fa412900266664e7497d7d8d4483f6a1,
+        type: 2}
+      propertyPath: playerNumber
+      value: One
+      objectReference: {fileID: 0}
+    - target: {fileID: 114138592198797738, guid: fa412900266664e7497d7d8d4483f6a1,
+        type: 2}
+      propertyPath: bounds.yMin
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 114138592198797738, guid: fa412900266664e7497d7d8d4483f6a1,
+        type: 2}
+      propertyPath: bounds.yMax
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 114138592198797738, guid: fa412900266664e7497d7d8d4483f6a1,
+        type: 2}
+      propertyPath: bounds.xMin
+      value: -17.775
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fa412900266664e7497d7d8d4483f6a1, type: 2}
   m_IsPrefabParent: 0
@@ -431,7 +467,7 @@ Transform:
   m_GameObject: {fileID: 1365927260}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 35.555, y: 19.999504, z: 1}
+  m_LocalScale: {x: 35.555, y: 20, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
