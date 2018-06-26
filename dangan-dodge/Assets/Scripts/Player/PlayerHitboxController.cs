@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HitboxController : MonoBehaviour {
+public class PlayerHitboxController : MonoBehaviour {
 
 	//only really useful if I ever want to change hitbox/modelsize
 
