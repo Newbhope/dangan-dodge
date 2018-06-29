@@ -40,7 +40,6 @@ GameObject:
   - component: {fileID: 4744980790253650}
   - component: {fileID: 212574974081921180}
   - component: {fileID: 61612644746292802}
-  - component: {fileID: 114253606881012516}
   m_Layer: 0
   m_Name: Square
   m_TagString: Untagged
@@ -112,19 +111,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireRate: 0
---- !u!114 &114253606881012516
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1402729466580526}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7db71204e5de54413af96c313282b36c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  modelScale: 0
-  model: {fileID: 0}
 --- !u!114 &114413863827109194
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -160,11 +146,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerNumber: 
-  bounds:
-    xMin: 0
-    xMax: 0
-    yMin: 0
-    yMax: 0
 --- !u!212 &212574974081921180
 SpriteRenderer:
   m_ObjectHideFlags: 1
