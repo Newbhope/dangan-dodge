@@ -17,7 +17,7 @@ public class PlayerMovementController : MonoBehaviour {
 	private float verticalUpperLimit;
 
 	void Start() {
-		BasePlayerVariables vars = this.gameObject.GetComponent<BasePlayerVariables>();
+		BasePlayerVariables vars = GetComponent<BasePlayerVariables>();
 		playerTransform = GetComponent<Transform>();
 		horizontalAxisName = vars.playerNumber + "Horizontal";
 		verticalAxisNamee = vars.playerNumber + "Vertical";
@@ -30,10 +30,14 @@ public class PlayerMovementController : MonoBehaviour {
 			}
 		}
 
-		horizontalLowerLimit = vars.bounds.xMin + (spriteTransform.localScale.x / 2);
-		horizontalUpperLimit = vars.bounds.xMax - (spriteTransform.localScale.x / 2);
-		verticalLowerLimit = vars.bounds.yMin + (spriteTransform.localScale.y / 2);
-		verticalUpperLimit = vars.bounds.yMax - (spriteTransform.localScale.y / 2);
+		Boundary bounds = gameObject.AddComponent(typeof(Boundary)) as Boundary;
+
+		Debug.Log("" + bounds);
+
+		horizontalLowerLimit = bounds.xMin + (spriteTransform.localScale.x / 2);
+		horizontalUpperLimit = bounds.xMax - (spriteTransform.localScale.x / 2);
+		verticalLowerLimit = bounds.yMin + (spriteTransform.localScale.y / 2);
+		verticalUpperLimit = bounds.yMax - (spriteTransform.localScale.y / 2);
 	}
 
 	/*
