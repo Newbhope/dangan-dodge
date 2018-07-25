@@ -30,9 +30,7 @@ public class PlayerMovementController : MonoBehaviour {
 			}
 		}
 
-		Boundary bounds = gameObject.AddComponent(typeof(Boundary)) as Boundary;
-
-		Debug.Log("" + bounds);
+		Boundary bounds = _GLOBAL_CONSTANTS.getPlayerBoundary(vars.playerNumber);
 
 		horizontalLowerLimit = bounds.xMin + (spriteTransform.localScale.x / 2);
 		horizontalUpperLimit = bounds.xMax - (spriteTransform.localScale.x / 2);

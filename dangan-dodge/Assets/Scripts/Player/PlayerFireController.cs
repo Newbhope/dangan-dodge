@@ -17,9 +17,9 @@ public class PlayerFireController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetKey(fireButtonName) && Time.time > nextFireTime) {
+		if (Input.GetButton(fireButtonName) && Time.time > nextFireTime) {
 			nextFireTime = Time.time + fireRate;
-
+			Debug.Log("lel");
 		}
 	}
 }

@@ -2,13 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public class Boundary : MonoBehaviour {
-
-	private static Boundary privBounds;
-	public static Boundary Instance() {
-		return new Boundary(-5, 5, -10, 10);
-	}
+public struct Boundary {
 
 	public float xMin, xMax, yMin, yMax;
 
@@ -19,17 +13,18 @@ public class Boundary : MonoBehaviour {
 		this.yMax = yMax;
 	}
 }
-	
+
 public class _GLOBAL_CONSTANTS {
-	public static Boundary ARENA_BOUNDARIES = new Boundary(-5, 5, -10, 10);
-}
+	public static Boundary ARENA_BOUNDARIES = new Boundary(-17.775f, 17.775f, -10f, 10f);
 
-public class Singleton : MonoBehaviour {
-	private static Singleton instance;
-
-	public static Singleton Instance {
-		get { return instance ?? 
-			(instance = new GameObject("Singleton").AddComponent<Singleton>()); 
+	public static Boundary getPlayerBoundary(string playerNumber) {
+		if (playerNumber.Equals("One")) {
+			return new Boundary(-17.775f, 0f, -10f, 10f);
+		} else if (playerNumber.Equals("Two")) {
+			return new Boundary(0f, 17.775f, -10f, 10f);
+		} else {
+			return ARENA_BOUNDARIES;
 		}
 	}
+
 }
