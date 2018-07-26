@@ -9,24 +9,32 @@ using UnityEngine;
 public class BaseBulletSpawner : MonoBehaviour {
 
 	public float fireRate;
+	public int movementSpeed;
 
-	private GameObject bullet;
+	private Rigidbody2D bullet;
 	private float nextFireTime;
-	private Transform playerTransform;
 
-	//Used to give the spawned bullet an owner (don't damage the creator, damage others)
-	//TODO: implement at some time
+	private Transform playerTransform;
+	private BasePlayerVariables playerVars;
 	private int playerNumber;
 
 	public void Start() {
-		bullet = (GameObject) Resources.Load("BaseBullet", typeof(GameObject));
+		bullet = (Rigidbody2D) Resources.Load("BaseBullet", typeof(Rigidbody2D));
 		playerTransform = GetComponentInParent<Transform>();
+		playerVars = GetComponentInParent<BasePlayerVariables>();
+		playerNumber = playerVars.playerNumberInt;
 	}
 
 	public void Spawn() {
 		if (Time.time > nextFireTime) {
 			nextFireTime = Time.time + fireRate;
-			Instantiate(bullet, new Vector3(0, 0, 0), Quaternion.identity);
+			bullet = Instantiate(bullet, playerTransform.position, Quaternion.identity)
+				as Rigidbody2D;
+			if (playerNumber == 1) {
+				bullet.velocity = transform.TransformDirection(Vector3.right * movementSpeed);
+			} else if (playerNumber == 2) {
+				bullet.velocity = transform.TransformDirection(Vector3.left * movementSpeed);
+			}
 		}
 	}
 
