@@ -6,14 +6,13 @@ public class BasePlayerVariables : MonoBehaviour {
 
 	//TODO: maybe refactor all player variables into this?
 
-	public string playerNumber;
+	public string playerNumberString;
+	public int playerNumberInt;
 
-	// Use this for initialization
 	void Start () {
 		
 	}
 	
-	// Update is called once per frame
 	void Update () {
 
 	}

@@ -19,8 +19,8 @@ public class PlayerMovementController : MonoBehaviour {
 	void Start() {
 		BasePlayerVariables vars = GetComponent<BasePlayerVariables>();
 		playerTransform = GetComponent<Transform>();
-		horizontalAxisName = vars.playerNumber + "Horizontal";
-		verticalAxisNamee = vars.playerNumber + "Vertical";
+		horizontalAxisName = vars.playerNumberString + "Horizontal";
+		verticalAxisNamee = vars.playerNumberString + "Vertical";
 
 		var childComponents = GetComponentsInChildren<Transform>();
 
@@ -30,7 +30,7 @@ public class PlayerMovementController : MonoBehaviour {
 			}
 		}
 
-		Boundary bounds = _GLOBAL_CONSTANTS.getPlayerBoundary(vars.playerNumber);
+		Boundary bounds = _GLOBAL_CONSTANTS.getPlayerBoundary(vars.playerNumberString);
 
 		horizontalLowerLimit = bounds.xMin + (spriteTransform.localScale.x / 2);
 		horizontalUpperLimit = bounds.xMax - (spriteTransform.localScale.x / 2);

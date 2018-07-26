@@ -2,24 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/**
+ * Class that calls into each bullet spawner with the fire key
+ * Each bullet spawner will have its own configurable fire rate
+ * 
+ * Fire rate is the period in seconds between the next time that type of bullet fires
+ **/
 public class PlayerFireController : MonoBehaviour {
 
-	public float fireRate;
-
 	private string fireButtonName;
-	private float nextFireTime;
+	private BaseBulletSpawner baseBulletSpawner;
 
-	// Use this for initialization
-	void Start () {
+	void Start() {
 		BasePlayerVariables vars = this.gameObject.GetComponent<BasePlayerVariables>();
-		fireButtonName = vars.playerNumber + "Fire";
+		fireButtonName = vars.playerNumberString + "Fire";
+		baseBulletSpawner = GetComponent<BaseBulletSpawner>();
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		if (Input.GetButton(fireButtonName) && Time.time > nextFireTime) {
-			nextFireTime = Time.time + fireRate;
-			Debug.Log("lel");
+	void Update() {
+		if (Input.GetButton(fireButtonName)) {
+			baseBulletSpawner.Spawn();
 		}
 	}
 }

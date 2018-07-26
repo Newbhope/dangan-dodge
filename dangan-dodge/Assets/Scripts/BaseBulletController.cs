@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class BaseBulletController : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
+	private int playerNumber;
+
+	void Start() {
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+
+	void Update() {
+		if (playerNumber == 1) {
+			transform.Translate(3 * Vector3.right * Time.deltaTime);
+		} else if (playerNumber == 2) {
+			transform.Translate(3 * Vector3.left * Time.deltaTime);
+		}
 	}
 }
