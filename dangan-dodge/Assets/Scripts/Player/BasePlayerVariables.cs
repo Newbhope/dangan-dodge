@@ -9,7 +9,7 @@ public class BasePlayerVariables : MonoBehaviour {
 	public string playerNumberString;
 	public int playerNumberInt;
 
-	private Transform spriteTransform;
+	public Transform spriteTransform;
 
 	void Awake() {
 		var childComponents = GetComponentsInChildren<Transform>();
@@ -19,9 +19,5 @@ public class BasePlayerVariables : MonoBehaviour {
 				spriteTransform = transform;
 			}
 		}
-	}
-
-	public Transform getPlayerSpriteTransform() {
-		return spriteTransform;
 	}
 }

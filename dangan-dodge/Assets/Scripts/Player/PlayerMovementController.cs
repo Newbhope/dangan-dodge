@@ -6,7 +6,7 @@ public class PlayerMovementController : MonoBehaviour {
 	public float movementSpeed;
 
 	private string horizontalAxisName;
-	private string verticalAxisNamee;
+	private string verticalAxisName;
 
 	private Transform playerTransform;
 
@@ -19,10 +19,10 @@ public class PlayerMovementController : MonoBehaviour {
 		BasePlayerVariables vars = GetComponent<BasePlayerVariables>();
 		playerTransform = GetComponent<Transform>();
 		horizontalAxisName = vars.playerNumberString + "Horizontal";
-		verticalAxisNamee = vars.playerNumberString + "Vertical";
+		verticalAxisName = vars.playerNumberString + "Vertical";
 
 		Boundary bounds = _GLOBAL_CONSTANTS.getPlayerBoundary(vars.playerNumberString);
-		Transform spriteTransform = vars.getPlayerSpriteTransform();
+		Transform spriteTransform = vars.spriteTransform;
 
 		horizontalLowerLimit = bounds.xMin + (spriteTransform.localScale.x / 2);
 		horizontalUpperLimit = bounds.xMax - (spriteTransform.localScale.x / 2);
@@ -37,7 +37,7 @@ public class PlayerMovementController : MonoBehaviour {
 	void Update() {
 		//Translate ranges from -.33 to .33
 		var xTranslate = Input.GetAxis(horizontalAxisName) * Time.deltaTime * movementSpeed;
-		var yTranslate = Input.GetAxis(verticalAxisNamee) * Time.deltaTime * movementSpeed;
+		var yTranslate = Input.GetAxis(verticalAxisName) * Time.deltaTime * movementSpeed;
 		//TODO: look into removing this early translate call
 		transform.Translate(xTranslate, yTranslate, 0);
 		Vector3 clampedPosition = transform.position;
