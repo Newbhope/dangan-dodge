@@ -15,26 +15,39 @@ public class BaseBulletSpawner : MonoBehaviour {
 	private float nextFireTime;
 
 	private Transform playerTransform;
-	private BasePlayerVariables playerVars;
+	private BasePlayerVariables vars;
 	private int playerNumber;
+	private Transform playerSpriteTransform;
 
 	public void Start() {
 		bullet = (Rigidbody2D) Resources.Load("BaseBullet", typeof(Rigidbody2D));
 		playerTransform = GetComponentInParent<Transform>();
-		playerVars = GetComponentInParent<BasePlayerVariables>();
-		playerNumber = playerVars.playerNumberInt;
+		vars = GetComponentInParent<BasePlayerVariables>();
+		playerNumber = vars.playerNumberInt;
+		playerSpriteTransform = vars.getPlayerSpriteTransform();
 	}
 
 	public void Spawn() {
 		if (Time.time > nextFireTime) {
 			nextFireTime = Time.time + fireRate;
-			bullet = Instantiate(bullet, playerTransform.position, Quaternion.identity)
-				as Rigidbody2D;
+			Vector3 spawnPosition = playerTransform.position;
+			Vector3 spawnDirection = Vector3.zero;
+
 			if (playerNumber == 1) {
-				bullet.velocity = transform.TransformDirection(Vector3.right * movementSpeed);
+				spawnPosition = playerTransform.position 
+					+ new Vector3(playerSpriteTransform.localScale.x / 2, 0, 0);
+				spawnDirection = Vector3.right * movementSpeed;
 			} else if (playerNumber == 2) {
-				bullet.velocity = transform.TransformDirection(Vector3.left * movementSpeed);
+				spawnPosition = playerTransform.position 
+					- new Vector3(playerSpriteTransform.localScale.x / 2, 0, 0);
+				spawnDirection = Vector3.left * movementSpeed;
 			}
+
+			Rigidbody2D spawnedBullet = Instantiate(
+				bullet, 
+				spawnPosition, 
+				Quaternion.identity) as Rigidbody2D;
+			spawnedBullet.velocity = transform.TransformDirection(spawnDirection);
 		}
 	}
 

@@ -9,7 +9,6 @@ public class PlayerMovementController : MonoBehaviour {
 	private string verticalAxisNamee;
 
 	private Transform playerTransform;
-	private Transform spriteTransform;
 
 	private float horizontalLowerLimit;
 	private float horizontalUpperLimit;
@@ -22,15 +21,8 @@ public class PlayerMovementController : MonoBehaviour {
 		horizontalAxisName = vars.playerNumberString + "Horizontal";
 		verticalAxisNamee = vars.playerNumberString + "Vertical";
 
-		var childComponents = GetComponentsInChildren<Transform>();
-
-		foreach (Transform transform in childComponents) {
-			if (transform.tag.Equals("PlayerSprite")) {
-				spriteTransform = transform;
-			}
-		}
-
 		Boundary bounds = _GLOBAL_CONSTANTS.getPlayerBoundary(vars.playerNumberString);
+		Transform spriteTransform = vars.getPlayerSpriteTransform();
 
 		horizontalLowerLimit = bounds.xMin + (spriteTransform.localScale.x / 2);
 		horizontalUpperLimit = bounds.xMax - (spriteTransform.localScale.x / 2);

@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Sprite
   - PlayerSprite
+  - Bullet
+  - Arena
   layers:
   - Default
   - TransparentFX
