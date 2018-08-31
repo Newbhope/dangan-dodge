@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public struct Boundary {
+﻿public struct Boundary {
 
 	public float xMin, xMax, yMin, yMax;
 

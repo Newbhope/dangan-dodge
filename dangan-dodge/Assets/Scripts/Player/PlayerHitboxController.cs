@@ -1,27 +1,38 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerHitboxController : MonoBehaviour {
-	
-	private BasePlayerVariables vars;
-	private int playerNumber;
+
+    public Text shootingPlayerScoreText;
+
+    private BasePlayerVariables vars;
+	private int hitPlayerNumber;
+    private GameObject player;
 
 	void Start () {
 		vars = GetComponentInParent<BasePlayerVariables>();
-		playerNumber = vars.playerNumberInt;
-	}
-	
-	void Update () {
-	}
+		hitPlayerNumber = vars.playerNumberInt;
+    }
 
 	void OnTriggerEnter2D(Collider2D other) {
 		BaseBulletVariables bulletVars = other
 			.gameObject
 			.GetComponent(typeof(BaseBulletVariables)) as BaseBulletVariables;
-		if (bulletVars != null && bulletVars.playerNumberInt != playerNumber) {
-			//a bullet that isn't owned by the player
-			Destroy(gameObject);
-		}
-	}
+
+        int shootingPlayerNumber = bulletVars.playerNumberInt;
+
+        //A bullet that isn't owned by the player
+        if (bulletVars != null && shootingPlayerNumber != hitPlayerNumber) {
+
+            int currentScore;
+            Debug.Log(GameStats.playerScores.TryGetValue(shootingPlayerNumber, out currentScore));
+            currentScore += 1;
+            GameStats.playerScores[shootingPlayerNumber] = currentScore;
+            shootingPlayerScoreText.text = "Score: " + currentScore;
+
+            //Destroy the player prefab instead of the square prefab
+            Destroy(gameObject.transform.parent.gameObject);
+        }
+    }
 }

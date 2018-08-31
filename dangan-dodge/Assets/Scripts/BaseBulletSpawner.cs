@@ -26,19 +26,12 @@ public class BaseBulletSpawner : MonoBehaviour {
 		playerTransform = GetComponentInParent<Transform>();
 		vars = GetComponentInParent<BasePlayerVariables>();
 		playerNumber = vars.playerNumberInt;
-		playerSpriteTransform = vars.spriteTransform;
 	}
 
 	public void Spawn() {
 		if (Time.time > nextFireTime) {
 			nextFireTime = Time.time + fireRate;
-			Vector3 spawnDirection = Vector3.zero;
-
-			if (playerNumber == 1) {
-				spawnDirection = Vector3.right * movementSpeed;
-			} else if (playerNumber == 2) {
-				spawnDirection = Vector3.left * movementSpeed;
-			}
+            Vector2 spawnDirection = vars.playerVector * movementSpeed;
 
 			GameObject spawnedBulletObject = Instantiate(
 				bulletObject,
