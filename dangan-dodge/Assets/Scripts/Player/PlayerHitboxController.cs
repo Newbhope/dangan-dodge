@@ -26,7 +26,7 @@ public class PlayerHitboxController : MonoBehaviour {
         if (bulletVars != null && shootingPlayerNumber != hitPlayerNumber) {
 
             int currentScore;
-            Debug.Log(GameStats.playerScores.TryGetValue(shootingPlayerNumber, out currentScore));
+            GameStats.playerScores.TryGetValue(shootingPlayerNumber, out currentScore);
             currentScore += 1;
             GameStats.playerScores[shootingPlayerNumber] = currentScore;
             shootingPlayerScoreText.text = "Score: " + currentScore;

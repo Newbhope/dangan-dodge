@@ -8,21 +8,22 @@ Prefab:
     m_TransformParent: {fileID: 0}
     m_Modifications: []
     m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 0}
+  m_SourcePrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1213257950634164}
-  m_IsPrefabParent: 1
+  m_IsPrefabAsset: 1
 --- !u!1 &1213257950634164
 GameObject:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
+  serializedVersion: 6
   m_Component:
   - component: {fileID: 4187014882824860}
   - component: {fileID: 114850359224366080}
   - component: {fileID: 114413863827109194}
   - component: {fileID: 114211003918731490}
   - component: {fileID: 114011870887347544}
+  - component: {fileID: 114186445107097210}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -33,9 +34,9 @@ GameObject:
 --- !u!1 &1402729466580526
 GameObject:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
+  serializedVersion: 6
   m_Component:
   - component: {fileID: 4744980790253650}
   - component: {fileID: 212574974081921180}
@@ -50,7 +51,7 @@ GameObject:
 --- !u!4 &4187014882824860
 Transform:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1213257950634164}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -64,7 +65,7 @@ Transform:
 --- !u!4 &4744980790253650
 Transform:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1402729466580526}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
@@ -77,7 +78,7 @@ Transform:
 --- !u!61 &61612644746292802
 BoxCollider2D:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1402729466580526}
   m_Enabled: 1
@@ -102,7 +103,7 @@ BoxCollider2D:
 --- !u!114 &114011870887347544
 MonoBehaviour:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1213257950634164}
   m_Enabled: 1
@@ -111,10 +112,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireRate: 1
+  movementSpeed: 0
+--- !u!114 &114186445107097210
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1213257950634164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 844c6a3b66f637148b563e7cf68ec12b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114211003918731490
 MonoBehaviour:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1213257950634164}
   m_Enabled: 1
@@ -125,7 +138,7 @@ MonoBehaviour:
 --- !u!114 &114413863827109194
 MonoBehaviour:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1213257950634164}
   m_Enabled: 1
@@ -137,7 +150,7 @@ MonoBehaviour:
 --- !u!114 &114850359224366080
 MonoBehaviour:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1213257950634164}
   m_Enabled: 1
@@ -147,10 +160,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerNumberString: One
   playerNumberInt: 1
+  bombsLeft: 0
+  playerVector: {x: 0, y: 0}
+  spriteTransform: {fileID: 0}
 --- !u!212 &212574974081921180
 SpriteRenderer:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1402729466580526}
   m_Enabled: 1
@@ -160,6 +176,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
@@ -191,3 +208,4 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+  m_SpriteSortPoint: 0

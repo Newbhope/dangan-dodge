@@ -7,6 +7,8 @@ public class BasePlayerVariables : MonoBehaviour {
     //Assigned in editor
 	public string playerNumberString;
 	public int playerNumberInt;
+    public int bombsLeft;
+
     //Vector representing which way the player is facing
     public Vector2 playerVector;
 
