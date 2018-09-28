@@ -9,6 +9,8 @@ using UnityEngine.UI;
  * */
 public class ArenaController : MonoBehaviour {
 
+    public int roundEndBeginTime;
+    public Text countdownText;
     public float roundEndPauseTime;
 
     public GameObject playerOne;
@@ -25,15 +27,29 @@ public class ArenaController : MonoBehaviour {
         int playerTwoScore;
         GameStats.playerScores.TryGetValue(2, out playerTwoScore);
         playerTwoScoreText.text = "Score: " + playerTwoScore;
+
+        StartCoroutine(StartRound());
+    }
+
+    IEnumerator StartRound() {
+        Time.timeScale = 0;
+        for (int currentSecond = roundEndBeginTime; currentSecond > 0; currentSecond--) {
+            countdownText.text = currentSecond.ToString();
+            yield return new WaitForSecondsRealtime(.7f);
+        }
+        countdownText.text = "DODGE!";
+        yield return new WaitForSecondsRealtime(.4f);
+        Destroy(countdownText);
+        Time.timeScale = 1;
     }
 
     void Update() {
         if (playerOne == null || playerTwo == null) {
-            StartCoroutine(restartRound());
+            StartCoroutine(RestartRound());
         }
 	}
 
-    IEnumerator restartRound() {
+    IEnumerator RestartRound() {
         yield return new WaitForSeconds(roundEndPauseTime);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
