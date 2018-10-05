@@ -356,10 +356,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 154103502}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 844c6a3b66f637148b563e7cf68ec12b, type: 3}
+  m_Script: {fileID: 11500000, guid: deedcf104d9f3d4419a2f5ae2dc64122, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bombIndicator: {fileID: 51290792}
+  horizontalPadding: 0
+  originalBombIcon: {fileID: 51290792}
 --- !u!1 &197572810
 GameObject:
   m_ObjectHideFlags: 0
@@ -552,7 +553,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerNumberString: One
   playerNumberInt: 1
-  bombsLeft: 1
+  bombsLeft: 5
   playerVector: {x: 1, y: 0}
   spriteTransform: {fileID: 0}
 --- !u!4 &316272979
@@ -578,10 +579,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 316272974}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 844c6a3b66f637148b563e7cf68ec12b, type: 3}
+  m_Script: {fileID: 11500000, guid: deedcf104d9f3d4419a2f5ae2dc64122, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bombIndicator: {fileID: 1466134402}
+  horizontalPadding: 10
+  originalBombIcon: {fileID: 1466134402}
 --- !u!1 &463519249
 GameObject:
   m_ObjectHideFlags: 0
