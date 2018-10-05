@@ -23,6 +23,7 @@ public class BombSpawner : MonoBehaviour {
                 originalPosition.z);
 
             Image newIcon = Instantiate(originalBombIcon, newIconPosition, Quaternion.identity);
+
             bombIcons.Add(newIcon);
         }
     }
