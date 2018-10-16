@@ -21,13 +21,13 @@ public class PlayerMovementController : MonoBehaviour {
 		horizontalAxisName = vars.playerNumberString + "Horizontal";
 		verticalAxisName = vars.playerNumberString + "Vertical";
 
-		Boundary bounds = _GLOBAL_CONSTANTS.getPlayerBoundary(vars.playerNumberString);
-		Transform spriteTransform = vars.spriteTransform;
+		Boundary arenaBounds = _GLOBAL_CONSTANTS.getPlayerBoundary(vars.playerNumberString);
+        Vector3 spriteBounds = GetComponentInChildren<SpriteRenderer>().bounds.size;
 
-		horizontalLowerLimit = bounds.xMin + (spriteTransform.localScale.x / 2);
-		horizontalUpperLimit = bounds.xMax - (spriteTransform.localScale.x / 2);
-		verticalLowerLimit = bounds.yMin + (spriteTransform.localScale.y / 2);
-		verticalUpperLimit = bounds.yMax - (spriteTransform.localScale.y / 2);
+        horizontalLowerLimit = arenaBounds.xMin + (spriteBounds.x / 2);
+		horizontalUpperLimit = arenaBounds.xMax - (spriteBounds.x / 2);
+		verticalLowerLimit = arenaBounds.yMin + (spriteBounds.y / 2);
+		verticalUpperLimit = arenaBounds.yMax - (spriteBounds.y / 2);
 	}
 
 	/*
