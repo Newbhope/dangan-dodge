@@ -121,9 +121,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1213257950634164}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 844c6a3b66f637148b563e7cf68ec12b, type: 3}
+  m_Script: {fileID: 11500000, guid: deedcf104d9f3d4419a2f5ae2dc64122, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  horizontalPadding: 0
+  originalBombIcon: {fileID: 0}
 --- !u!114 &114211003918731490
 MonoBehaviour:
   m_ObjectHideFlags: 1

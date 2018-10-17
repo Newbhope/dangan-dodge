@@ -8,7 +8,6 @@ public class PlayerHitboxController : MonoBehaviour {
 
     private BasePlayerVariables vars;
 	private int hitPlayerNumber;
-    private GameObject player;
 
 	void Start () {
 		vars = GetComponentInParent<BasePlayerVariables>();
@@ -16,6 +15,8 @@ public class PlayerHitboxController : MonoBehaviour {
     }
 
 	void OnTriggerEnter2D(Collider2D other) {
+        //TODO: Consider making this unit testable by extracting logic to an outside class/method
+
 		BaseBulletVariables bulletVars = other
 			.gameObject
 			.GetComponent(typeof(BaseBulletVariables)) as BaseBulletVariables;
