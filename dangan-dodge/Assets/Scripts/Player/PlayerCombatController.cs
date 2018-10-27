@@ -35,9 +35,10 @@ public class PlayerCombatController : MonoBehaviour {
                 baseBulletSpawner.Spawn();
             }
 
-            if (Input.GetButton(bombButtonName) && bombsLeft > 0) {
+            if (Input.GetButtonDown(bombButtonName) && bombsLeft > 0) {
                 bombSpawner.Spawn(bombsLeft);
                 bombsLeft--;
+                Debug.Log(bombsLeft);
             }
         }
     }

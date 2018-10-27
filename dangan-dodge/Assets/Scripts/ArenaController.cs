@@ -9,7 +9,8 @@ using UnityEngine.UI;
  * */
 public class ArenaController : MonoBehaviour {
 
-    public int roundEndBeginTime;
+    public int countdownNumber;
+    public float countdownInterval;
     public Text countdownText;
     public float roundEndPauseTime;
 
@@ -33,9 +34,9 @@ public class ArenaController : MonoBehaviour {
 
     IEnumerator StartRound() {
         Time.timeScale = 0;
-        for (int currentSecond = roundEndBeginTime; currentSecond > 0; currentSecond--) {
-            countdownText.text = currentSecond.ToString();
-            yield return new WaitForSecondsRealtime(.7f);
+        for (int currentNumber = countdownNumber; currentNumber > 0; currentNumber--) {
+            countdownText.text = currentNumber.ToString();
+            yield return new WaitForSecondsRealtime(countdownInterval);
         }
         countdownText.text = "DODGE!";
         yield return new WaitForSecondsRealtime(.4f);

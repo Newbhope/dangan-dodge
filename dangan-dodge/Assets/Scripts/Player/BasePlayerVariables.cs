@@ -12,16 +12,6 @@ public class BasePlayerVariables : MonoBehaviour {
     //Vector representing which way the player is facing
     public Vector2 playerVector;
 
-    //Assigned programatically
-	public Transform spriteTransform;
-
 	void Awake() {
-		var childComponents = GetComponentsInChildren<Transform>();
-
-		foreach (Transform transform in childComponents) {
-			if (transform.tag.Equals("PlayerSprite")) {
-				spriteTransform = transform;
-			}
-		}
 	}
 }

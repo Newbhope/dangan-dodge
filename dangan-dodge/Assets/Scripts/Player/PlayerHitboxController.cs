@@ -8,12 +8,16 @@ public class PlayerHitboxController : MonoBehaviour {
     private BasePlayerVariables vars;
 	private int hitPlayerNumber;
 
-	void Start () {
+    private ParticleSystem pSystem;
+
+    void Start () {
 		vars = GetComponentInParent<BasePlayerVariables>();
 		hitPlayerNumber = vars.playerNumberInt;
+
+        pSystem = transform.parent.gameObject.GetComponent<ParticleSystem>();
     }
 
-	void OnTriggerEnter2D(Collider2D other) {
+    void OnTriggerEnter2D(Collider2D other) {
         //TODO: Consider making this unit testable by extracting logic to an outside class/method
 
 		BaseBulletVariables bulletVars = other
@@ -30,6 +34,8 @@ public class PlayerHitboxController : MonoBehaviour {
             currentScore += 1;
             GameStats.playerScores[shootingPlayerNumber] = currentScore;
             shootingPlayerScoreText.text = "Score: " + currentScore;
+            //TODO use instantaite insead
+            pSystem.Play();
 
             //Destroy the player prefab instead of the square prefab
             Destroy(gameObject.transform.parent.gameObject);
