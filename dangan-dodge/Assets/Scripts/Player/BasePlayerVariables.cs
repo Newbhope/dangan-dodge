@@ -10,6 +10,7 @@ public class BasePlayerVariables : MonoBehaviour {
     public int bombsLeft;
 
     //Vector representing which way the player is facing
+    //TODO: Why do i need this?
     public Vector2 playerVector;
 
 	void Awake() {

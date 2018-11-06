@@ -6,14 +6,12 @@ public class BombSpawner : MonoBehaviour {
 
     public int horizontalPadding;
     public Image originalBombIcon;
+    public GameObject particles;
 
     private List<Image> bombIcons = new List<Image>();
     private int bombsLeft;
 
-    private ParticleSystem pSystem;
-
     public void Start() {
-        pSystem = GetComponent<ParticleSystem>();
         BasePlayerVariables vars = this.gameObject.GetComponent<BasePlayerVariables>();
         bombsLeft = vars.bombsLeft;
         Vector3 originalPosition = originalBombIcon.transform.position;
@@ -38,6 +36,9 @@ public class BombSpawner : MonoBehaviour {
             Destroy(bullet);
         }
         Destroy(bombIcons[bombsLeft - 1]);
-        pSystem.Play();
+
+        GameObject particleGameObject = Instantiate(particles, gameObject.transform);
+        ParticleSystem system = particleGameObject.GetComponent<ParticleSystem>();
+        system.Play();
     }
 }
