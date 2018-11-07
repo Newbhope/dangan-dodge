@@ -10,9 +10,12 @@ public class PlayerHitboxController : MonoBehaviour {
     private BasePlayerVariables vars;
 	private int hitPlayerNumber;
 
+    private ArenaController arenaController;
+
     void Start () {
 		vars = GetComponentInParent<BasePlayerVariables>();
 		hitPlayerNumber = vars.playerNumberInt;
+        arenaController = FindObjectOfType<ArenaController>();
     }
 
     void OnTriggerEnter2D(Collider2D other) {
@@ -31,6 +34,7 @@ public class PlayerHitboxController : MonoBehaviour {
             currentScore += 1;
             GameStats.playerScores[shootingPlayerNumber] = currentScore;
             shootingPlayerScoreText.text = "Score: " + currentScore;
+            arenaController.checkGameOver();
 
             GameObject particleObject = Instantiate
                 (explosionParticles, 
@@ -38,6 +42,7 @@ public class PlayerHitboxController : MonoBehaviour {
                 Quaternion.identity);
             particleObject.GetComponent<ParticleSystem>().Play();
 
+            Destroy(other.gameObject);
             //Destroy the player prefab instead of the square prefab
             Destroy(gameObject.transform.parent.gameObject);
         }

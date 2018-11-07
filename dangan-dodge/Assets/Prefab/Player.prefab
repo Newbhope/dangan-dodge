@@ -166,6 +166,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shootingPlayerScoreText: {fileID: 0}
+  explosionParticles: {fileID: 0}
 --- !u!114 &114712342882068156
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -179,6 +180,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   horizontalPadding: 50
   originalBombIcon: {fileID: 0}
+  particles: {fileID: 0}
 --- !u!212 &212117701956977200
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-
+using System.Collections.Generic;
 
 /**
  * Overall script for the game and arena
@@ -19,6 +19,8 @@ public class ArenaController : MonoBehaviour {
 
     public Text playerOneScoreText;
     public Text playerTwoScoreText;
+
+    public Text gameOverText;
 
     void Start() {
         int playerOneScore;
@@ -46,7 +48,6 @@ public class ArenaController : MonoBehaviour {
 
     void Update() {
         if (playerOne == null || playerTwo == null) {
-            StartCoroutine(RestartRound());
         }
 	}
 
@@ -60,4 +61,19 @@ public class ArenaController : MonoBehaviour {
 			Destroy(other.gameObject);
 		}
 	}
+
+    public void checkGameOver() {
+        Dictionary<int, int> scores = GameStats.playerScores;
+        //TODO: configurable score
+        //there has to be a better way to do this
+        if (scores.ContainsValue(7)) {
+            foreach (var pair in scores) {
+                if (pair.Value == 7) {
+                    gameOverText.text = "Player " + pair.Key + " Wins!";
+                }
+            }
+        } else {
+            StartCoroutine(RestartRound());
+        }
+    }
 }
