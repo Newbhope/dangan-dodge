@@ -166,7 +166,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shootingPlayerScoreText: {fileID: 0}
-  explosionParticles: {fileID: 0}
+  explosionParticles: {fileID: 1475468544743062, guid: e6e9179337d103b439444948fe4ac983,
+    type: 2}
 --- !u!114 &114712342882068156
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -180,7 +181,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   horizontalPadding: 50
   originalBombIcon: {fileID: 0}
-  particles: {fileID: 0}
+  particles: {fileID: 1475468544743062, guid: e6e9179337d103b439444948fe4ac983, type: 2}
 --- !u!212 &212117701956977200
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -19,7 +19,7 @@ public class BombSpawner : MonoBehaviour {
 
         for (int i = 1; i < bombsLeft; i++) {
             Vector3 newIconPosition = new Vector3(
-                originalPosition.x + horizontalPadding * i,
+                originalPosition.x + (horizontalPadding * i * vars.playerVector.x),
                 originalPosition.y,
                 originalPosition.z);
 
