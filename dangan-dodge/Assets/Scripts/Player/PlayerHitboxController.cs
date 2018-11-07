@@ -32,10 +32,14 @@ public class PlayerHitboxController : MonoBehaviour {
             GameStats.playerScores[shootingPlayerNumber] = currentScore;
             shootingPlayerScoreText.text = "Score: " + currentScore;
 
-            Instantiate(explosionParticles, gameObject.transform);
+            GameObject particleObject = Instantiate
+                (explosionParticles, 
+                gameObject.transform.position,
+                Quaternion.identity);
+            particleObject.GetComponent<ParticleSystem>().Play();
 
             //Destroy the player prefab instead of the square prefab
-            //Destroy(gameObject.transform.parent.gameObject);
+            Destroy(gameObject.transform.parent.gameObject);
         }
     }
 }
