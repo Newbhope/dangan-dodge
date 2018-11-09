@@ -357,7 +357,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   horizontalPadding: 50
   originalBombIcon: {fileID: 51290792}
-  particles: {fileID: 0}
+  particles: {fileID: 1475468544743062, guid: e6e9179337d103b439444948fe4ac983, type: 2}
 --- !u!1 &197572810
 GameObject:
   m_ObjectHideFlags: 0
