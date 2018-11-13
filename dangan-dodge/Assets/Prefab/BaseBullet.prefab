@@ -23,6 +23,8 @@ GameObject:
   - component: {fileID: 61594854992549780}
   - component: {fileID: 50609128706798366}
   - component: {fileID: 114406589312880862}
+  - component: {fileID: 114901635139606070}
+  - component: {fileID: 114485519851866988}
   m_Layer: 0
   m_Name: BaseBullet
   m_TagString: Bullet
@@ -56,10 +58,10 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_GravityScale: 0
   m_Material: {fileID: 0}
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
@@ -100,6 +102,59 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerNumberInt: 0
+--- !u!114 &114485519851866988
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1068068838267708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TransformSyncMode: 2
+  m_SendInterval: 0
+  m_SyncRotationAxis: 3
+  m_RotationSyncCompression: 0
+  m_SyncSpin: 0
+  m_MovementTheshold: 0.001
+  m_VelocityThreshold: 0.0001
+  m_SnapThreshold: 5
+  m_InterpolateRotation: 1
+  m_InterpolateMovement: 1
+--- !u!114 &114901635139606070
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1068068838267708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 36
+    i1: 180
+    i2: 56
+    i3: 89
+    i4: 10
+    i5: 114
+    i6: 182
+    i7: 148
+    i8: 56
+    i9: 19
+    i10: 202
+    i11: 151
+    i12: 47
+    i13: 218
+    i14: 233
+    i15: 87
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!212 &212448734772690456
 SpriteRenderer:
   m_ObjectHideFlags: 1

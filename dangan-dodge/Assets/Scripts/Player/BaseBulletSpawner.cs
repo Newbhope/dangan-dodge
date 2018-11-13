@@ -1,48 +1,51 @@
 ﻿using UnityEngine;
+using UnityEngine.Networking;
 
 /**
  * Class used to make base "Bullets". 
  * Will use its own fire rate separate from other spawner types
  **/
-public class BaseBulletSpawner : MonoBehaviour {
+public class BaseBulletSpawner : NetworkBehaviour {
 
 	public float fireRate;
 	public int movementSpeed;
+    public GameObject bulletPrefab;
 
-	private Rigidbody2D bullet;
 	private float nextFireTime;
 
 	private Transform playerTransform;
 	private BasePlayerVariables vars;
 	private int playerNumber;
 
-	private GameObject bulletObject;
-
 	public void Start() {
-		bulletObject = (GameObject) Resources.Load("BaseBullet", typeof(GameObject));
 		playerTransform = GetComponentInParent<Transform>();
 		vars = GetComponentInParent<BasePlayerVariables>();
 		playerNumber = vars.playerNumberInt;
 	}
 
-	public void Spawn() {
+    [Command]
+	public void CmdSpawn() {
 		if (Time.time > nextFireTime) {
 			nextFireTime = Time.time + fireRate;
+            //TODO: shot direction uses server script all the time
             Vector2 spawnDirection = vars.playerVector * movementSpeed;
 
 			GameObject spawnedBulletObject = Instantiate(
-				bulletObject,
+				bulletPrefab,
 				playerTransform.position,
 				Quaternion.identity) as GameObject;
+
+            spawnedBulletObject.GetComponent<BaseBulletVariables>().playerNumberInt = vars.playerNumberInt;
 
 			BaseBulletVariables bulletsVars = spawnedBulletObject
 				.GetComponent(typeof(BaseBulletVariables)) as BaseBulletVariables;
 			bulletsVars.playerNumberInt = playerNumber;
 
-			Rigidbody2D bulletBody = spawnedBulletObject
-				.GetComponent(typeof(Rigidbody2D)) as Rigidbody2D;
+            Rigidbody2D bulletBody = spawnedBulletObject
+				.GetComponent<Rigidbody2D>();
 			bulletBody.velocity = transform.TransformDirection(spawnDirection);
-		}
-	}
 
+            NetworkServer.Spawn(spawnedBulletObject);
+        }
+    }
 }

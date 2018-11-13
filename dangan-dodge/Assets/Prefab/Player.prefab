@@ -24,6 +24,8 @@ GameObject:
   - component: {fileID: 114249739598624026}
   - component: {fileID: 114176899883188426}
   - component: {fileID: 114712342882068156}
+  - component: {fileID: 114426166145972404}
+  - component: {fileID: 114103557066570384}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -103,6 +105,27 @@ PolygonCollider2D:
     - - {x: 1, y: 0}
       - {x: -1, y: 1.16}
       - {x: -1, y: -1.16}
+--- !u!114 &114103557066570384
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1213257950634164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TransformSyncMode: 1
+  m_SendInterval: 0.033333335
+  m_SyncRotationAxis: 7
+  m_RotationSyncCompression: 0
+  m_SyncSpin: 0
+  m_MovementTheshold: 0.001
+  m_VelocityThreshold: 0.0001
+  m_SnapThreshold: 5
+  m_InterpolateRotation: 1
+  m_InterpolateMovement: 1
 --- !u!114 &114176899883188426
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -116,6 +139,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fireRate: 0.3
   movementSpeed: 20
+  bulletPrefab: {fileID: 1068068838267708, guid: 24b438590a72b6943813ca972fdae957,
+    type: 2}
 --- !u!114 &114249739598624026
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -154,6 +179,38 @@ MonoBehaviour:
   playerNumberInt: 1
   bombsLeft: 3
   playerVector: {x: 1, y: 0}
+--- !u!114 &114426166145972404
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1213257950634164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 250
+    i1: 65
+    i2: 41
+    i3: 0
+    i4: 38
+    i5: 102
+    i6: 100
+    i7: 231
+    i8: 73
+    i9: 125
+    i10: 125
+    i11: 141
+    i12: 68
+    i13: 131
+    i14: 246
+    i15: 161
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 1
 --- !u!114 &114557096494368902
 MonoBehaviour:
   m_ObjectHideFlags: 1

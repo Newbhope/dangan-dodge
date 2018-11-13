@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
+using UnityEngine.Networking;
 
-public class PlayerMovementController : MonoBehaviour {
+public class PlayerMovementController : NetworkBehaviour {
 	public float movementSpeed;
 
 	private string horizontalAxisName;
@@ -19,7 +20,7 @@ public class PlayerMovementController : MonoBehaviour {
 		horizontalAxisName = vars.playerNumberString + "Horizontal";
 		verticalAxisName = vars.playerNumberString + "Vertical";
 
-		Boundary arenaBounds = _GLOBAL_CONSTANTS.getPlayerBoundary(vars.playerNumberString);
+		Boundary arenaBounds = _GLOBAL_CONSTANTS.getPlayerBoundary(vars);
         Vector3 spriteBounds = GetComponentInChildren<SpriteRenderer>().bounds.size;
 
         horizontalLowerLimit = arenaBounds.xMin + (spriteBounds.x / 2);
@@ -33,14 +34,17 @@ public class PlayerMovementController : MonoBehaviour {
 	 * inside the defined limits 
 	 */
 	void Update() {
-		//Translate ranges from -.33 to .33
-		var xTranslate = Input.GetAxis(horizontalAxisName) * Time.deltaTime * movementSpeed;
-		var yTranslate = Input.GetAxis(verticalAxisName) * Time.deltaTime * movementSpeed;
-		//TODO: look into removing this early translate call
-		transform.Translate(xTranslate, yTranslate, 0);
-		Vector3 clampedPosition = transform.position;
-		clampedPosition.x = Mathf.Clamp(playerTransform.position.x, horizontalLowerLimit, horizontalUpperLimit);
-		clampedPosition.y = Mathf.Clamp(playerTransform.position.y, verticalLowerLimit, verticalUpperLimit);
-		transform.position = clampedPosition;
+        if (isLocalPlayer) {
+            //Translate ranges from -.33 to .33
+            var xTranslate = Input.GetAxis(horizontalAxisName) * Time.deltaTime * movementSpeed;
+            var yTranslate = Input.GetAxis(verticalAxisName) * Time.deltaTime * movementSpeed;
+            //TODO: look into removing this early translate call
+            transform.Translate(xTranslate, yTranslate, 0);
+            Vector3 clampedPosition = transform.position;
+            clampedPosition.x = Mathf.Clamp(playerTransform.position.x, horizontalLowerLimit, horizontalUpperLimit);
+            clampedPosition.y = Mathf.Clamp(playerTransform.position.y, verticalLowerLimit, verticalUpperLimit);
+            transform.position = clampedPosition;
+        }
 	}
 }
+ 

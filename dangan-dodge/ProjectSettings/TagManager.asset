@@ -8,6 +8,8 @@ TagManager:
   - PlayerSprite
   - Bullet
   - Arena
+  - Score
+  - Bombs
   layers:
   - Default
   - TransparentFX

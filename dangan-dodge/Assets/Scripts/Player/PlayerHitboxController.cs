@@ -27,14 +27,18 @@ public class PlayerHitboxController : MonoBehaviour {
 
         int shootingPlayerNumber = bulletVars.playerNumberInt;
 
+        Debug.Log("bullet owner: " + shootingPlayerNumber);
+        Debug.Log("hitbox: " + hitPlayerNumber);
+
         //A bullet that isn't owned by the player
         if (bulletVars != null && shootingPlayerNumber != hitPlayerNumber) {
             int currentScore;
             GameStats.playerScores.TryGetValue(shootingPlayerNumber, out currentScore);
             currentScore += 1;
             GameStats.playerScores[shootingPlayerNumber] = currentScore;
-            shootingPlayerScoreText.text = "Score: " + currentScore;
-            arenaController.checkGameOver();
+
+            arenaController.UpdateScoreUi();
+            arenaController.CheckGameOver();
 
             GameObject particleObject = Instantiate
                 (explosionParticles, 
