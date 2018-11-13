@@ -69,6 +69,12 @@ public class ArenaController : MonoBehaviour {
     }
 
     internal void UpdateBombUi() {
+        //TODO: do this correctly by instantiating new instance of bomb icon prefab
+        GameObject[] bombs = GameObject.FindGameObjectsWithTag("Bombs");
+        foreach (GameObject bomb in bombs) {
+            Destroy(bomb);
+        }
+
         int playerOneBombs = GameStats.playerBombs[1];
         CreateBombIcons(playerOneOriginalBombIcon, playerOneBombs, 1);
 
