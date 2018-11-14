@@ -49,7 +49,8 @@ public class BasePlayerVariables : NetworkBehaviour {
                 playerVector = new Vector2(-1, 0);
 
                 break;
-            case 2:
+            default:
+                Destroy(gameObject);
                 //TODO: spectator
                 //TODO: reconnects
                 break;

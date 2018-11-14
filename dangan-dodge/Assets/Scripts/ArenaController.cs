@@ -15,9 +15,9 @@ public class ArenaController : MonoBehaviour {
     public float roundEndPauseTime;
 
     public Text playerOneScoreText;
-    public Image playerOneOriginalBombIcon;
+    public Image playerOneBombs;
     public Text playerTwoScoreText;
-    public Image playerTwoOriginalBombIcon;
+    public Image playerTwoBombs;
 
     public int bombHorizontalPadding;
     public int startingBombCount = 3;
@@ -26,7 +26,7 @@ public class ArenaController : MonoBehaviour {
 
     void Start() {
         UpdateScoreUi();
-        //TODO: move somewhere better
+        //TODO: move somewhere better. maybe gamestats?
         GameStats.playerBombs[1] = startingBombCount;
         GameStats.playerBombs[2] = startingBombCount;
         //TODO: this gross dewd
@@ -61,7 +61,7 @@ public class ArenaController : MonoBehaviour {
     internal void UpdateScoreUi() {
         int playerOneScore;
         GameStats.playerScores.TryGetValue(1, out playerOneScore);
-        playerOneScoreText.text = "Score: " + playerOneScore;
+        this.playerOneScoreText.text = "Score: " + playerOneScore;
 
         int playerTwoScore;
         GameStats.playerScores.TryGetValue(2, out playerTwoScore);
@@ -69,32 +69,8 @@ public class ArenaController : MonoBehaviour {
     }
 
     internal void UpdateBombUi() {
-        //TODO: do this correctly by instantiating new instance of bomb icon prefab
-        GameObject[] bombs = GameObject.FindGameObjectsWithTag("Bombs");
-        foreach (GameObject bomb in bombs) {
-            Destroy(bomb);
-        }
-
-        int playerOneBombs = GameStats.playerBombs[1];
-        CreateBombIcons(playerOneOriginalBombIcon, playerOneBombs, 1);
-
-        int playerTwoBombs = GameStats.playerBombs[2];
-        CreateBombIcons(playerTwoOriginalBombIcon, playerTwoBombs, -1);
-    }
-
-    private void CreateBombIcons(Image originalBombIcon, int bombsLeft, int playerXVector) {
-        Vector3 originalPosition = originalBombIcon.transform.position;
-
-        for (int i = 1; i < startingBombCount; i++) {
-            Vector3 newIconPosition = new Vector3(
-                originalPosition.x + (bombHorizontalPadding * i * playerXVector),
-                originalPosition.y,
-                originalPosition.z);
-
-            Image newIcon = Instantiate(originalBombIcon, newIconPosition, Quaternion.identity);
-            Canvas canvas = FindObjectOfType<Canvas>();
-            newIcon.transform.SetParent(canvas.transform);
-        }
+        playerOneBombs.fillAmount = (float) GameStats.playerBombs[1] / (float) startingBombCount;
+        playerTwoBombs.fillAmount = (float) GameStats.playerBombs[2] / (float) startingBombCount;
     }
 
     public void CheckGameOver() {
