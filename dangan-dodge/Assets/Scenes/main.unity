@@ -1464,7 +1464,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 3
+  m_Text: 
 --- !u!222 &1328562757
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1586,7 +1586,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f4f7859a6a709e43b0085c5933da0e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  countdownNumber: 3
+  countdownNumber: 0
   countdownInterval: 0.5
   countdownText: {fileID: 1328562756}
   roundEndPauseTime: 0.5

@@ -19,9 +19,6 @@ public class PlayerCombatController : NetworkBehaviour {
     private int bombsLeft;
     private BasePlayerVariables vars;
 
-    private ArenaController arenaController;
-
-
     void Start() {
         vars = this.gameObject.GetComponent<BasePlayerVariables>();
 
@@ -31,12 +28,11 @@ public class PlayerCombatController : NetworkBehaviour {
         bombButtonName = vars.playerNumberString + "Bomb";
         bombSpawner = GetComponent<BombSpawner>();
 
-        arenaController = FindObjectOfType<ArenaController>();
     }
 
     void Update() {
         if (isLocalPlayer) {
-            //TODO better way to do these calls?
+            //TODO way to avoid these timescale calls?
             if (Time.timeScale > 0.1) {
                 if (Input.GetButton(fireButtonName)) {
                     baseBulletSpawner.CmdSpawn();
@@ -44,13 +40,7 @@ public class PlayerCombatController : NetworkBehaviour {
 
                 var bombsLeft = GameStats.playerBombs[vars.playerNumberInt];
                 if (Input.GetButtonDown(bombButtonName) && bombsLeft > 0) {
-                    bombSpawner.Spawn(bombsLeft);
-                    bombsLeft--;
-                    GameStats.playerBombs[vars.playerNumberInt] = bombsLeft;
-
-                    arenaController.UpdateBombUi();
-
-                    Debug.Log("Bombs left: " + bombsLeft);
+                    bombSpawner.CmdSpawn(bombsLeft, vars.playerNumberInt);
                 }
             }
         }

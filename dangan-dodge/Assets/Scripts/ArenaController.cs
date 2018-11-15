@@ -3,12 +3,12 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.Collections.Generic;
-using System;
+using UnityEngine.Networking;
 
 /**
  * Overall script for the game and arena
  * */
-public class ArenaController : MonoBehaviour {
+public class ArenaController : NetworkBehaviour {
     public int countdownNumber;
     public float countdownInterval;
     public Text countdownText;
