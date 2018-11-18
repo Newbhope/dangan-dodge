@@ -27,9 +27,6 @@ public class PlayerHitboxController : MonoBehaviour {
 
         int shootingPlayerNumber = bulletVars.playerNumberInt;
 
-        Debug.Log("bullet owner: " + shootingPlayerNumber);
-        Debug.Log("hitbox: " + hitPlayerNumber);
-
         //A bullet that isn't owned by the player
         if (bulletVars != null && shootingPlayerNumber != hitPlayerNumber) {
             int currentScore;

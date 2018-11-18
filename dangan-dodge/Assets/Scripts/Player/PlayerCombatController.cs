@@ -31,7 +31,7 @@ public class PlayerCombatController : NetworkBehaviour {
     }
 
     void Update() {
-        if (isLocalPlayer) {
+        if (hasAuthority) {
             //TODO way to avoid these timescale calls?
             if (Time.timeScale > 0.1) {
                 if (Input.GetButton(fireButtonName)) {

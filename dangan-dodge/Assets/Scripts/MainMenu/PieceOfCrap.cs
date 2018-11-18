@@ -3,22 +3,67 @@ using UnityEngine.UI;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 
+/**
+ * Pretty weird class that handles player networking behaviour.
+ **/
 public class PieceOfCrap : NetworkBehaviour {
 
     private MainMenuUiController menuUiController;
     private Button LeftButton;
     private Button RightButton;
     private Button StartButton;
+    private NetworkManager manager;
 
-	void Start () {
-        menuUiController = FindObjectOfType<MainMenuUiController>();
-        LeftButton = GameObject.FindGameObjectWithTag("Left").GetComponent<Button>();
-        RightButton = GameObject.FindGameObjectWithTag("Right").GetComponent<Button>();
-        StartButton = GameObject.FindGameObjectWithTag("Start").GetComponent<Button>();
+    public GameObject playerPrefab;
 
-        LeftButton.onClick.AddListener(LeftButtonClick);
-        RightButton.onClick.AddListener(RightButtonClick);
-        StartButton.onClick.AddListener(StartButtonClick);
+    void Start () {
+        if (SceneManager.GetActiveScene().name == "MainMenu") {
+            menuUiController = FindObjectOfType<MainMenuUiController>();
+            LeftButton = GameObject.FindGameObjectWithTag("Left").GetComponent<Button>();
+            RightButton = GameObject.FindGameObjectWithTag("Right").GetComponent<Button>();
+            StartButton = GameObject.FindGameObjectWithTag("Start").GetComponent<Button>();
+
+            LeftButton.onClick.AddListener(LeftButtonClick);
+            RightButton.onClick.AddListener(RightButtonClick);
+            StartButton.onClick.AddListener(StartButtonClick);
+
+            manager = FindObjectOfType<NetworkManager>();
+        }
+        if (SceneManager.GetActiveScene().name == "Arena" && 
+            isLocalPlayer &&
+            (PlayerStats.playerNum == 1 || PlayerStats.playerNum == 2)) {
+
+            CmdPopulatePlayers(PlayerStats.playerNum);
+        }
+    }
+
+    [Command]
+    private void CmdPopulatePlayers(int playerNum) {
+        if (playerNum == 1) {
+            GameObject leftPlayerObject = Instantiate(
+                playerPrefab,
+                new Vector3(-15, 0, 0),
+                Quaternion.identity);
+            BasePlayerVariables leftVars = leftPlayerObject.GetComponent<BasePlayerVariables>();
+            leftVars.playerNumberInt = 1;
+            leftVars.playerVector = new Vector2(1, 0);
+            leftVars.isFlipped = false;
+
+            NetworkServer.SpawnWithClientAuthority(leftPlayerObject, connectionToClient);
+        }
+        if (playerNum == 2) {
+            GameObject rightPlayerObject = Instantiate(
+                playerPrefab,
+                new Vector3(15, 0, 0),
+                Quaternion.identity);
+            BasePlayerVariables rightVars = rightPlayerObject.GetComponent<BasePlayerVariables>();
+            rightVars.playerNumberInt = 2;
+            rightVars.playerVector = new Vector2(-1, 0);
+            rightVars.isFlipped = true;
+
+            NetworkServer.SpawnWithClientAuthority(rightPlayerObject, connectionToClient);
+        }
+        //TODO: weird effect on seeing sprite change
     }
 
     public void LeftButtonClick() {
@@ -46,26 +91,11 @@ public class PieceOfCrap : NetworkBehaviour {
     }
 
     public void StartButtonClick() {
-        if (isServer) {
-            RpcStartGame();
-        }
-        else {
-            CmdStartGame();
-        }
-    }
-
-    private void StartGame() {
-        SceneManager.LoadScene("Arena");
+        CmdStartGame();
     }
 
     [Command]
     private void CmdStartGame() {
-        RpcStartGame();
-        StartGame();
-    }
-
-    [ClientRpc]
-    private void RpcStartGame() {
-        StartGame();
+        manager.ServerChangeScene("Arena");
     }
 }

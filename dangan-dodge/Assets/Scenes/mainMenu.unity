@@ -261,11 +261,11 @@ GameObject:
   - component: {fileID: 476645505}
   - component: {fileID: 476645504}
   m_Layer: 0
-  m_Name: ManMenuUiCotroller
+  m_Name: ManMenuUiController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!114 &476645504
 MonoBehaviour:
@@ -585,6 +585,7 @@ MonoBehaviour:
   m_OnlineScene: 
   m_SpawnPrefabs:
   - {fileID: 1068068838267708, guid: 24b438590a72b6943813ca972fdae957, type: 2}
+  - {fileID: 1213257950634164, guid: fa412900266664e7497d7d8d4483f6a1, type: 2}
   m_CustomConfig: 0
   m_MaxConnections: 4
   m_ConnectionConfig:

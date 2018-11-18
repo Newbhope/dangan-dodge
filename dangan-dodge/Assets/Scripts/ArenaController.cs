@@ -1,10 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.Networking;
-using System;
 
 /**
  * Overall script for the game and arena
@@ -25,8 +23,10 @@ public class ArenaController : NetworkBehaviour {
 
     public Text gameOverText;
 
+    private NetworkManager manager;
+
     void Start() {
-        PopulatePlayers();
+        manager = FindObjectOfType<NetworkManager>();
 
         //TODO: move somewhere better. maybe gamestats?
         GameStats.playerBombs[1] = startingBombCount;
@@ -35,30 +35,6 @@ public class ArenaController : NetworkBehaviour {
         UpdateBombUi();
 
         StartCoroutine(StartRound());
-    }
-
-    private void PopulatePlayers() {
-        Debug.LogError("Player Num: " + PlayerStats.playerNum);
-        switch (PlayerStats.playerNum) {
-            case 1:
-                gameObject.transform.position = new Vector3(-15, 0, 0);
-                playerNumberInt = 1;
-                playerVector = new Vector2(1, 0);
-                break;
-            case 2:
-                var spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-                spriteRenderer.material.color = Color.blue;
-                spriteRenderer.flipX = true;
-
-                gameObject.transform.position = new Vector3(15, 0, 0);
-                playerNumberInt = 2;
-                playerVector = new Vector2(-1, 0);
-
-                break;
-            default:
-                //Destroy(gameObject);
-                break;
-        }
     }
 
     IEnumerator StartRound() {
@@ -75,7 +51,12 @@ public class ArenaController : NetworkBehaviour {
 
     IEnumerator RestartRound() {
         yield return new WaitForSeconds(roundEndPauseTime);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        CmdRestartScene();
+    }
+
+    [Command]
+    private void CmdRestartScene() {
+        manager.ServerChangeScene("Arena");
     }
 
     void OnTriggerExit2D(Collider2D other) {
@@ -85,13 +66,17 @@ public class ArenaController : NetworkBehaviour {
 	}
 
     internal void UpdateScoreUi() {
+
         int playerOneScore;
         GameStats.playerScores.TryGetValue(1, out playerOneScore);
-        this.playerOneScoreText.text = "Score: " + playerOneScore;
+        playerOneScoreText.text = "Score: " + playerOneScore;
 
         int playerTwoScore;
         GameStats.playerScores.TryGetValue(2, out playerTwoScore);
         playerTwoScoreText.text = "Score: " + playerTwoScore;
+
+        Debug.LogError("p1: " + playerOneScore);
+        Debug.LogError("p2: " + playerTwoScore);
     }
 
     internal void UpdateBombUi() {

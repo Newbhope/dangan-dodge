@@ -1,11 +1,8 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.Networking;
 
 public class BombSpawner : NetworkBehaviour {
 
-    public int horizontalPadding;
-    public Image originalBombIcon;
     public GameObject particles;
 
     private ArenaController arenaController;
@@ -16,8 +13,6 @@ public class BombSpawner : NetworkBehaviour {
 
     [Command]
     public void CmdSpawn(int bombsLeft, int playerNum) {
-        Debug.Log("Bombs left: " + bombsLeft);
-
         //TODO: clean up to mimic bullet prefab
         RpcSpawn(bombsLeft, playerNum);
 

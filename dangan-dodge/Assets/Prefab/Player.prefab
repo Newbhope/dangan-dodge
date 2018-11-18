@@ -26,7 +26,6 @@ GameObject:
   - component: {fileID: 114712342882068156}
   - component: {fileID: 114426166145972404}
   - component: {fileID: 114103557066570384}
-  - component: {fileID: 114718842905232600}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -119,7 +118,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_TransformSyncMode: 1
   m_SendInterval: 0.033333335
-  m_SyncRotationAxis: 7
+  m_SyncRotationAxis: 2
   m_RotationSyncCompression: 0
   m_SyncSpin: 0
   m_MovementTheshold: 0.001
@@ -179,6 +178,7 @@ MonoBehaviour:
   playerNumberString: One
   playerNumberInt: 1
   playerVector: {x: 1, y: 0}
+  isFlipped: 0
 --- !u!114 &114426166145972404
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -236,20 +236,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: deedcf104d9f3d4419a2f5ae2dc64122, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  horizontalPadding: 50
-  originalBombIcon: {fileID: 0}
   particles: {fileID: 1475468544743062, guid: e6e9179337d103b439444948fe4ac983, type: 2}
---- !u!114 &114718842905232600
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1213257950634164}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a37aa0b5b6ccbe44b986bddffcc838af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!212 &212117701956977200
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -33,7 +33,7 @@ public class BaseBulletSpawner : NetworkBehaviour {
 			GameObject spawnedBulletObject = Instantiate(
 				bulletPrefab,
 				playerTransform.position,
-				Quaternion.identity) as GameObject;
+				Quaternion.identity);
 
             spawnedBulletObject.GetComponent<BaseBulletVariables>().playerNumberInt = vars.playerNumberInt;
 

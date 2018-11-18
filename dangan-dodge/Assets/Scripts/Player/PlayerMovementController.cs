@@ -27,14 +27,14 @@ public class PlayerMovementController : NetworkBehaviour {
 		horizontalUpperLimit = arenaBounds.xMax - (spriteBounds.x / 2);
 		verticalLowerLimit = arenaBounds.yMin + (spriteBounds.y / 2);
 		verticalUpperLimit = arenaBounds.yMax - (spriteBounds.y / 2);
-	}
+    }
 
-	/*
+    /*
 	 * Player movement applies movement translation then clamps the final position to
 	 * inside the defined limits 
 	 */
-	void Update() {
-        if (isLocalPlayer) {
+    void Update() {
+        if (hasAuthority) {
             //Translate ranges from -.33 to .33
             var xTranslate = Input.GetAxis(horizontalAxisName) * Time.deltaTime * movementSpeed;
             var yTranslate = Input.GetAxis(verticalAxisName) * Time.deltaTime * movementSpeed;
