@@ -24,7 +24,4 @@ public class _GLOBAL_CONSTANTS {
                 return new Boundary(0, 0, 0, 0);
         }
 	}
-
-    [SyncVar]
-    public static int currentPlayerNum = 0;
 }

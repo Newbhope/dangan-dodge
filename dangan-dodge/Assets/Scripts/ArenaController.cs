@@ -1,9 +1,10 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using System.Collections.Generic;
 using UnityEngine.Networking;
+using System;
 
 /**
  * Overall script for the game and arena
@@ -25,14 +26,39 @@ public class ArenaController : NetworkBehaviour {
     public Text gameOverText;
 
     void Start() {
-        UpdateScoreUi();
+        PopulatePlayers();
+
         //TODO: move somewhere better. maybe gamestats?
         GameStats.playerBombs[1] = startingBombCount;
         GameStats.playerBombs[2] = startingBombCount;
-        //TODO: this gross dewd
+        UpdateScoreUi();
         UpdateBombUi();
 
         StartCoroutine(StartRound());
+    }
+
+    private void PopulatePlayers() {
+        Debug.LogError("Player Num: " + PlayerStats.playerNum);
+        switch (PlayerStats.playerNum) {
+            case 1:
+                gameObject.transform.position = new Vector3(-15, 0, 0);
+                playerNumberInt = 1;
+                playerVector = new Vector2(1, 0);
+                break;
+            case 2:
+                var spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+                spriteRenderer.material.color = Color.blue;
+                spriteRenderer.flipX = true;
+
+                gameObject.transform.position = new Vector3(15, 0, 0);
+                playerNumberInt = 2;
+                playerVector = new Vector2(-1, 0);
+
+                break;
+            default:
+                //Destroy(gameObject);
+                break;
+        }
     }
 
     IEnumerator StartRound() {

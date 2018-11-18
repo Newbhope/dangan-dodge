@@ -10,6 +10,9 @@ TagManager:
   - Arena
   - Score
   - Bombs
+  - Right
+  - Left
+  - Start
   layers:
   - Default
   - TransparentFX
