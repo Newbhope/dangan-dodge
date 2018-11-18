@@ -75,8 +75,18 @@ public class ArenaController : NetworkBehaviour {
         GameStats.playerScores.TryGetValue(2, out playerTwoScore);
         playerTwoScoreText.text = "Score: " + playerTwoScore;
 
-        Debug.LogError("p1: " + playerOneScore);
-        Debug.LogError("p2: " + playerTwoScore);
+        if (isServer) {
+            RpcUpdateScoreUi(playerOneScore, playerTwoScore);
+        }
+    }
+
+    //TODO: why do i need this
+    [ClientRpc]
+    private void RpcUpdateScoreUi(int serverOneScore, int serverTwoScore) {
+        GameStats.playerScores[1] = serverOneScore;
+        GameStats.playerScores[2] = serverTwoScore;
+        playerOneScoreText.text = "Score: " + serverOneScore;
+        playerTwoScoreText.text = "Score: " + serverTwoScore;
     }
 
     internal void UpdateBombUi() {

@@ -453,7 +453,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: text
+  m_Text: 'Score: 0'
 --- !u!222 &269350913
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -971,8 +971,6 @@ MonoBehaviour:
   bombHorizontalPadding: 50
   startingBombCount: 3
   gameOverText: {fileID: 1513718209}
-  playerPrefab: {fileID: 1213257950634164, guid: fa412900266664e7497d7d8d4483f6a1,
-    type: 2}
 --- !u!114 &1365927265
 MonoBehaviour:
   m_ObjectHideFlags: 0

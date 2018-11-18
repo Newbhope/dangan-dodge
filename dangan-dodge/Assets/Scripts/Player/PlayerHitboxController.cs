@@ -18,6 +18,8 @@ public class PlayerHitboxController : MonoBehaviour {
         arenaController = FindObjectOfType<ArenaController>();
     }
 
+    //Race condition between server's call of this and restarting the scene
+    //with the client calling this
     void OnTriggerEnter2D(Collider2D other) {
         //TODO: Consider making this unit testable by extracting logic to an outside class/method
 
