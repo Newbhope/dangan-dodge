@@ -5,42 +5,34 @@ public class PlayerMovementController : MonoBehaviour {
 
 	private string horizontalAxisName;
 	private string verticalAxisName;
-
-	private Transform playerTransform;
-
-	private float horizontalLowerLimit;
-	private float horizontalUpperLimit;
-	private float verticalLowerLimit;
-	private float verticalUpperLimit;
+    private Rigidbody2D body;
 
 	void Start() {
 		BasePlayerVariables vars = GetComponent<BasePlayerVariables>();
-		playerTransform = GetComponent<Transform>();
 		horizontalAxisName = vars.playerNumberString + "Horizontal";
 		verticalAxisName = vars.playerNumberString + "Vertical";
 
-		Boundary arenaBounds = _GLOBAL_CONSTANTS.getPlayerBoundary(vars.playerNumberString);
+        Boundary arenaBounds = _GLOBAL_CONSTANTS.getPlayerBoundary(vars.playerNumberString);
+
         Vector3 spriteBounds = GetComponentInChildren<SpriteRenderer>().bounds.size;
 
-        horizontalLowerLimit = arenaBounds.xMin + (spriteBounds.x / 2);
-		horizontalUpperLimit = arenaBounds.xMax - (spriteBounds.x / 2);
-		verticalLowerLimit = arenaBounds.yMin + (spriteBounds.y / 2);
-		verticalUpperLimit = arenaBounds.yMax - (spriteBounds.y / 2);
+        body = GetComponent<Rigidbody2D>();
 	}
 
 	/*
 	 * Player movement applies movement translation then clamps the final position to
 	 * inside the defined limits 
 	 */
-	void Update() {
+	void FixedUpdate() {
 		//Translate ranges from -.33 to .33
 		var xTranslate = Input.GetAxis(horizontalAxisName) * Time.deltaTime * movementSpeed;
 		var yTranslate = Input.GetAxis(verticalAxisName) * Time.deltaTime * movementSpeed;
-		//TODO: look into removing this early translate call
-		transform.Translate(xTranslate, yTranslate, 0);
-		Vector3 clampedPosition = transform.position;
-		clampedPosition.x = Mathf.Clamp(playerTransform.position.x, horizontalLowerLimit, horizontalUpperLimit);
-		clampedPosition.y = Mathf.Clamp(playerTransform.position.y, verticalLowerLimit, verticalUpperLimit);
-		transform.position = clampedPosition;
+        Vector2 movement = new Vector2(xTranslate, yTranslate);
+        body.MovePosition(body.position + movement);
 	}
+
+    private void OnCollisionEnter2D(Collision2D collision) {
+        body.velocity = Vector2.zero;
+        Debug.Log("wew");
+    }
 }

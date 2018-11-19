@@ -271,6 +271,7 @@ GameObject:
   - component: {fileID: 154103504}
   - component: {fileID: 154103503}
   - component: {fileID: 154103508}
+  - component: {fileID: 154103509}
   m_Layer: 0
   m_Name: Player2
   m_TagString: Untagged
@@ -358,6 +359,26 @@ MonoBehaviour:
   horizontalPadding: 50
   originalBombIcon: {fileID: 51290792}
   particles: {fileID: 1475468544743062, guid: e6e9179337d103b439444948fe4ac983, type: 2}
+--- !u!50 &154103509
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 154103502}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &197572810
 GameObject:
   m_ObjectHideFlags: 0
@@ -537,6 +558,26 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1213257950634164, guid: fa412900266664e7497d7d8d4483f6a1,
     type: 2}
   m_PrefabInternal: {fileID: 202605902}
+--- !u!50 &316272975
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 316272974}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &463519249
 GameObject:
   m_ObjectHideFlags: 0
@@ -546,6 +587,7 @@ GameObject:
   m_Component:
   - component: {fileID: 463519250}
   - component: {fileID: 463519251}
+  - component: {fileID: 463519252}
   m_Layer: 4
   m_Name: MiddleLine
   m_TagString: Untagged
@@ -612,6 +654,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!50 &463519252
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 463519249}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &919933491
 GameObject:
   m_ObjectHideFlags: 0
