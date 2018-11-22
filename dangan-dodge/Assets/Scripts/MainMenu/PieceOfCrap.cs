@@ -63,7 +63,6 @@ public class PieceOfCrap : NetworkBehaviour {
 
             NetworkServer.SpawnWithClientAuthority(rightPlayerObject, connectionToClient);
         }
-        //TODO: weird effect on seeing sprite change
     }
 
     public void LeftButtonClick() {
