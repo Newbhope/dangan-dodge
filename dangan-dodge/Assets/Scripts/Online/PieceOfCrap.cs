@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
  **/
 public class PieceOfCrap : NetworkBehaviour {
 
-    private MainMenuUiController menuUiController;
+    private OnlineMenuUiController menuUiController;
     private Button LeftButton;
     private Button RightButton;
     private Button StartButton;
@@ -17,8 +17,8 @@ public class PieceOfCrap : NetworkBehaviour {
     public GameObject playerPrefab;
 
     void Start () {
-        if (SceneManager.GetActiveScene().name == "MainMenu") {
-            menuUiController = FindObjectOfType<MainMenuUiController>();
+        if (SceneManager.GetActiveScene().name == "OnlineMenu") {
+            menuUiController = FindObjectOfType<OnlineMenuUiController>();
             LeftButton = GameObject.FindGameObjectWithTag("Left").GetComponent<Button>();
             RightButton = GameObject.FindGameObjectWithTag("Right").GetComponent<Button>();
             StartButton = GameObject.FindGameObjectWithTag("Start").GetComponent<Button>();

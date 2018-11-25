@@ -37,14 +37,12 @@ public class BasePlayerVariables : NetworkBehaviour {
         spriteRenderer.flipX = isFlipped;
 
         if (playerNumberInt == 1) {
-            spriteRenderer.sprite = Shaq;
+            //spriteRenderer.sprite = Shaq;
         }
 
         if (playerNumberInt == 2) {
-            //spriteRenderer.material.color = Color.blue;
-            if (Bobe != null) {
-                spriteRenderer.sprite = Bobe;
-            }
+            spriteRenderer.material.color = Color.blue;
+            //spriteRenderer.sprite = Bobe;
         }
     }
 
@@ -62,6 +60,7 @@ public class BasePlayerVariables : NetworkBehaviour {
             }
         }
     }
+
     private void OnChangeHealth(int health) {
         BaseBulletVariables bulletVars = otherBullet
             .gameObject
