@@ -47,7 +47,6 @@ GameObject:
   - component: {fileID: 60479454910328564}
   - component: {fileID: 222569417059383738}
   - component: {fileID: 114439880503087826}
-  - component: {fileID: 114878075336624632}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: PlayerSprite
@@ -277,38 +276,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particles: {fileID: 1475468544743062, guid: e6e9179337d103b439444948fe4ac983, type: 2}
---- !u!114 &114878075336624632
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1465727293327272}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 250
-    i1: 65
-    i2: 41
-    i3: 0
-    i4: 38
-    i5: 102
-    i6: 100
-    i7: 231
-    i8: 73
-    i9: 125
-    i10: 125
-    i11: 141
-    i12: 68
-    i13: 131
-    i14: 246
-    i15: 161
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 0
 --- !u!212 &212117701956977200
 SpriteRenderer:
   m_ObjectHideFlags: 1

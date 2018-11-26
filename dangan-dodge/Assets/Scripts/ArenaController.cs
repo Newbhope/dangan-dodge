@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 /**
  * Overall script for the game and arena
@@ -47,16 +48,6 @@ public class ArenaController : NetworkBehaviour {
         yield return new WaitForSecondsRealtime(.4f);
         Destroy(countdownText);
         Time.timeScale = 1;
-    }
-
-    IEnumerator RestartRound() {
-        yield return new WaitForSeconds(roundEndPauseTime);
-        CmdRestartScene();
-    }
-
-    [Command]
-    private void CmdRestartScene() {
-        manager.ServerChangeScene("Arena");
     }
 
     void OnTriggerExit2D(Collider2D other) {
@@ -107,5 +98,15 @@ public class ArenaController : NetworkBehaviour {
         } else {
             StartCoroutine(RestartRound());
         }
+    }
+
+    IEnumerator RestartRound() {
+        yield return new WaitForSeconds(roundEndPauseTime);
+        CmdRestartScene();
+    }
+
+    [Command]
+    private void CmdRestartScene() {
+        manager.ServerChangeScene(SceneManager.GetActiveScene().name);
     }
 }

@@ -6,7 +6,6 @@ public class BasePlayerVariables : NetworkBehaviour {
 
     //TODO: maybe refactor all player variables into this?
 
-    //TODO: remove for network version
     public string playerNumberString = "One";
 
     [SyncVar]

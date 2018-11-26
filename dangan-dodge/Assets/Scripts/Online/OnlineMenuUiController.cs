@@ -14,6 +14,11 @@ public class OnlineMenuUiController : NetworkBehaviour {
     [SyncVar(hook = "OnChangeRightState")]
     public bool RightButtonSelected = false;
 
+    private void Start() {
+        //NetworkManager manager = FindObjectOfType<NetworkManager>();
+        //TODO: make my own gui for lobby system
+    }
+
     //TODO: handle un selecting, players joining at different times, etc.
 
     private void OnChangeLeftState(bool buttonSelected) {

@@ -1,15 +1,17 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class MainMenuUiController : MonoBehaviour {
 
     public Button local;
     public Button online;
 
-    private void OnClickLocal() {
+    public void OnClickLocal() {
+        SceneManager.LoadScene("LocalArena");
     }
 
-    private void OnClickOnline() {
-
+    public void OnClickOnline() {
+        SceneManager.LoadScene("OnlineMenu");
     }
 }
