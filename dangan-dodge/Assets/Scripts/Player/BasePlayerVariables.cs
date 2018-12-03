@@ -40,7 +40,7 @@ public class BasePlayerVariables : NetworkBehaviour {
         }
 
         if (playerNumberInt == 2) {
-            spriteRenderer.material.color = Color.blue;
+            spriteRenderer.color = Color.blue;
             //spriteRenderer.sprite = Bobe;
         }
     }

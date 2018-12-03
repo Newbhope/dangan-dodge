@@ -17,20 +17,22 @@ public class BaseBulletSpawner : NetworkBehaviour {
 	private Transform playerTransform;
 	private BasePlayerVariables vars;
 	private int playerNumber;
+    private SpriteRenderer spriteRenderer;
 
 	public void Start() {
 		playerTransform = GetComponentInParent<Transform>();
 		vars = GetComponentInParent<BasePlayerVariables>();
 		playerNumber = vars.playerNumberInt;
-	}
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+    }
 
     [Command]
 	public void CmdSpawn() {
 		if (Time.time > nextFireTime) {
 			nextFireTime = Time.time + fireRate;
-            SpawnBullet(8);
+            SpawnBullet(2);
             SpawnBullet(0);
-            SpawnBullet(-8);
+            SpawnBullet(-2);
         }
     }
 
@@ -44,6 +46,8 @@ public class BaseBulletSpawner : NetworkBehaviour {
             Quaternion.identity);
 
         spawnedBulletObject.GetComponent<BaseBulletVariables>().playerNumberInt = playerNumber;
+
+        spawnedBulletObject.GetComponent<SpriteRenderer>().color = spriteRenderer.color;
 
         Rigidbody2D bulletBody = spawnedBulletObject
             .GetComponent<Rigidbody2D>();

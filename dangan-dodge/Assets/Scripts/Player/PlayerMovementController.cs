@@ -15,10 +15,6 @@ public class PlayerMovementController : NetworkBehaviour {
         body = GetComponent<Rigidbody2D>();
     }
 
-    /*
-	 * Player movement applies movement translation then clamps the final position to
-	 * inside the defined limits 
-	 */
     void FixedUpdate() {
         if (hasAuthority) {
             var xTranslate = Input.GetAxis(horizontalAxisName) * Time.deltaTime * movementSpeed;

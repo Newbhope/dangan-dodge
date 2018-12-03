@@ -20,7 +20,7 @@ public class ArenaController : NetworkBehaviour {
     public Image playerTwoBombs;
 
     public int bombHorizontalPadding;
-    public int startingBombCount = 3;
+    public int startingBombCount = 1;
 
     public Text gameOverText;
 
@@ -81,8 +81,8 @@ public class ArenaController : NetworkBehaviour {
     }
 
     internal void UpdateBombUi() {
-        playerOneBombs.fillAmount = (float) GameStats.playerBombs[1] / (float) startingBombCount;
-        playerTwoBombs.fillAmount = (float) GameStats.playerBombs[2] / (float) startingBombCount;
+        playerOneBombs.fillAmount = (float) GameStats.playerBombs[1] / (float) 3;
+        playerTwoBombs.fillAmount = (float) GameStats.playerBombs[2] / (float) 3;
     }
 
     public void CheckGameOver() {
