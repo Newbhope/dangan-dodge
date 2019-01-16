@@ -8,15 +8,19 @@ public class OnlineMenuUiController : NetworkBehaviour {
 
     public Button LeftButton;
     public Button RightButton;
+    public Text playersConnected;
 
     [SyncVar(hook = "OnChangeLeftState")]
     public bool LeftButtonSelected = false;
     [SyncVar(hook = "OnChangeRightState")]
     public bool RightButtonSelected = false;
 
+    private NetworkManager manager;
+
     private void Start() {
-        //NetworkManager manager = FindObjectOfType<NetworkManager>();
-        //TODO: make my own gui for lobby system
+        manager = FindObjectOfType<NetworkManager>();
+        NetworkServer.Listen(7777);
+        NetworkServer.RegisterHandler(MsgType.Connect, OnPlayerConnected);
     }
 
     //TODO: handle un selecting, players joining at different times, etc.
@@ -42,4 +46,8 @@ public class OnlineMenuUiController : NetworkBehaviour {
         }
     }
 
+    private void OnPlayerConnected(NetworkMessage networkMessage) {
+        Debug.LogError("asdasds");
+        playersConnected.text = manager.numPlayers + " Players Connected";
+    }
 }

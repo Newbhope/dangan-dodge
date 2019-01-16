@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 /**
  * Pretty weird class that handles player networking behaviour.
@@ -17,7 +17,7 @@ public class PieceOfCrap : NetworkBehaviour {
     public GameObject playerPrefab;
 
     void Start () {
-        if (SceneManager.GetActiveScene().name == "OnlineMenu") {
+        if (SceneManager.GetActiveScene().name == "mainMenu") {
             menuUiController = FindObjectOfType<OnlineMenuUiController>();
             LeftButton = GameObject.FindGameObjectWithTag("Left").GetComponent<Button>();
             RightButton = GameObject.FindGameObjectWithTag("Right").GetComponent<Button>();
@@ -29,6 +29,7 @@ public class PieceOfCrap : NetworkBehaviour {
 
             manager = FindObjectOfType<NetworkManager>();
         }
+
         if (SceneManager.GetActiveScene().name == "Arena" && 
             isLocalPlayer &&
             (PlayerStats.playerNum == 1 || PlayerStats.playerNum == 2)) {

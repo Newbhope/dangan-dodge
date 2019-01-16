@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
 
+// To allow network code to work locally, create local hosted game for offline
 public class LocalController : MonoBehaviour {
 
     private NetworkManager manager;
