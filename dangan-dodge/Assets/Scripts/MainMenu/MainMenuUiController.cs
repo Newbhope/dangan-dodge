@@ -2,7 +2,6 @@
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.Networking;
-using System;
 using UnityEngine.Networking.Match;
 using System.Collections.Generic;
 
@@ -12,9 +11,11 @@ public class MainMenuUiController : MonoBehaviour {
     public Button online;
 
     private NetworkManager manager;
+    private OnlineMenuUiController menuController;
 
     private void Start() {
         manager = FindObjectOfType<NetworkManager>();
+        menuController = FindObjectOfType<OnlineMenuUiController>();
     }
 
     public void OnClickLocal() {
@@ -32,6 +33,7 @@ public class MainMenuUiController : MonoBehaviour {
 
     private void OnCreateMatch(bool success, string extendedInfo, MatchInfo responseData) {
         manager.StartHost(responseData);
+        Debug.LogError(manager.numPlayers);
     }
 
     public void EndLobby() {
@@ -49,7 +51,8 @@ public class MainMenuUiController : MonoBehaviour {
     }
 
     private void OnMatchJoin(bool success, string extendedInfo, MatchInfo responseData) {
-        Debug.LogError("joined match");
         manager.StartClient(responseData);
+        //menuController.playersConnected = manager.numPlayers;
+        Debug.LogError(manager.numPlayers);
     }
 }
