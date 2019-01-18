@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Networking;
 
 /**
@@ -32,25 +31,30 @@ public class BaseBulletSpawner : NetworkBehaviour {
     [Command]
 	public void CmdSpawn() {
 		if (Time.time > nextFireTime) {
-			nextFireTime = Time.time + fireRate;
+            nextFireTime = Time.time + fireRate;
             SpawnBullet(angle);
             for (int i = 1; i < 3; i++) {
                 SpawnBullet(angle + i * 2);
                 SpawnBullet(angle - i * 2);
             }
 
-            if (shouldMovePatternDown) {
-                angle -= 1;
-            } else {
-                angle += 1;
-            }
+            ChangeAngle();
+        }
+    }
 
-            if (angle >= 10) {
-                shouldMovePatternDown = true;
-            }
-            if (angle <= -10) {
-                shouldMovePatternDown = false;
-            }
+    private void ChangeAngle() {
+        if (shouldMovePatternDown) {
+            angle -= 1;
+        } else {
+            angle += 1;
+        }
+
+        if (angle >= 10) {
+            shouldMovePatternDown = true;
+        }
+
+        if (angle <= -10) {
+            shouldMovePatternDown = false;
         }
     }
 

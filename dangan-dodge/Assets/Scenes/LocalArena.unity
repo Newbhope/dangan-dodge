@@ -678,7 +678,7 @@ Prefab:
     - target: {fileID: 114176899883188426, guid: fa412900266664e7497d7d8d4483f6a1,
         type: 2}
       propertyPath: movementSpeed
-      value: 8
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 114176899883188426, guid: fa412900266664e7497d7d8d4483f6a1,
         type: 2}
@@ -1279,26 +1279,6 @@ Prefab:
     - target: {fileID: 1213257950634164, guid: fa412900266664e7497d7d8d4483f6a1, type: 2}
       propertyPath: m_Name
       value: LeftPlayer
-      objectReference: {fileID: 0}
-    - target: {fileID: 114267407670011496, guid: fa412900266664e7497d7d8d4483f6a1,
-        type: 2}
-      propertyPath: movementSpeed
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 50635406597844988, guid: fa412900266664e7497d7d8d4483f6a1,
-        type: 2}
-      propertyPath: m_Interpolate
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114176899883188426, guid: fa412900266664e7497d7d8d4483f6a1,
-        type: 2}
-      propertyPath: movementSpeed
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 114176899883188426, guid: fa412900266664e7497d7d8d4483f6a1,
-        type: 2}
-      propertyPath: fireRate
-      value: 0.4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fa412900266664e7497d7d8d4483f6a1, type: 2}

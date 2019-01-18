@@ -15,7 +15,6 @@ public class MainMenuUiController : MonoBehaviour {
 
     private void Start() {
         manager = FindObjectOfType<NetworkManager>();
-        menuController = FindObjectOfType<OnlineMenuUiController>();
     }
 
     public void OnClickLocal() {
@@ -52,7 +51,5 @@ public class MainMenuUiController : MonoBehaviour {
 
     private void OnMatchJoin(bool success, string extendedInfo, MatchInfo responseData) {
         manager.StartClient(responseData);
-        //menuController.playersConnected = manager.numPlayers;
-        Debug.LogError(manager.numPlayers);
     }
 }
