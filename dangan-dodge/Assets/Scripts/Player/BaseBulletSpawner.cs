@@ -19,6 +19,9 @@ public class BaseBulletSpawner : NetworkBehaviour {
 	private int playerNumber;
     private SpriteRenderer spriteRenderer;
 
+    private int angle = 0;
+    private bool shouldMovePatternDown = true;
+
 	public void Start() {
 		playerTransform = GetComponentInParent<Transform>();
 		vars = GetComponentInParent<BasePlayerVariables>();
@@ -30,9 +33,24 @@ public class BaseBulletSpawner : NetworkBehaviour {
 	public void CmdSpawn() {
 		if (Time.time > nextFireTime) {
 			nextFireTime = Time.time + fireRate;
-            SpawnBullet(2);
-            SpawnBullet(0);
-            SpawnBullet(-2);
+            SpawnBullet(angle);
+            for (int i = 1; i < 3; i++) {
+                SpawnBullet(angle + i * 2);
+                SpawnBullet(angle - i * 2);
+            }
+
+            if (shouldMovePatternDown) {
+                angle -= 1;
+            } else {
+                angle += 1;
+            }
+
+            if (angle >= 10) {
+                shouldMovePatternDown = true;
+            }
+            if (angle <= -10) {
+                shouldMovePatternDown = false;
+            }
         }
     }
 
