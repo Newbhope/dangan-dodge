@@ -53,6 +53,6 @@ public class OnlineMenuUiController : NetworkBehaviour {
     }
 
     private void OnPlayerJoin(int playersConnected) {
-        playersConnectedText.text = "haha " + playersConnected;
+        playersConnectedText.text = "Players In Lobby: " + playersConnected;
     }
 }

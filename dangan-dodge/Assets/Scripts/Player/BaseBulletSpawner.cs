@@ -38,7 +38,7 @@ public class BaseBulletSpawner : NetworkBehaviour {
                 SpawnBullet(angle - i * 2);
             }
 
-            ChangeAngle();
+            //ChangeAngle();
         }
     }
 
