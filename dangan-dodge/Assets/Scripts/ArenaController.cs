@@ -9,6 +9,8 @@ using UnityEngine.UI;
  * Overall script for the game and arena
  * */
 public class ArenaController : NetworkBehaviour {
+    public int numRoundsToWin;
+
     public int countdownNumber;
     public float countdownInterval;
     public Text countdownText;
@@ -89,15 +91,29 @@ public class ArenaController : NetworkBehaviour {
         Dictionary<int, int> scores = GameStats.playerScores;
         //TODO: configurable score
         //there has to be a better way to do this
-        if (scores.ContainsValue(7)) {
-            foreach (var pair in scores) {
-                if (pair.Value == 7) {
-                    gameOverText.text = "Player " + pair.Key + " Wins!";
-                }
+        foreach (var pair in scores) {
+            if (pair.Value >= numRoundsToWin) {
+                gameOverText.text = "Player " + pair.Key + " Wins!";
             }
-        } else {
-            StartCoroutine(RestartRound());
         }
+
+        foreach (var pair in scores) {
+            if (pair.Value >= numRoundsToWin) {
+                break;
+                // ew
+            } else {
+                StartCoroutine(RestartRound());
+            }
+        }
+
+        //if (scores.ContainsValue(7)) {
+        //    foreach (var pair in scores) {
+        //        if (pair.Value == 7) {
+        //            gameOverText.text = "Player " + pair.Key + " Wins!";
+        //        }
+        //    }
+        //} else {
+        //}
     }
 
     IEnumerator RestartRound() {

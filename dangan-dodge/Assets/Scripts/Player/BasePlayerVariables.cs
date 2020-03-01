@@ -56,6 +56,7 @@ public class BasePlayerVariables : NetworkBehaviour {
             if (bulletVars != null && shootingPlayerNumber != playerNumberInt) {
                 otherBullet = other;
                 health--;
+     
             }
         }
     }
@@ -74,11 +75,18 @@ public class BasePlayerVariables : NetworkBehaviour {
         arenaController.UpdateScoreUi();
         arenaController.CheckGameOver();
 
+        GameObject[] bullets = GameObject.FindGameObjectsWithTag("Bullet");
+        foreach (GameObject bullet in bullets) {
+            Destroy(bullet);
+        }
+
         GameObject particleObject = Instantiate
             (explosionParticles,
             gameObject.transform.position,
             Quaternion.identity);
         particleObject.GetComponent<ParticleSystem>().Play();
+
+
 
         Destroy(otherBullet.gameObject);
         Destroy(gameObject);

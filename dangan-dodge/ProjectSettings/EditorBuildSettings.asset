@@ -17,4 +17,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/LocalArena.unity
     guid: ce1af647d2d6d4cc59e1014f9633d998
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.input.settings: {fileID: 11400000, guid: ad5561e110d4a4ffbbd0acc347f7dcf4,
+      type: 2}

@@ -18,7 +18,7 @@ public class PlayerCombatController : NetworkBehaviour {
     void Start() {
         vars = this.gameObject.GetComponent<BasePlayerVariables>();
 
-        //fireButtonName = vars.playerNumberString + "Fire";
+        fireButtonName = vars.playerNumberString + "Fire";
         baseBulletSpawner = GetComponent<BaseBulletSpawner>();
 
         bombButtonName = vars.playerNumberString + "Bomb";
@@ -27,11 +27,15 @@ public class PlayerCombatController : NetworkBehaviour {
 
     void Update() {
         if (hasAuthority && Time.timeScale != 0) {
-            baseBulletSpawner.CmdSpawn();
+            // baseBulletSpawner.CmdSpawn();
 
             var bombsLeft = GameStats.playerBombs[vars.playerNumberInt];
             if (Input.GetButtonDown(bombButtonName) && bombsLeft > 0) {
                 bombSpawner.CmdSpawn(bombsLeft, vars.playerNumberInt);
+            }
+
+            if (Input.GetButton(fireButtonName)) {
+                baseBulletSpawner.CmdSpawn();
             }
         }
     }
