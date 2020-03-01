@@ -4,11 +4,13 @@ using UnityEngine.UI;
 
 public class BombSpawner : MonoBehaviour {
 
+    // TODO: UI stuff doesnt belong in a bomb spawner class
     public int horizontalPadding;
     public Image originalBombIcon;
+    private List<Image> bombIcons = new List<Image>();
+
     public GameObject particles;
 
-    private List<Image> bombIcons = new List<Image>();
     private int bombsLeft;
 
     public void Start() {
@@ -19,7 +21,7 @@ public class BombSpawner : MonoBehaviour {
 
         for (int i = 1; i < bombsLeft; i++) {
             Vector3 newIconPosition = new Vector3(
-                originalPosition.x + (horizontalPadding * i * vars.playerVector.x),
+                originalPosition.x + (horizontalPadding * i),
                 originalPosition.y,
                 originalPosition.z);
 

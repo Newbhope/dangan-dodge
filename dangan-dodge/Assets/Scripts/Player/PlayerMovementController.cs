@@ -11,11 +11,6 @@ public class PlayerMovementController : MonoBehaviour {
 		BasePlayerVariables vars = GetComponent<BasePlayerVariables>();
 		horizontalAxisName = vars.playerNumberString + "Horizontal";
 		verticalAxisName = vars.playerNumberString + "Vertical";
-
-        Boundary arenaBounds = _GLOBAL_CONSTANTS.getPlayerBoundary(vars.playerNumberString);
-
-        Vector3 spriteBounds = GetComponentInChildren<SpriteRenderer>().bounds.size;
-
         body = GetComponent<Rigidbody2D>();
 	}
 
@@ -33,6 +28,5 @@ public class PlayerMovementController : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D collision) {
         body.velocity = Vector2.zero;
-        Debug.Log("wew");
     }
 }

@@ -5,44 +5,51 @@
  * Will use its own fire rate separate from other spawner types
  **/
 public class BaseBulletSpawner : MonoBehaviour {
-
 	public float fireRate;
 	public int movementSpeed;
+    public GameObject bulletPrefab;
+    public int additionalBulletAngleSpread;
+    public int extraBulletsPerSide;
 
-	private Rigidbody2D bullet;
-	private float nextFireTime;
-
-	private Transform playerTransform;
+    // player vars
+    private Transform playerTransform;
 	private BasePlayerVariables vars;
 	private int playerNumber;
 
-	private GameObject bulletObject;
+    private SpriteRenderer spriteRenderer;
+
+    private float nextFireTime;
 
 	public void Start() {
-		bulletObject = (GameObject) Resources.Load("BaseBullet", typeof(GameObject));
 		playerTransform = GetComponentInParent<Transform>();
 		vars = GetComponentInParent<BasePlayerVariables>();
 		playerNumber = vars.playerNumberInt;
-	}
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+    }
 
 	public void Spawn() {
 		if (Time.time > nextFireTime) {
 			nextFireTime = Time.time + fireRate;
-            Vector2 spawnDirection = vars.playerVector * movementSpeed;
 
-			GameObject spawnedBulletObject = Instantiate(
-				bulletObject,
-				playerTransform.position,
-				Quaternion.identity) as GameObject;
-
-			BaseBulletVariables bulletsVars = spawnedBulletObject
-				.GetComponent(typeof(BaseBulletVariables)) as BaseBulletVariables;
-			bulletsVars.playerNumberInt = playerNumber;
-
-			Rigidbody2D bulletBody = spawnedBulletObject
-				.GetComponent(typeof(Rigidbody2D)) as Rigidbody2D;
-			bulletBody.velocity = transform.TransformDirection(spawnDirection);
-		}
+            SpawnBullet(additionalBulletAngleSpread);
+            for (int i = 1; i <= extraBulletsPerSide; i++) {
+                SpawnBullet(additionalBulletAngleSpread + i * 2);
+                SpawnBullet(additionalBulletAngleSpread - i * 2);
+            }
+        }
 	}
 
+    private void SpawnBullet(int angle) {
+        Vector2 spawnDirection = new Vector2(1, 0) * movementSpeed;
+        spawnDirection.y += angle;
+
+        GameObject spawnedBulletObject = Instantiate(
+                bulletPrefab,
+                playerTransform.position,
+                Quaternion.identity);
+
+        spawnedBulletObject.GetComponent<BaseBulletVariables>().playerNumberInt = playerNumber;
+        spawnedBulletObject.GetComponent<SpriteRenderer>().color = spriteRenderer.color;
+        spawnedBulletObject.GetComponent<Rigidbody2D>().velocity = transform.TransformDirection(spawnDirection);
+    }
 }
