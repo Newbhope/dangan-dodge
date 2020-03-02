@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 /**
  * Class that calls into each bullet spawner with the fire key
@@ -18,6 +18,13 @@ public class PlayerCombatController : MonoBehaviour {
     private BombSpawner bombSpawner;
     private int bombsLeft;
 
+    private Controls controls;
+
+    private void Awake() {
+        controls = new Controls();
+        controls.Default.Fire.performed += HandleFire;
+    }
+
     void Start() {
         BasePlayerVariables vars = this.gameObject.GetComponent<BasePlayerVariables>();
 
@@ -27,9 +34,19 @@ public class PlayerCombatController : MonoBehaviour {
         bombButtonName = vars.playerNumberString + "Bomb";
         bombsLeft = vars.bombsLeft;
         bombSpawner = GetComponent<BombSpawner>();
+
+        controls = new Controls();
+
+        controls.Default.Fire.performed += HandleFire;
+        controls.Default.Fire.Enable();
+    }
+
+    private void HandleFire(InputAction.CallbackContext obj) {
+        baseBulletSpawner.Spawn();
     }
 
     void Update() {
+        /*
         if (Time.timeScale > 0.1) {
             if (Input.GetButton(fireButtonName)) {
                 baseBulletSpawner.Spawn();
@@ -41,5 +58,14 @@ public class PlayerCombatController : MonoBehaviour {
                 Debug.Log(bombsLeft);
             }
         }
+        */
+    }
+
+    private void OnEnable() {
+        controls.Default.Fire.Enable();
+    }
+
+    private void OnDisable() {
+        controls.Default.Fire.Disable();
     }
 }

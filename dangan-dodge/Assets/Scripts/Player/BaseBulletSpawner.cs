@@ -28,7 +28,7 @@ public class BaseBulletSpawner : MonoBehaviour {
     }
 
 	public void Spawn() {
-		if (Time.time > nextFireTime) {
+		if (Time.time > nextFireTime && playerTransform != null) {
 			nextFireTime = Time.time + fireRate;
 
             SpawnBullet(additionalBulletAngleSpread);

@@ -33,7 +33,7 @@ public class PlayerHitboxController : MonoBehaviour {
             currentScore += 1;
             GameStats.playerScores[shootingPlayerNumber] = currentScore;
             shootingPlayerScoreText.text = "Score: " + currentScore;
-            arenaController.checkGameOver();
+            arenaController.CheckGameOver();
 
 
             // Clear all bullets on death and create explosion particles
@@ -48,9 +48,8 @@ public class PlayerHitboxController : MonoBehaviour {
                 Quaternion.identity);
             particleObject.GetComponent<ParticleSystem>().Play();
 
-            Destroy(collidingBullet.gameObject);
             // Destroy the player prefab also instead of just the square prefab
-            Destroy(gameObject);
+            Destroy(this.transform.parent.gameObject);
         }
     }
 }

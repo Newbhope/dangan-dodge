@@ -62,7 +62,7 @@ public class ArenaController : MonoBehaviour {
 		}
 	}
 
-    public void checkGameOver() {
+    public void CheckGameOver() {
         Dictionary<int, int> scores = GameStats.playerScores;
         //TODO: configurable score
         //there has to be a better way to do this

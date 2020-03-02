@@ -12,5 +12,5 @@ EditorBuildSettings:
     path: Assets/Scenes/Versus.unity
     guid: 23e288e7f4ad155499a13168eb078d82
   m_configObjects:
-    com.unity.input.settings: {fileID: 11400000, guid: ad5561e110d4a4ffbbd0acc347f7dcf4,
+    com.unity.input.settings: {fileID: 11400000, guid: 126b4610c80f89545b8799eb49a00748,
       type: 2}
