@@ -28,7 +28,7 @@ public class @Controls : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": ""Move"",
-                    ""type"": ""PassThrough"",
+                    ""type"": ""Value"",
                     ""id"": ""79f67def-317b-464e-a96b-5b6cff0b710b"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
@@ -125,6 +125,96 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""IJKL"",
+            ""id"": ""9b8a58e7-d7e6-42cd-a9c0-f5ef7796b6c2"",
+            ""actions"": [
+                {
+                    ""name"": ""Fire"",
+                    ""type"": ""Button"",
+                    ""id"": ""6069dd95-d3e7-43e7-aefd-bc973ae17974"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Move"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""1c1e94af-e9ba-46f9-adf4-af1396c06c12"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""d2b6a808-109a-4017-a3e8-5270d95f7a58"",
+                    ""path"": ""<Keyboard>/o"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard2"",
+                    ""action"": ""Fire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""WASD"",
+                    ""id"": ""f3fd9ce7-c3ac-4aa5-ab6c-531a01f2871e"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""9d5a4da1-43f3-45c2-915a-d78118f9081d"",
+                    ""path"": ""<Keyboard>/i"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard2"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""08a9c991-c68a-4e6c-922f-3ae31673b471"",
+                    ""path"": ""<Keyboard>/k"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard2"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""98059933-f292-4724-b677-55eff1963cc0"",
+                    ""path"": ""<Keyboard>/j"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard2"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""ed301223-d108-48ca-bfbc-ebd6a48cef73"",
+                    ""path"": ""<Keyboard>/l"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard2"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -149,6 +239,17 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""isOR"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Keyboard2"",
+            ""bindingGroup"": ""Keyboard2"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Keyboard>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
         }
     ]
 }");
@@ -156,6 +257,10 @@ public class @Controls : IInputActionCollection, IDisposable
         m_Default = asset.FindActionMap("Default", throwIfNotFound: true);
         m_Default_Fire = m_Default.FindAction("Fire", throwIfNotFound: true);
         m_Default_Move = m_Default.FindAction("Move", throwIfNotFound: true);
+        // IJKL
+        m_IJKL = asset.FindActionMap("IJKL", throwIfNotFound: true);
+        m_IJKL_Fire = m_IJKL.FindAction("Fire", throwIfNotFound: true);
+        m_IJKL_Move = m_IJKL.FindAction("Move", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -242,6 +347,47 @@ public class @Controls : IInputActionCollection, IDisposable
         }
     }
     public DefaultActions @Default => new DefaultActions(this);
+
+    // IJKL
+    private readonly InputActionMap m_IJKL;
+    private IIJKLActions m_IJKLActionsCallbackInterface;
+    private readonly InputAction m_IJKL_Fire;
+    private readonly InputAction m_IJKL_Move;
+    public struct IJKLActions
+    {
+        private @Controls m_Wrapper;
+        public IJKLActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Fire => m_Wrapper.m_IJKL_Fire;
+        public InputAction @Move => m_Wrapper.m_IJKL_Move;
+        public InputActionMap Get() { return m_Wrapper.m_IJKL; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(IJKLActions set) { return set.Get(); }
+        public void SetCallbacks(IIJKLActions instance)
+        {
+            if (m_Wrapper.m_IJKLActionsCallbackInterface != null)
+            {
+                @Fire.started -= m_Wrapper.m_IJKLActionsCallbackInterface.OnFire;
+                @Fire.performed -= m_Wrapper.m_IJKLActionsCallbackInterface.OnFire;
+                @Fire.canceled -= m_Wrapper.m_IJKLActionsCallbackInterface.OnFire;
+                @Move.started -= m_Wrapper.m_IJKLActionsCallbackInterface.OnMove;
+                @Move.performed -= m_Wrapper.m_IJKLActionsCallbackInterface.OnMove;
+                @Move.canceled -= m_Wrapper.m_IJKLActionsCallbackInterface.OnMove;
+            }
+            m_Wrapper.m_IJKLActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Fire.started += instance.OnFire;
+                @Fire.performed += instance.OnFire;
+                @Fire.canceled += instance.OnFire;
+                @Move.started += instance.OnMove;
+                @Move.performed += instance.OnMove;
+                @Move.canceled += instance.OnMove;
+            }
+        }
+    }
+    public IJKLActions @IJKL => new IJKLActions(this);
     private int m_KeyboardSchemeIndex = -1;
     public InputControlScheme KeyboardScheme
     {
@@ -260,7 +406,21 @@ public class @Controls : IInputActionCollection, IDisposable
             return asset.controlSchemes[m_GamepadSchemeIndex];
         }
     }
+    private int m_Keyboard2SchemeIndex = -1;
+    public InputControlScheme Keyboard2Scheme
+    {
+        get
+        {
+            if (m_Keyboard2SchemeIndex == -1) m_Keyboard2SchemeIndex = asset.FindControlSchemeIndex("Keyboard2");
+            return asset.controlSchemes[m_Keyboard2SchemeIndex];
+        }
+    }
     public interface IDefaultActions
+    {
+        void OnFire(InputAction.CallbackContext context);
+        void OnMove(InputAction.CallbackContext context);
+    }
+    public interface IIJKLActions
     {
         void OnFire(InputAction.CallbackContext context);
         void OnMove(InputAction.CallbackContext context);
