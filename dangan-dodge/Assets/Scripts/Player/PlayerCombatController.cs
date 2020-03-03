@@ -18,13 +18,6 @@ public class PlayerCombatController : MonoBehaviour {
     private BombSpawner bombSpawner;
     private int bombsLeft;
 
-    private Controls controls;
-
-    private void Awake() {
-        controls = new Controls();
-        controls.Default.Fire.performed += HandleFire;
-    }
-
     void Start() {
         BasePlayerVariables vars = this.gameObject.GetComponent<BasePlayerVariables>();
 
@@ -34,11 +27,12 @@ public class PlayerCombatController : MonoBehaviour {
         bombButtonName = vars.playerNumberString + "Bomb";
         bombsLeft = vars.bombsLeft;
         bombSpawner = GetComponent<BombSpawner>();
+    }
 
-        controls = new Controls();
+    public void OnFire(InputValue value) {
+        Debug.Log("yay");
+        baseBulletSpawner.Spawn();
 
-        controls.Default.Fire.performed += HandleFire;
-        controls.Default.Fire.Enable();
     }
 
     private void HandleFire(InputAction.CallbackContext obj) {
@@ -59,13 +53,5 @@ public class PlayerCombatController : MonoBehaviour {
             }
         }
         */
-    }
-
-    private void OnEnable() {
-        controls.Default.Fire.Enable();
-    }
-
-    private void OnDisable() {
-        controls.Default.Fire.Disable();
     }
 }

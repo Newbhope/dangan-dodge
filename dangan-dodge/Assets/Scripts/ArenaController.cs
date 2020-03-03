@@ -14,21 +14,16 @@ public class ArenaController : MonoBehaviour {
     public Text countdownText;
     public float roundEndPauseTime;
 
-    public GameObject playerOne;
-    public GameObject playerTwo;
-
     public Text playerOneScoreText;
     public Text playerTwoScoreText;
 
     public Text gameOverText;
 
     void Start() {
-        int playerOneScore;
-        GameStats.playerScores.TryGetValue(1, out playerOneScore);
+        GameStats.playerScores.TryGetValue(1, out int playerOneScore);
         playerOneScoreText.text = "Score: " + playerOneScore;
 
-        int playerTwoScore;
-        GameStats.playerScores.TryGetValue(2, out playerTwoScore);
+        GameStats.playerScores.TryGetValue(2, out int playerTwoScore);
         playerTwoScoreText.text = "Score: " + playerTwoScore;
 
         StartCoroutine(StartRound());
@@ -45,11 +40,6 @@ public class ArenaController : MonoBehaviour {
         Destroy(countdownText);
         Time.timeScale = 1;
     }
-
-    void Update() {
-        if (playerOne == null || playerTwo == null) {
-        }
-	}
 
     IEnumerator RestartRound() {
         yield return new WaitForSeconds(roundEndPauseTime);

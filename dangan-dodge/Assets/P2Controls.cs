@@ -1,4 +1,4 @@
-// GENERATED AUTOMATICALLY FROM 'Assets/Controls.inputactions'
+// GENERATED AUTOMATICALLY FROM 'Assets/P2Controls.inputactions'
 
 using System;
 using System.Collections;
@@ -6,158 +6,16 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
-public class @Controls : IInputActionCollection, IDisposable
+public class @P2Controls : IInputActionCollection, IDisposable
 {
     public InputActionAsset asset { get; }
-    public @Controls()
+    public @P2Controls()
     {
         asset = InputActionAsset.FromJson(@"{
-    ""name"": ""Controls"",
+    ""name"": ""P2Controls"",
     ""maps"": [
         {
             ""name"": ""Default"",
-            ""id"": ""d387b341-0eae-43db-9cf0-3a47326df0a4"",
-            ""actions"": [
-                {
-                    ""name"": ""Fire"",
-                    ""type"": ""Button"",
-                    ""id"": ""44897986-b73c-4515-ae5f-db4a8bc49177"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""Move"",
-                    ""type"": ""PassThrough"",
-                    ""id"": ""79f67def-317b-464e-a96b-5b6cff0b710b"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""Pause"",
-                    ""type"": ""Button"",
-                    ""id"": ""27a02346-3f9c-4630-ae34-fafebe376d9f"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """"
-                }
-            ],
-            ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""be344b88-2cc3-4f52-a86e-65d690dcd971"",
-                    ""path"": ""<Keyboard>/e"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""Fire"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""b5c7282c-adca-4b27-8125-5d9d5570a88e"",
-                    ""path"": ""<Gamepad>/rightTrigger"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""Fire"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""WASD"",
-                    ""id"": ""d950454d-5c19-4326-a2f0-7076b288e1b4"",
-                    ""path"": ""2DVector"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""up"",
-                    ""id"": ""21810126-bdc7-4bd8-b475-067973eed7d7"",
-                    ""path"": ""<Keyboard>/w"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""61843a74-d881-42d8-858b-3479d0acbf0e"",
-                    ""path"": ""<Keyboard>/s"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""left"",
-                    ""id"": ""37587e1c-e88e-47e7-b271-6149bc60ae14"",
-                    ""path"": ""<Keyboard>/a"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""right"",
-                    ""id"": ""2eaf0350-8159-4a16-94c2-6d9f7faea626"",
-                    ""path"": ""<Keyboard>/d"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""f0de69f3-4147-4b1a-b719-2ea1be9423a8"",
-                    ""path"": ""<Gamepad>/leftStick"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""99ddb0db-c448-4937-9772-951477c7f4aa"",
-                    ""path"": ""<Gamepad>/start"",
-                    ""interactions"": ""Hold"",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""Pause"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""3e439992-9f56-411b-8bc6-ab0bc15aae8c"",
-                    ""path"": ""<Keyboard>/escape"",
-                    ""interactions"": ""Hold"",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""Pause"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                }
-            ]
-        },
-        {
-            ""name"": ""P2"",
             ""id"": ""5721290a-0dc4-49ea-bb92-b6451804a97c"",
             ""actions"": [
                 {
@@ -329,11 +187,6 @@ public class @Controls : IInputActionCollection, IDisposable
         m_Default_Fire = m_Default.FindAction("Fire", throwIfNotFound: true);
         m_Default_Move = m_Default.FindAction("Move", throwIfNotFound: true);
         m_Default_Pause = m_Default.FindAction("Pause", throwIfNotFound: true);
-        // P2
-        m_P2 = asset.FindActionMap("P2", throwIfNotFound: true);
-        m_P2_Fire = m_P2.FindAction("Fire", throwIfNotFound: true);
-        m_P2_Move = m_P2.FindAction("Move", throwIfNotFound: true);
-        m_P2_Pause = m_P2.FindAction("Pause", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -388,8 +241,8 @@ public class @Controls : IInputActionCollection, IDisposable
     private readonly InputAction m_Default_Pause;
     public struct DefaultActions
     {
-        private @Controls m_Wrapper;
-        public DefaultActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        private @P2Controls m_Wrapper;
+        public DefaultActions(@P2Controls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Fire => m_Wrapper.m_Default_Fire;
         public InputAction @Move => m_Wrapper.m_Default_Move;
         public InputAction @Pause => m_Wrapper.m_Default_Pause;
@@ -428,55 +281,6 @@ public class @Controls : IInputActionCollection, IDisposable
         }
     }
     public DefaultActions @Default => new DefaultActions(this);
-
-    // P2
-    private readonly InputActionMap m_P2;
-    private IP2Actions m_P2ActionsCallbackInterface;
-    private readonly InputAction m_P2_Fire;
-    private readonly InputAction m_P2_Move;
-    private readonly InputAction m_P2_Pause;
-    public struct P2Actions
-    {
-        private @Controls m_Wrapper;
-        public P2Actions(@Controls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Fire => m_Wrapper.m_P2_Fire;
-        public InputAction @Move => m_Wrapper.m_P2_Move;
-        public InputAction @Pause => m_Wrapper.m_P2_Pause;
-        public InputActionMap Get() { return m_Wrapper.m_P2; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(P2Actions set) { return set.Get(); }
-        public void SetCallbacks(IP2Actions instance)
-        {
-            if (m_Wrapper.m_P2ActionsCallbackInterface != null)
-            {
-                @Fire.started -= m_Wrapper.m_P2ActionsCallbackInterface.OnFire;
-                @Fire.performed -= m_Wrapper.m_P2ActionsCallbackInterface.OnFire;
-                @Fire.canceled -= m_Wrapper.m_P2ActionsCallbackInterface.OnFire;
-                @Move.started -= m_Wrapper.m_P2ActionsCallbackInterface.OnMove;
-                @Move.performed -= m_Wrapper.m_P2ActionsCallbackInterface.OnMove;
-                @Move.canceled -= m_Wrapper.m_P2ActionsCallbackInterface.OnMove;
-                @Pause.started -= m_Wrapper.m_P2ActionsCallbackInterface.OnPause;
-                @Pause.performed -= m_Wrapper.m_P2ActionsCallbackInterface.OnPause;
-                @Pause.canceled -= m_Wrapper.m_P2ActionsCallbackInterface.OnPause;
-            }
-            m_Wrapper.m_P2ActionsCallbackInterface = instance;
-            if (instance != null)
-            {
-                @Fire.started += instance.OnFire;
-                @Fire.performed += instance.OnFire;
-                @Fire.canceled += instance.OnFire;
-                @Move.started += instance.OnMove;
-                @Move.performed += instance.OnMove;
-                @Move.canceled += instance.OnMove;
-                @Pause.started += instance.OnPause;
-                @Pause.performed += instance.OnPause;
-                @Pause.canceled += instance.OnPause;
-            }
-        }
-    }
-    public P2Actions @P2 => new P2Actions(this);
     private int m_KeyboardSchemeIndex = -1;
     public InputControlScheme KeyboardScheme
     {
@@ -496,12 +300,6 @@ public class @Controls : IInputActionCollection, IDisposable
         }
     }
     public interface IDefaultActions
-    {
-        void OnFire(InputAction.CallbackContext context);
-        void OnMove(InputAction.CallbackContext context);
-        void OnPause(InputAction.CallbackContext context);
-    }
-    public interface IP2Actions
     {
         void OnFire(InputAction.CallbackContext context);
         void OnMove(InputAction.CallbackContext context);

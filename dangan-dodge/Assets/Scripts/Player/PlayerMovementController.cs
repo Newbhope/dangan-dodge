@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerMovementController : MonoBehaviour {
 	public float movementSpeed;
@@ -12,8 +13,8 @@ public class PlayerMovementController : MonoBehaviour {
     Vector2 movementInput;
 
     private void Awake() {
-        controls = new Controls();
-        controls.Default.Move.performed += callback => movementInput = callback.ReadValue<Vector2>();
+        //controls = new Controls();
+        //controls.Default.Move.performed += callback => movementInput = callback.ReadValue<Vector2>();
     }
 
     void Start() {
@@ -22,6 +23,14 @@ public class PlayerMovementController : MonoBehaviour {
 		verticalAxisName = vars.playerNumberString + "Vertical";
         body = GetComponent<Rigidbody2D>();
 	}
+
+    public void OnMove(InputValue value) {
+        Vector2 movementInput = value.Get<Vector2>();
+        Debug.Log(movementInput);
+        Vector2 movement = movementInput * movementSpeed * 0.35f;
+        body.MovePosition(body.position + movement);
+        Debug.Log("bruh");
+    }
 
     /*
 	 * Player movement applies movement translation then clamps the final position to
@@ -38,10 +47,10 @@ public class PlayerMovementController : MonoBehaviour {
     }
 
     private void OnEnable() {
-        controls.Enable();
+        //controls.Enable();
     }
 
     private void OnDisable() {
-        controls.Disable();
+        //controls.Disable();
     }
 }
