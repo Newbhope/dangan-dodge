@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class BaseBulletVariables : MonoBehaviour {
-	public int playerNumberInt;
+	public int ownerPlayerId;
 }

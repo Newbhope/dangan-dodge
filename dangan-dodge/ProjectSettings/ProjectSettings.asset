@@ -640,5 +640,5 @@ PlayerSettings:
   organizationId: john-pham-76b997df-16c2-4375-b7a0-4d477223cef3
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 1
-  disableOldInputManagerSupport: 1
+  disableOldInputManagerSupport: 0
   legacyClampBlendShapeWeights: 1

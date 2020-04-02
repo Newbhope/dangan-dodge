@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using System;
 
 /**
  * Overall script for the game and arena
@@ -23,13 +24,7 @@ public class ArenaController : MonoBehaviour {
     public Text gameOverText;
 
     void Start() {
-        int playerOneScore;
-        GameStats.playerScores.TryGetValue(1, out playerOneScore);
-        playerOneScoreText.text = "Score: " + playerOneScore;
-
-        int playerTwoScore;
-        GameStats.playerScores.TryGetValue(2, out playerTwoScore);
-        playerTwoScoreText.text = "Score: " + playerTwoScore;
+        UpdateScoreUi();
 
         StartCoroutine(StartRound());
     }
@@ -46,10 +41,17 @@ public class ArenaController : MonoBehaviour {
         Time.timeScale = 1;
     }
 
-    void Update() {
-        if (playerOne == null || playerTwo == null) {
+    internal void UpdateScoreUi() {
+        foreach (KeyValuePair<int, int> pair in GameStats.playerScores) {
+            Debug.Log(pair);
         }
-	}
+
+        GameStats.playerScores.TryGetValue(0, out int playerOneScore);
+        playerOneScoreText.text = "Score: " + playerOneScore;
+
+        GameStats.playerScores.TryGetValue(1, out int playerTwoScore);
+        playerTwoScoreText.text = "Score: " + playerTwoScore;
+    }
 
     IEnumerator RestartRound() {
         yield return new WaitForSeconds(roundEndPauseTime);

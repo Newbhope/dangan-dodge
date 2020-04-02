@@ -23,7 +23,7 @@ public class BaseBulletSpawner : MonoBehaviour {
 	public void Start() {
 		playerTransform = GetComponentInParent<Transform>();
 		vars = GetComponentInParent<BasePlayerVariables>();
-		playerNumber = vars.playerNumberInt;
+		playerNumber = vars.playerId;
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
@@ -48,7 +48,7 @@ public class BaseBulletSpawner : MonoBehaviour {
                 playerTransform.position,
                 Quaternion.identity);
 
-        spawnedBulletObject.GetComponent<BaseBulletVariables>().playerNumberInt = playerNumber;
+        spawnedBulletObject.GetComponent<BaseBulletVariables>().ownerPlayerId = playerNumber;
         spawnedBulletObject.GetComponent<SpriteRenderer>().color = spriteRenderer.color;
         spawnedBulletObject.GetComponent<Rigidbody2D>().velocity = transform.TransformDirection(spawnDirection);
     }

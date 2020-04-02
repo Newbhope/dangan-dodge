@@ -1,20 +1,17 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 
 public class PlayerHitboxController : MonoBehaviour {
 
-    //TOOD: kinda weird that this is here
-    public Text shootingPlayerScoreText;
     public GameObject explosionParticles;
 
     private BasePlayerVariables vars;
-	private int hitPlayerNumber;
+	private int hitPlayerId;
 
     private ArenaController arenaController;
 
     void Start () {
 		vars = GetComponentInParent<BasePlayerVariables>();
-		hitPlayerNumber = vars.playerNumberInt;
+		hitPlayerId = vars.playerId;
         arenaController = FindObjectOfType<ArenaController>();
     }
 
@@ -25,16 +22,17 @@ public class PlayerHitboxController : MonoBehaviour {
 			.gameObject
 			.GetComponent(typeof(BaseBulletVariables)) as BaseBulletVariables;
 
-        int shootingPlayerNumber = bulletVars.playerNumberInt;
+        int shootingPlayerId = bulletVars.ownerPlayerId;
 
         // A bullet that isn't owned by the player
-        if (bulletVars != null && shootingPlayerNumber != hitPlayerNumber) {
-            GameStats.playerScores.TryGetValue(shootingPlayerNumber, out int currentScore);
-            currentScore += 1;
-            GameStats.playerScores[shootingPlayerNumber] = currentScore;
-            shootingPlayerScoreText.text = "Score: " + currentScore;
-            arenaController.CheckGameOver();
+        if (bulletVars != null && shootingPlayerId != hitPlayerId) {
 
+            GameStats.playerScores.TryGetValue(shootingPlayerId, out int currentScore);
+            currentScore += 1;
+            GameStats.playerScores[shootingPlayerId] = currentScore;
+
+            arenaController.UpdateScoreUi();
+            arenaController.CheckGameOver();
 
             // Clear all bullets on death and create explosion particles
             GameObject[] bullets = GameObject.FindGameObjectsWithTag("Bullet");
