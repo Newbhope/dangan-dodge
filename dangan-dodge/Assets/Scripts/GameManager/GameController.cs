@@ -3,12 +3,11 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.Collections.Generic;
-using System;
 
 /**
  * Overall script for the game and arena
  * */
-public class ArenaController : MonoBehaviour {
+public class GameController : MonoBehaviour {
 
     public int countdownNumber;
     public float countdownInterval;
@@ -18,16 +17,28 @@ public class ArenaController : MonoBehaviour {
     public GameObject playerOne;
     public GameObject playerTwo;
 
+    public GameObject gameUI;
     public Text playerOneScoreText;
     public Text playerTwoScoreText;
-
     public Text gameOverText;
+
+    public GameObject pauseMenu;
 
     void Start() {
         UpdateScoreUi();
-
         StartCoroutine(StartRound());
     }
+
+    // UI Stuff
+    internal void UpdateScoreUi() {
+        GameStats.playerScores.TryGetValue(0, out int playerOneScore);
+        playerOneScoreText.text = "Score: " + playerOneScore;
+
+        GameStats.playerScores.TryGetValue(1, out int playerTwoScore);
+        playerTwoScoreText.text = "Score: " + playerTwoScore;
+    }
+
+    // Game Manager Stuff
 
     IEnumerator StartRound() {
         Time.timeScale = 0;
@@ -41,28 +52,11 @@ public class ArenaController : MonoBehaviour {
         Time.timeScale = 1;
     }
 
-    internal void UpdateScoreUi() {
-        foreach (KeyValuePair<int, int> pair in GameStats.playerScores) {
-            Debug.Log(pair);
-        }
-
-        GameStats.playerScores.TryGetValue(0, out int playerOneScore);
-        playerOneScoreText.text = "Score: " + playerOneScore;
-
-        GameStats.playerScores.TryGetValue(1, out int playerTwoScore);
-        playerTwoScoreText.text = "Score: " + playerTwoScore;
-    }
-
     IEnumerator RestartRound() {
         yield return new WaitForSeconds(roundEndPauseTime);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    void OnTriggerExit2D(Collider2D other) {
-		if (other != null) {
-			Destroy(other.gameObject);
-		}
-	}
 
     public void CheckGameOver() {
         Dictionary<int, int> scores = GameStats.playerScores;
@@ -76,6 +70,19 @@ public class ArenaController : MonoBehaviour {
             }
         } else {
             StartCoroutine(RestartRound());
+        }
+    }
+
+    public void PausePressed() {
+        switch (Time.timeScale) {
+            case 1:
+                Time.timeScale = 0;
+                pauseMenu.SetActive(true);
+                break;
+            case 0:
+                Time.timeScale = 1;
+                pauseMenu.SetActive(false);
+                break;
         }
     }
 }

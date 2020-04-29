@@ -1,8 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ParticleController : MonoBehaviour {
+
+    // Currently attached to ExplosionParticles prefab
 
     private ParticleSystem pSystem;
 

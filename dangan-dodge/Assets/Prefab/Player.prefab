@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 114176899883188426}
   - component: {fileID: 114712342882068156}
   - component: {fileID: -8299842961660815236}
+  - component: {fileID: -8447653884234119036}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -49,8 +50,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07b68ef99b3412444a301bc28a536bb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerNumberString: One
-  playerNumberInt: 1
+  playerId: 0
   bombsLeft: 3
 --- !u!114 &114267407670011496
 MonoBehaviour:
@@ -131,6 +131,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &-8447653884234119036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1213257950634164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b809081beae800d428eb17672a5409e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1465727293327272
 GameObject:
   m_ObjectHideFlags: 0
@@ -226,7 +238,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 548c399c26dcba04981a37a546c30cd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootingPlayerScoreText: {fileID: 0}
   explosionParticles: {fileID: 1475468544743062, guid: e6e9179337d103b439444948fe4ac983,
     type: 3}
 --- !u!60 &60479454910328564
