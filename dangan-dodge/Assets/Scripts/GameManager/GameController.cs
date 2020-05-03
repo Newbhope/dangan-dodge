@@ -85,4 +85,8 @@ public class GameController : MonoBehaviour {
                 break;
         }
     }
+
+    public void OnClickTitle() {
+        SceneManager.LoadScene("MainMenu");
+    }
 }
