@@ -5,7 +5,6 @@ using UnityEngine.UI;
 public class BombSpawner : MonoBehaviour {
 
     // TODO: UI stuff doesnt belong in a bomb spawner class
-    public int horizontalPadding;
     public Image originalBombIcon;
     private List<Image> bombIcons = new List<Image>();
 
@@ -18,6 +17,14 @@ public class BombSpawner : MonoBehaviour {
         bombsLeft = vars.bombsLeft;
         Vector3 originalPosition = originalBombIcon.transform.position;
         bombIcons.Add(originalBombIcon);
+
+        float length = originalBombIcon.transform.localScale.x;
+     
+        float horizontalPadding = originalBombIcon.rectTransform.rect.width + 2;
+
+        if (vars.playerId == 1) {
+            horizontalPadding = -horizontalPadding;
+        }
 
         for (int i = 1; i < bombsLeft; i++) {
             Vector3 newIconPosition = new Vector3(
