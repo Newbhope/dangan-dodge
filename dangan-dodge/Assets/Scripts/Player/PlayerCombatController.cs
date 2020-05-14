@@ -11,7 +11,10 @@ using Rewired;
  **/
 public class PlayerCombatController : MonoBehaviour {
 
+    public int superOneCost;
+
     private Player player;
+    private BasePlayerVariables vars;
 
     private BaseBulletSpawner baseBulletSpawner;
 
@@ -19,7 +22,7 @@ public class PlayerCombatController : MonoBehaviour {
     private int bombsLeft;
 
     void Awake() {
-        BasePlayerVariables vars = this.gameObject.GetComponent<BasePlayerVariables>();
+        vars = this.gameObject.GetComponent<BasePlayerVariables>();
         player = ReInput.players.GetPlayer(vars.playerId);
 
         baseBulletSpawner = GetComponent<BaseBulletSpawner>();
@@ -28,6 +31,7 @@ public class PlayerCombatController : MonoBehaviour {
         bombsLeft = vars.bombsLeft;
     }
 
+    // Player inputs should always be in Update() since FixedUpdate() doesn't poll fast enough
     void Update() {
         // To prevent actions while paused
         if (Time.timeScale > 0.1) {
@@ -39,6 +43,12 @@ public class PlayerCombatController : MonoBehaviour {
                 bombSpawner.Spawn(bombsLeft);
                 bombsLeft--;
                 Debug.Log(bombsLeft);
+            }
+
+            if (player.GetButtonDown("Super1") && bombsLeft > 0 && vars.Energy >= superOneCost) {
+                Debug.Log(vars.Energy);
+                baseBulletSpawner.SpawnSuperBullet();
+                vars.Energy -= superOneCost;
             }
         }
     }

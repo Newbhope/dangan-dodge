@@ -52,8 +52,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerId: 0
-  bombsLeft: 3
-  energy: 0
+  bombsLeft: 1
 --- !u!114 &114267407670011496
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -79,6 +78,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85f03796ae80457458a2cd3db3eebd41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  superOneCost: 25
 --- !u!114 &114176899883188426
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -93,10 +93,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fireRate: 0.4
   movementSpeed: 5
-  bulletPrefab: {fileID: 1068068838267708, guid: 24b438590a72b6943813ca972fdae957,
-    type: 3}
   additionalBulletAngleSpread: 0
   extraBulletsPerSide: 3
+  bulletPrefab: {fileID: 1068068838267708, guid: 24b438590a72b6943813ca972fdae957,
+    type: 3}
+  superBulletPrefab: {fileID: 7191477511457251773, guid: 430e20ca3508bcb44b892c19099ce1ed,
+    type: 3}
 --- !u!114 &114712342882068156
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 /**
  * Class used to make base "Bullets". 
@@ -7,15 +8,15 @@
 public class BaseBulletSpawner : MonoBehaviour {
 	public float fireRate;
 	public int movementSpeed;
-    public GameObject bulletPrefab;
     public int additionalBulletAngleSpread;
     public int extraBulletsPerSide;
 
-    // player vars
+    public GameObject bulletPrefab;
+    public GameObject superBulletPrefab;
+
     private Transform playerTransform;
 	private BasePlayerVariables vars;
 	private int playerNumber;
-
     private SpriteRenderer spriteRenderer;
 
     private float nextFireTime;
@@ -51,5 +52,16 @@ public class BaseBulletSpawner : MonoBehaviour {
         spawnedBulletObject.GetComponent<BaseBulletVariables>().ownerPlayerId = playerNumber;
         spawnedBulletObject.GetComponent<SpriteRenderer>().color = spriteRenderer.color;
         spawnedBulletObject.GetComponent<Rigidbody2D>().velocity = transform.TransformDirection(spawnDirection);
+    }
+
+    internal void SpawnSuperBullet() {
+        GameObject superBullet = Instantiate(
+            superBulletPrefab,
+            playerTransform.position,
+            Quaternion.identity);
+
+        superBullet.GetComponent<BaseBulletVariables>().ownerPlayerId = playerNumber;
+        superBullet.GetComponent<SpriteRenderer>().color = spriteRenderer.color;
+        superBullet.GetComponent<Rigidbody2D>().velocity = transform.TransformDirection(new Vector2(1, 0) * movementSpeed / 2);
     }
 }

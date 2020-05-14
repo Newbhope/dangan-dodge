@@ -15,6 +15,9 @@ public class GameController : MonoBehaviour {
     public Text countdownText;
     public float roundEndPauseTime;
 
+    public GameObject playerOne;
+    public GameObject playerTwo;
+
     public Text playerOneEnergy;
     public Text playerTwoEnergy;
     public Text playerOneScoreText;
@@ -22,12 +25,27 @@ public class GameController : MonoBehaviour {
     public Text gameOverText;
     public GameObject pauseMenu;
 
+    private List<BasePlayerVariables> playerVars;
+
     void Start() {
+        playerVars = new List<BasePlayerVariables> {
+            playerOne.GetComponent<BasePlayerVariables>(),
+            playerTwo.GetComponent<BasePlayerVariables>()
+        };
+
         UpdateScoreUi();
         StartCoroutine(StartRound());
+
+
+        // START TEST CODE
+        playerOne.GetComponent<BasePlayerVariables>().Energy = 50;
+        playerTwo.GetComponent<BasePlayerVariables>().Energy = 50;
+
+        // END TEST CODE
     }
 
     // UI Stuff
+
     internal void UpdateScoreUi() {
         GameStats.playerScores.TryGetValue(0, out int playerOneScore);
         playerOneScoreText.text = "Score: " + playerOneScore;
@@ -36,6 +54,12 @@ public class GameController : MonoBehaviour {
         playerTwoScoreText.text = "Score: " + playerTwoScore;
     }
 
+    internal void UpdateEnergyUi() {
+        playerOneEnergy.text = playerVars[0].Energy.ToString();
+        playerTwoEnergy.text = playerVars[1].Energy.ToString();
+    }
+
+    // This is probably optimizng too much. Unused code now
     internal void UpdateEnergyUi(int playerId, int energy) {
         switch(playerId) {
             case 0:
