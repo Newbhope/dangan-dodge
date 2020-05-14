@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using System;
 
 /**
  * Overall script for the game and arena
@@ -14,14 +15,11 @@ public class GameController : MonoBehaviour {
     public Text countdownText;
     public float roundEndPauseTime;
 
-    public GameObject playerOne;
-    public GameObject playerTwo;
-
-    public GameObject gameUI;
+    public Text playerOneEnergy;
+    public Text playerTwoEnergy;
     public Text playerOneScoreText;
     public Text playerTwoScoreText;
     public Text gameOverText;
-
     public GameObject pauseMenu;
 
     void Start() {
@@ -36,6 +34,17 @@ public class GameController : MonoBehaviour {
 
         GameStats.playerScores.TryGetValue(1, out int playerTwoScore);
         playerTwoScoreText.text = "Score: " + playerTwoScore;
+    }
+
+    internal void UpdateEnergyUi(int playerId, int energy) {
+        switch(playerId) {
+            case 0:
+                playerOneEnergy.text = energy.ToString();
+                break;
+            case 1:
+                playerTwoEnergy.text = energy.ToString();
+                break;
+        }
     }
 
     // Game Manager Stuff

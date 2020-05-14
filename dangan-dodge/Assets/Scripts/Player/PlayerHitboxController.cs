@@ -7,12 +7,12 @@ public class PlayerHitboxController : MonoBehaviour {
     private BasePlayerVariables vars;
 	private int hitPlayerId;
 
-    private GameController arenaController;
+    private GameController gameController;
 
     void Start () {
 		vars = GetComponentInParent<BasePlayerVariables>();
 		hitPlayerId = vars.playerId;
-        arenaController = FindObjectOfType<GameController>();
+        gameController = FindObjectOfType<GameController>();
     }
 
     void OnTriggerEnter2D(Collider2D collidingBullet) {
@@ -31,8 +31,8 @@ public class PlayerHitboxController : MonoBehaviour {
             currentScore += 1;
             GameStats.playerScores[shootingPlayerId] = currentScore;
 
-            arenaController.UpdateScoreUi();
-            arenaController.CheckGameOver();
+            gameController.UpdateScoreUi();
+            gameController.CheckGameOver();
 
             // Clear all bullets on death and create explosion particles
             GameObject[] bullets = GameObject.FindGameObjectsWithTag("Bullet");
