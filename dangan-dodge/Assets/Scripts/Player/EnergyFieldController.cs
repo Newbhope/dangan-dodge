@@ -2,6 +2,8 @@
 
 public class EnergyFieldController : MonoBehaviour {
 
+    public int energyPerFrame;
+
     private GameController gameController;
     private BasePlayerVariables vars;
 
@@ -13,7 +15,7 @@ public class EnergyFieldController : MonoBehaviour {
     private void OnTriggerStay2D(Collider2D collision) {
         BaseBulletVariables bulletVars = collision.GetComponent<BaseBulletVariables>();
         if (bulletVars != null && bulletVars.ownerPlayerId != vars.playerId) {
-            vars.energy += 1;
+            vars.energy += energyPerFrame;
             gameController.UpdateEnergyUi(vars.playerId, vars.energy);
         }
     }
