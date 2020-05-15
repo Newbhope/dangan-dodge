@@ -22,14 +22,12 @@ public class PlayerHitboxController : MonoBehaviour {
 			.gameObject
 			.GetComponent(typeof(BaseBulletVariables)) as BaseBulletVariables;
 
-        int shootingPlayerId = bulletVars.ownerPlayerId;
-
         // A bullet that isn't owned by the player
-        if (bulletVars != null && shootingPlayerId != hitPlayerId) {
+        if (bulletVars != null && bulletVars.ownerPlayerId != hitPlayerId) {
 
-            GameStats.playerScores.TryGetValue(shootingPlayerId, out int currentScore);
+            GameStats.playerScores.TryGetValue(bulletVars.ownerPlayerId, out int currentScore);
             currentScore += 1;
-            GameStats.playerScores[shootingPlayerId] = currentScore;
+            GameStats.playerScores[bulletVars.ownerPlayerId] = currentScore;
 
             gameController.UpdateScoreUi();
             gameController.CheckGameOver();
