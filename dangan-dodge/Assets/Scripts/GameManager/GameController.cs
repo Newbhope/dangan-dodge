@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using System;
+using UnityEngine.EventSystems;
 
 /**
  * Overall script for the game and arena
@@ -24,6 +25,8 @@ public class GameController : MonoBehaviour {
     public Text playerTwoScoreText;
     public Text gameOverText;
     public GameObject pauseMenu;
+    public Button resumeButton;
+    public Button why;
 
     private List<BasePlayerVariables> playerVars;
 
@@ -111,9 +114,11 @@ public class GameController : MonoBehaviour {
             case 1:
                 Time.timeScale = 0;
                 pauseMenu.SetActive(true);
+                resumeButton.Select();
                 break;
             case 0:
                 Time.timeScale = 1;
+                why.Select();
                 pauseMenu.SetActive(false);
                 break;
         }

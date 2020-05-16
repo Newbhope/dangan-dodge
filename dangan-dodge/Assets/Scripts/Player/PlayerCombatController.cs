@@ -45,7 +45,7 @@ public class PlayerCombatController : MonoBehaviour {
                 Debug.Log(bombsLeft);
             }
 
-            if (player.GetButtonDown("Super1") && bombsLeft > 0 && vars.Energy >= superOneCost) {
+            if (player.GetButtonDown("Super1") && vars.Energy >= superOneCost) {
                 Debug.Log(vars.Energy);
                 baseBulletSpawner.SpawnSuperBullet();
                 vars.Energy -= superOneCost;
