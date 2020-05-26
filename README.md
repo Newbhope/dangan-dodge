@@ -4,6 +4,7 @@ A 1v1 bullet hell taking inspirations from fighting games.
 My first "meaty" gameplay focused game. Made in Unity and based off an idea I sketched out during a lecture while bored. It has been in on and off development since then, and it has showed me how hard it is to make a game on the side while working.
 
 Gameplay video below
+
 [![](https://img.youtube.com/vi/5W_whgoUFtg/0.jpg)](https://www.youtube.com/watch?v=5W_whgoUFtg)
 
 # Lessons Learned
