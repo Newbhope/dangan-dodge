@@ -19,7 +19,7 @@ public class BasePlayerVariables : MonoBehaviour {
 
     private GameController gameController;
 
-    void Start() {
+    void Awake() {
         gameController = FindObjectOfType<GameController>();
     }
 }

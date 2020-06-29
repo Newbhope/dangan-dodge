@@ -20,7 +20,10 @@ public class GameController : MonoBehaviour {
     public GameObject playerTwo;
 
     public Text playerOneEnergy;
+    public Slider playerOneEnergyMeter;
     public Text playerTwoEnergy;
+    public Slider playerTwoEnergyMeter;
+
     public Text playerOneScoreText;
     public Text playerTwoScoreText;
     public Text gameOverText;
@@ -43,7 +46,7 @@ public class GameController : MonoBehaviour {
         // START TEST CODE
         playerOne.GetComponent<BasePlayerVariables>().Energy = 50;
         playerTwo.GetComponent<BasePlayerVariables>().Energy = 50;
-
+        UpdateEnergyUi();
         // END TEST CODE
     }
 
@@ -58,8 +61,13 @@ public class GameController : MonoBehaviour {
     }
 
     internal void UpdateEnergyUi() {
-        playerOneEnergy.text = playerVars[0].Energy.ToString();
-        playerTwoEnergy.text = playerVars[1].Energy.ToString();
+        int p1EnergyValue = playerVars[0].Energy;
+        playerOneEnergy.text = p1EnergyValue.ToString();
+        playerOneEnergyMeter.value = p1EnergyValue;
+
+        int p2EnergyValue = playerVars[1].Energy;
+        playerTwoEnergy.text = p2EnergyValue.ToString();
+        playerTwoEnergyMeter.value = p2EnergyValue;
     }
 
     // This is probably optimizng too much. Unused code now
