@@ -54,6 +54,16 @@ public class BaseBulletSpawner : MonoBehaviour {
         spawnedBulletObject.GetComponent<Rigidbody2D>().velocity = transform.TransformDirection(spawnDirection);
     }
 
+    internal void SpawnUltra() {
+        for (int bulletNumber = 1; bulletNumber <= 100; bulletNumber++) {
+            Vector3 spawnPosition = new Vector3(0, 0, 0);
+        }
+        GameObject spawnedBulletObject = Instantiate(
+                superBulletPrefab,
+                playerTransform.position,
+                Quaternion.identity);
+    }
+
     internal void SpawnSuperBullet() {
         GameObject superBullet = Instantiate(
             superBulletPrefab,

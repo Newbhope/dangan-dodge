@@ -10,7 +10,7 @@ public class PlayerMovementController : MonoBehaviour {
     // The Rewired Player
     private Player player;
 
-    void Awake() {
+    private void Awake() {
         BasePlayerVariables vars = GetComponent<BasePlayerVariables>();
         body = GetComponent<Rigidbody2D>();
 

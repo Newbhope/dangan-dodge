@@ -12,6 +12,7 @@ using Rewired;
 public class PlayerCombatController : MonoBehaviour {
 
     public int superOneCost;
+    public int ultraCost;
 
     private Player player;
     private BasePlayerVariables vars;
@@ -45,11 +46,18 @@ public class PlayerCombatController : MonoBehaviour {
                 Debug.Log(bombsLeft);
             }
 
-            if (player.GetButtonDown("Super1") && vars.Energy >= superOneCost) {
-                Debug.Log(vars.Energy);
+            // Metered moves
+            if (player.GetButtonLongPressUp("Super1")) {
+                if (vars.Energy >= ultraCost) {
+                    baseBulletSpawner.SpawnUltra();
+                    vars.Energy -= ultraCost;
+                }
+            } else if (player.GetButtonUp("Super1") && vars.Energy >= superOneCost) {
                 baseBulletSpawner.SpawnSuperBullet();
                 vars.Energy -= superOneCost;
+                Debug.Log("short hold");
             }
+
         }
     }
 }
