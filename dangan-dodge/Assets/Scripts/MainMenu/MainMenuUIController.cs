@@ -1,12 +1,15 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MainMenuUIController : MonoBehaviour {
-    public void OnClickVersus() {
+public class MainMenuUIController : MonoBehaviour
+{
+    public void OnClickVersus()
+    {
         SceneManager.LoadScene("Versus");
     }
 
-    public void OnClickQuit() {
+    public void OnClickQuit()
+    {
         Application.Quit();
     }
 }

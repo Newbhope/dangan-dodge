@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
 
-public class DrawArenaBorder : MonoBehaviour {
+public class DrawArenaBorder : MonoBehaviour
+{
 
-	void Start () {
+    void Start()
+    {
         Bounds bounds = GetComponent<SpriteRenderer>().bounds;
         LineRenderer lineRenderer = GetComponent<LineRenderer>();
 
@@ -13,5 +15,5 @@ public class DrawArenaBorder : MonoBehaviour {
 
         Vector3[] corners = { topLeft, topRight, bottomRight, bottomLeft, topLeft };
         lineRenderer.SetPositions(corners);
-	}
+    }
 }

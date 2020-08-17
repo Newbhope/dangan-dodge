@@ -1,16 +1,20 @@
 ﻿using UnityEngine;
 
-public class BasePlayerVariables : MonoBehaviour {
-	public int playerId;
+public class BasePlayerVariables : MonoBehaviour
+{
+    public int playerId;
     public int bombsLeft;
 
     // Sadly property fields can't be exposed by the default Unity editor
-    public int Energy {
-        get {
+    public int Energy
+    {
+        get
+        {
             return energy;
         }
 
-        set {
+        set
+        {
             energy = value;
             gameController.UpdateEnergyUi();
         }
@@ -19,7 +23,8 @@ public class BasePlayerVariables : MonoBehaviour {
 
     private GameController gameController;
 
-    void Awake() {
+    void Awake()
+    {
         gameController = FindObjectOfType<GameController>();
     }
 }

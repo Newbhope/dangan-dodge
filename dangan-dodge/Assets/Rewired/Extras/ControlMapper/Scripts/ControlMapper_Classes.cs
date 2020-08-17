@@ -6,14 +6,13 @@
 #pragma warning disable 0618
 #pragma warning disable 0649
 
-namespace Rewired.UI.ControlMapper {
+namespace Rewired.UI.ControlMapper
+{
 
     using UnityEngine;
     using UnityEngine.UI;
     using UnityEngine.EventSystems;
-    using System;
     using System.Collections.Generic;
-    using System.Collections.ObjectModel;
     using Rewired;
     using Rewired.Utils;
 #if REWIRED_CONTROL_MAPPER_USE_TMPRO
@@ -22,11 +21,13 @@ namespace Rewired.UI.ControlMapper {
     using Text = UnityEngine.UI.Text;
 #endif
 
-    public partial class ControlMapper {
+    public partial class ControlMapper
+    {
 
         #region GUI Elements
 
-        private abstract class GUIElement {
+        private abstract class GUIElement
+        {
             public readonly GameObject gameObject;
             protected readonly Text text;
             public readonly Selectable selectable;
@@ -36,13 +37,16 @@ namespace Rewired.UI.ControlMapper {
 
             public RectTransform rectTransform { get; private set; }
 
-            public GUIElement(GameObject gameObject) {
-                if(gameObject == null) {
+            public GUIElement(GameObject gameObject)
+            {
+                if (gameObject == null)
+                {
                     Debug.LogError("Rewired Control Mapper: gameObject is null!");
                     return;
                 }
                 this.selectable = gameObject.GetComponent<Selectable>();
-                if(selectable == null) {
+                if (selectable == null)
+                {
                     Debug.LogError("Rewired Control Mapper: Selectable is null!");
                     return;
                 }
@@ -52,8 +56,10 @@ namespace Rewired.UI.ControlMapper {
                 this.uiElementInfo = gameObject.GetComponent<UIElementInfo>();
                 children = new List<GUIElement>();
             }
-            public GUIElement(Selectable selectable, Text label) {
-                if(selectable == null) {
+            public GUIElement(Selectable selectable, Text label)
+            {
+                if (selectable == null)
+                {
                     Debug.LogError("Rewired Control Mapper: Selectable is null!");
                     return;
                 }
@@ -65,79 +71,94 @@ namespace Rewired.UI.ControlMapper {
                 children = new List<GUIElement>();
             }
 
-            public virtual void SetInteractible(bool state, bool playTransition) {
+            public virtual void SetInteractible(bool state, bool playTransition)
+            {
                 SetInteractible(state, playTransition, false);
             }
-            public virtual void SetInteractible(bool state, bool playTransition, bool permanent) {
-                for(int i = 0; i < children.Count; i++) {
-                    if(children[i] == null) continue;
+            public virtual void SetInteractible(bool state, bool playTransition, bool permanent)
+            {
+                for (int i = 0; i < children.Count; i++)
+                {
+                    if (children[i] == null) continue;
                     children[i].SetInteractible(state, playTransition, permanent);
                 }
-                if(permanentStateSet) return;
-                if(selectable == null) return;
-                if(permanent) permanentStateSet = true;
-                if(selectable.interactable == state) return;
+                if (permanentStateSet) return;
+                if (selectable == null) return;
+                if (permanent) permanentStateSet = true;
+                if (selectable.interactable == state) return;
                 UI.ControlMapper.UITools.SetInteractable(selectable, state, playTransition);
             }
 
-            public virtual void SetTextWidth(int value) {
-                if(text == null) return;
+            public virtual void SetTextWidth(int value)
+            {
+                if (text == null) return;
                 LayoutElement e = text.GetComponent<LayoutElement>();
-                if(e == null) e = text.gameObject.AddComponent<LayoutElement>();
+                if (e == null) e = text.gameObject.AddComponent<LayoutElement>();
                 e.preferredWidth = value;
             }
 
-            public virtual void SetFirstChildObjectWidth(LayoutElementSizeType type, int value) {
-                if(rectTransform.childCount == 0) return;
+            public virtual void SetFirstChildObjectWidth(LayoutElementSizeType type, int value)
+            {
+                if (rectTransform.childCount == 0) return;
                 Transform child = rectTransform.GetChild(0);
                 LayoutElement e = child.GetComponent<LayoutElement>();
-                if(e == null) e = child.gameObject.AddComponent<LayoutElement>();
+                if (e == null) e = child.gameObject.AddComponent<LayoutElement>();
 
-                if(type == LayoutElementSizeType.MinSize) e.minWidth = value;
-                else if(type == LayoutElementSizeType.PreferredSize) e.preferredWidth = value;
+                if (type == LayoutElementSizeType.MinSize) e.minWidth = value;
+                else if (type == LayoutElementSizeType.PreferredSize) e.preferredWidth = value;
                 else throw new System.NotImplementedException();
             }
 
-            public virtual void SetLabel(string label) {
-                if(text == null) return;
+            public virtual void SetLabel(string label)
+            {
+                if (text == null) return;
                 text.text = label;
             }
 
-            public virtual string GetLabel() {
-                if(text == null) return string.Empty;
+            public virtual string GetLabel()
+            {
+                if (text == null) return string.Empty;
                 return text.text;
             }
 
-            public virtual void AddChild(GUIElement child) {
+            public virtual void AddChild(GUIElement child)
+            {
                 children.Add(child);
             }
 
-            public void SetElementInfoData(string identifier, int intData) {
-                if(uiElementInfo == null) return;
+            public void SetElementInfoData(string identifier, int intData)
+            {
+                if (uiElementInfo == null) return;
                 uiElementInfo.identifier = identifier;
                 uiElementInfo.intData = intData;
             }
 
-            public virtual void SetActive(bool state) {
-                if(gameObject == null) return;
+            public virtual void SetActive(bool state)
+            {
+                if (gameObject == null) return;
                 gameObject.SetActive(state);
             }
 
-            protected virtual bool Init() {
+            protected virtual bool Init()
+            {
                 bool result = true;
-                for(int i = 0; i < children.Count; i++) {
-                    if(children[i] == null) continue;
-                    if(!children[i].Init()) result = false;
+                for (int i = 0; i < children.Count; i++)
+                {
+                    if (children[i] == null) continue;
+                    if (!children[i].Init()) result = false;
                 }
-                if(selectable == null) {
+                if (selectable == null)
+                {
                     Debug.LogError("Rewired Control Mapper: UI Element is missing Selectable component!");
                     result = false;
                 }
-                if(rectTransform == null) {
+                if (rectTransform == null)
+                {
                     Debug.LogError("Rewired Control Mapper: UI Element is missing RectTransform component!");
                     result = false;
                 }
-                if(uiElementInfo == null) {
+                if (uiElementInfo == null)
+                {
                     Debug.LogError("Rewired Control Mapper: UI Element is missing UIElementInfo component!");
                     result = false;
                 }
@@ -145,146 +166,175 @@ namespace Rewired.UI.ControlMapper {
             }
         }
 
-        private class GUIButton : GUIElement {
+        private class GUIButton : GUIElement
+        {
 
             protected Button button { get { return selectable as Button; } }
             public ButtonInfo buttonInfo { get { return uiElementInfo as ButtonInfo; } }
 
             public GUIButton(GameObject gameObject)
-                : base(gameObject) {
-                if(!Init()) return;
+                : base(gameObject)
+            {
+                if (!Init()) return;
             }
             public GUIButton(Button button, Text label)
-                : base(button, label) {
-                if(!Init()) return;
+                : base(button, label)
+            {
+                if (!Init()) return;
             }
 
-            public void SetButtonInfoData(string identifier, int intData) {
+            public void SetButtonInfoData(string identifier, int intData)
+            {
                 base.SetElementInfoData(identifier, intData);
             }
 
-            public void SetOnClickCallback(System.Action<ButtonInfo> callback) {
-                if(button == null) return;
+            public void SetOnClickCallback(System.Action<ButtonInfo> callback)
+            {
+                if (button == null) return;
                 button.onClick.AddListener(() => { callback(buttonInfo); });
             }
         }
 
-        private class GUIInputField : GUIElement {
+        private class GUIInputField : GUIElement
+        {
 
             protected Button button { get { return selectable as Button; } }
             public InputFieldInfo fieldInfo { get { return uiElementInfo as InputFieldInfo; } }
             public bool hasToggle { get { return toggle != null; } }
             public GUIToggle toggle { get; private set; }
 
-            public int actionElementMapId {
-                get {
-                    if(fieldInfo == null) return -1;
+            public int actionElementMapId
+            {
+                get
+                {
+                    if (fieldInfo == null) return -1;
                     return fieldInfo.actionElementMapId;
                 }
-                set {
-                    if(fieldInfo == null) return;
+                set
+                {
+                    if (fieldInfo == null) return;
                     fieldInfo.actionElementMapId = value;
                 }
             }
-            public int controllerId {
-                get {
-                    if(fieldInfo == null) return -1;
+            public int controllerId
+            {
+                get
+                {
+                    if (fieldInfo == null) return -1;
                     return fieldInfo.controllerId;
                 }
-                set {
-                    if(fieldInfo == null) return;
+                set
+                {
+                    if (fieldInfo == null) return;
                     fieldInfo.controllerId = value;
                 }
             }
 
             public GUIInputField(GameObject gameObject)
-                : base(gameObject) {
-                if(!Init()) return;
+                : base(gameObject)
+            {
+                if (!Init()) return;
             }
             public GUIInputField(Button button, Text label)
-                : base(button, label) {
-                if(!Init()) return;
+                : base(button, label)
+            {
+                if (!Init()) return;
             }
 
-            public void SetFieldInfoData(int actionId, AxisRange axisRange, ControllerType controllerType, int intData) {
+            public void SetFieldInfoData(int actionId, AxisRange axisRange, ControllerType controllerType, int intData)
+            {
                 base.SetElementInfoData(string.Empty, intData);
-                if(fieldInfo == null) return;
+                if (fieldInfo == null) return;
                 fieldInfo.actionId = actionId;
                 fieldInfo.axisRange = axisRange;
                 fieldInfo.controllerType = controllerType;
             }
 
-            public void SetOnClickCallback(System.Action<InputFieldInfo> callback) {
-                if(button == null) return;
+            public void SetOnClickCallback(System.Action<InputFieldInfo> callback)
+            {
+                if (button == null) return;
                 button.onClick.AddListener(() => { callback(fieldInfo as InputFieldInfo); });
             }
 
-            public virtual void SetInteractable(bool state, bool playTransition, bool permanent) {
-                if(permanentStateSet) return;
-                if(hasToggle && !state) toggle.SetInteractible(state, playTransition, permanent); // disable toggle if main element disabled
+            public virtual void SetInteractable(bool state, bool playTransition, bool permanent)
+            {
+                if (permanentStateSet) return;
+                if (hasToggle && !state) toggle.SetInteractible(state, playTransition, permanent); // disable toggle if main element disabled
                 base.SetInteractible(state, playTransition, permanent);
             }
 
-            public void AddToggle(GUIToggle toggle) {
-                if(toggle == null) return;
+            public void AddToggle(GUIToggle toggle)
+            {
+                if (toggle == null) return;
                 this.toggle = toggle;
             }
         }
 
-        private class GUIToggle : GUIElement {
+        private class GUIToggle : GUIElement
+        {
 
             protected Toggle toggle { get { return selectable as Toggle; } }
             public ToggleInfo toggleInfo { get { return uiElementInfo as ToggleInfo; } }
 
-            public int actionElementMapId {
-                get {
-                    if(toggleInfo == null) return -1;
+            public int actionElementMapId
+            {
+                get
+                {
+                    if (toggleInfo == null) return -1;
                     return toggleInfo.actionElementMapId;
                 }
-                set {
-                    if(toggleInfo == null) return;
+                set
+                {
+                    if (toggleInfo == null) return;
                     toggleInfo.actionElementMapId = value;
                 }
             }
 
             public GUIToggle(GameObject gameObject)
-                : base(gameObject) {
-                if(!Init()) return;
+                : base(gameObject)
+            {
+                if (!Init()) return;
             }
             public GUIToggle(Toggle toggle, Text label)
-                : base(toggle, label) {
-                if(!Init()) return;
+                : base(toggle, label)
+            {
+                if (!Init()) return;
             }
 
-            public void SetToggleInfoData(int actionId, AxisRange axisRange, ControllerType controllerType, int intData) {
+            public void SetToggleInfoData(int actionId, AxisRange axisRange, ControllerType controllerType, int intData)
+            {
                 base.SetElementInfoData(string.Empty, intData);
-                if(toggleInfo == null) return;
+                if (toggleInfo == null) return;
                 toggleInfo.actionId = actionId;
                 toggleInfo.axisRange = axisRange;
                 toggleInfo.controllerType = controllerType;
             }
 
-            public void SetOnSubmitCallback(System.Action<ToggleInfo, bool> callback) {
-                if(toggle == null) return;
-                
+            public void SetOnSubmitCallback(System.Action<ToggleInfo, bool> callback)
+            {
+                if (toggle == null) return;
+
                 EventTrigger trigger = toggle.GetComponent<EventTrigger>();
-                if(trigger == null) trigger = toggle.gameObject.AddComponent<EventTrigger>();
+                if (trigger == null) trigger = toggle.gameObject.AddComponent<EventTrigger>();
 
                 EventTrigger.TriggerEvent triggerEvent = new EventTrigger.TriggerEvent();
-                triggerEvent.AddListener((BaseEventData data) => {
+                triggerEvent.AddListener((BaseEventData data) =>
+                {
                     PointerEventData p = data as PointerEventData;
-                    if(p != null && p.button != 0) return; // ignore mouse clicks for all buttons except LMB
+                    if (p != null && p.button != 0) return; // ignore mouse clicks for all buttons except LMB
                     callback(toggleInfo, toggle.isOn);
                 });
 
                 // Joystick/keyboard submit event
-                EventTrigger.Entry entry = new EventTrigger.Entry() {
+                EventTrigger.Entry entry = new EventTrigger.Entry()
+                {
                     callback = triggerEvent,
                     eventID = EventTriggerType.Submit
                 };
 
                 // Mouse click submit event
-                EventTrigger.Entry entry2 = new EventTrigger.Entry() {
+                EventTrigger.Entry entry2 = new EventTrigger.Entry()
+                {
                     callback = triggerEvent,
                     eventID = EventTriggerType.PointerClick
                 };
@@ -295,56 +345,65 @@ namespace Rewired.UI.ControlMapper {
                 trigger.delegates.Add(entry);
                 trigger.delegates.Add(entry2);
 #else
-                if(trigger.triggers != null) trigger.triggers.Clear();
+                if (trigger.triggers != null) trigger.triggers.Clear();
                 else trigger.triggers = new List<EventTrigger.Entry>();
                 trigger.triggers.Add(entry);
                 trigger.triggers.Add(entry2);
 #endif
             }
 
-            public void SetToggleState(bool state) {
-                if(toggle == null) return;
+            public void SetToggleState(bool state)
+            {
+                if (toggle == null) return;
                 toggle.isOn = state;
             }
         }
 
-        private class GUILabel {
+        private class GUILabel
+        {
 
             public GameObject gameObject { get; private set; }
             private Text text { get; set; }
             public RectTransform rectTransform { get; private set; }
 
-            public GUILabel(GameObject gameObject) {
-                if(gameObject == null) {
+            public GUILabel(GameObject gameObject)
+            {
+                if (gameObject == null)
+                {
                     Debug.LogError("Rewired Control Mapper: gameObject is null!");
                     return;
                 }
                 text = UnityTools.GetComponentInSelfOrChildren<Text>(gameObject);
                 Check();
             }
-            public GUILabel(Text label) {
+            public GUILabel(Text label)
+            {
                 this.text = label;
-                if(!Check()) return;
+                if (!Check()) return;
             }
 
-            public void SetSize(int width, int height) {
-                if(text == null) return;
+            public void SetSize(int width, int height)
+            {
+                if (text == null) return;
                 rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, width);
                 rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, height);
             }
 
-            public void SetWidth(int width) {
-                if(text == null) return;
+            public void SetWidth(int width)
+            {
+                if (text == null) return;
                 rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, width);
             }
 
-            public void SetHeight(int height) {
-                if(text == null) return;
+            public void SetHeight(int height)
+            {
+                if (text == null) return;
                 rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, height);
             }
 
-            public void SetLabel(string label) {
-                if(text == null) return;
+            public void SetLabel(string label)
+            {
+                if (text == null) return;
                 text.text = label;
             }
 
@@ -359,25 +418,30 @@ namespace Rewired.UI.ControlMapper {
                 text.alignment = alignment;
             }
 #else
-            public void SetFontStyle(FontStyle style) {
-                if(text == null) return;
+            public void SetFontStyle(FontStyle style)
+            {
+                if (text == null) return;
                 text.fontStyle = style;
             }
 
-            public void SetTextAlignment(TextAnchor alignment) {
-                if(text == null) return;
+            public void SetTextAlignment(TextAnchor alignment)
+            {
+                if (text == null) return;
                 text.alignment = alignment;
             }
 #endif
 
-            public void SetActive(bool state) {
-                if(gameObject == null) return;
+            public void SetActive(bool state)
+            {
+                if (gameObject == null) return;
                 gameObject.SetActive(state);
             }
 
-            private bool Check() {
+            private bool Check()
+            {
                 bool result = true;
-                if(text == null) {
+                if (text == null)
+                {
                     Debug.LogError("Rewired Control Mapper: Button is missing Text child component!");
                     result = false;
                 }
@@ -387,12 +451,13 @@ namespace Rewired.UI.ControlMapper {
             }
         }
 
-#endregion
+        #endregion
 
-#region Serialized Data
+        #region Serialized Data
 
         [System.Serializable]
-        public class MappingSet {
+        public class MappingSet
+        {
 
             [SerializeField]
             [Tooltip("The Map Category that will be displayed to the user for remapping.")]
@@ -411,36 +476,44 @@ namespace Rewired.UI.ControlMapper {
 
             public int mapCategoryId { get { return _mapCategoryId; } }
             public ActionListMode actionListMode { get { return _actionListMode; } }
-            public IList<int> actionCategoryIds {
-                get {
-                    if(_actionCategoryIds == null) return null;
-                    if(_actionCategoryIdsReadOnly == null) _actionCategoryIdsReadOnly = new System.Collections.ObjectModel.ReadOnlyCollection<int>(_actionCategoryIds);
+            public IList<int> actionCategoryIds
+            {
+                get
+                {
+                    if (_actionCategoryIds == null) return null;
+                    if (_actionCategoryIdsReadOnly == null) _actionCategoryIdsReadOnly = new System.Collections.ObjectModel.ReadOnlyCollection<int>(_actionCategoryIds);
                     return _actionCategoryIdsReadOnly;
                 }
             }
-            public IList<int> actionIds {
-                get {
-                    if(_actionIds == null) return null;
-                    if(_actionIdsReadOnly == null) _actionIdsReadOnly = new System.Collections.ObjectModel.ReadOnlyCollection<int>(_actionIds);
+            public IList<int> actionIds
+            {
+                get
+                {
+                    if (_actionIds == null) return null;
+                    if (_actionIdsReadOnly == null) _actionIdsReadOnly = new System.Collections.ObjectModel.ReadOnlyCollection<int>(_actionIds);
                     return _actionIds;
                 }
             }
-            public bool isValid {
-                get {
-                    if(_mapCategoryId < 0 || ReInput.mapping.GetMapCategory(_mapCategoryId) == null) return false;
+            public bool isValid
+            {
+                get
+                {
+                    if (_mapCategoryId < 0 || ReInput.mapping.GetMapCategory(_mapCategoryId) == null) return false;
                     return true;
                 }
             }
 
 
-            public MappingSet() {
+            public MappingSet()
+            {
                 this._mapCategoryId = -1;
                 this._actionCategoryIds = new int[0];
                 this._actionIds = new int[0];
                 this._actionListMode = ActionListMode.ActionCategory;
             }
 
-            private MappingSet(int mapCategoryId, ActionListMode actionListMode, int[] actionCategoryIds, int[] actionIds) {
+            private MappingSet(int mapCategoryId, ActionListMode actionListMode, int[] actionCategoryIds, int[] actionIds)
+            {
                 this._mapCategoryId = mapCategoryId;
                 this._actionListMode = actionListMode;
                 this._actionCategoryIds = actionCategoryIds;
@@ -449,8 +522,10 @@ namespace Rewired.UI.ControlMapper {
 
             // Static
 
-            public static MappingSet Default {
-                get {
+            public static MappingSet Default
+            {
+                get
+                {
                     return new MappingSet(
                         0, // Default
                         ActionListMode.ActionCategory,
@@ -460,20 +535,22 @@ namespace Rewired.UI.ControlMapper {
                 }
             }
 
-            public enum ActionListMode {
+            public enum ActionListMode
+            {
                 ActionCategory = 0,
                 Action = 1
             }
         }
 
         [System.Serializable]
-        public class InputBehaviorSettings {
+        public class InputBehaviorSettings
+        {
 
             // Info
             [SerializeField]
             [Tooltip("The Input Behavior that will be displayed to the user for modification.")]
             private int _inputBehaviorId = -1;
-           
+
             // Display options
             [SerializeField]
             [Tooltip("If checked, a slider will be displayed so the user can change this value.")]
@@ -537,13 +614,15 @@ namespace Rewired.UI.ControlMapper {
             public bool isValid { get { return _inputBehaviorId >= 0 && (_showJoystickAxisSensitivity || _showMouseXYAxisSensitivity); } } // || _showMouseOtherAxisSensitivity); } }
 
 
-            public InputBehaviorSettings() {
+            public InputBehaviorSettings()
+            {
             }
 
         }
 
         [System.Serializable]
-        private class Prefabs {
+        private class Prefabs
+        {
 
             [SerializeField]
             private GameObject _button;
@@ -592,8 +671,9 @@ namespace Rewired.UI.ControlMapper {
             public GameObject centerStickGraphic { get { return _centerStickGraphic; } }
             public GameObject moveStickGraphic { get { return _moveStickGraphic; } }
 
-            public bool Check() {
-                if(
+            public bool Check()
+            {
+                if (
                     _button == null ||
                     _fitButton == null ||
                     _inputGridLabel == null ||
@@ -613,7 +693,8 @@ namespace Rewired.UI.ControlMapper {
         }
 
         [System.Serializable]
-        private class References {
+        private class References
+        {
 
             [SerializeField]
             private Canvas _canvas;
@@ -714,8 +795,9 @@ namespace Rewired.UI.ControlMapper {
             public Transform inputGridHeader3 { get; set; }
             public Transform inputGridHeader4 { get; set; }
 
-            public bool Check() {
-                if( _canvas == null ||
+            public bool Check()
+            {
+                if (_canvas == null ||
                     _mainCanvasGroup == null ||
                     _mainContent == null ||
                     _mainContentInner == null ||
@@ -746,22 +828,25 @@ namespace Rewired.UI.ControlMapper {
 
         }
 
-#endregion
+        #endregion
 
-        private class InputActionSet {
+        private class InputActionSet
+        {
             private int _actionId;
             private AxisRange _axisRange;
 
             public int actionId { get { return _actionId; } }
             public AxisRange axisRange { get { return _axisRange; } }
 
-            public InputActionSet(int actionId, AxisRange axisRange) {
+            public InputActionSet(int actionId, AxisRange axisRange)
+            {
                 this._actionId = actionId;
                 this._axisRange = axisRange;
             }
         }
 
-        private class InputMapping {
+        private class InputMapping
+        {
             public string actionName { get; private set; }
             public InputFieldInfo fieldInfo { get; private set; }
             public ControllerMap map { get; private set; }
@@ -772,20 +857,27 @@ namespace Rewired.UI.ControlMapper {
             public ControllerPollingInfo pollingInfo { get; set; }
             public ModifierKeyFlags modifierKeyFlags { get; set; }
 
-            public AxisRange axisRange {
-                get {
+            public AxisRange axisRange
+            {
+                get
+                {
                     AxisRange axisRange = AxisRange.Positive;
-                    if(pollingInfo.elementType == ControllerElementType.Axis) {
-                        if(fieldInfo.axisRange == AxisRange.Full) axisRange = AxisRange.Full;
+                    if (pollingInfo.elementType == ControllerElementType.Axis)
+                    {
+                        if (fieldInfo.axisRange == AxisRange.Full) axisRange = AxisRange.Full;
                         else axisRange = pollingInfo.axisPole == Pole.Positive ? AxisRange.Positive : AxisRange.Negative;
                     }
                     return axisRange;
                 }
             }
-            public string elementName {
-                get {
-                    if(controllerType == ControllerType.Keyboard) {
-                        if(modifierKeyFlags != ModifierKeyFlags.None) {
+            public string elementName
+            {
+                get
+                {
+                    if (controllerType == ControllerType.Keyboard)
+                    {
+                        if (modifierKeyFlags != ModifierKeyFlags.None)
+                        {
                             return string.Format("{0} + {1}", Keyboard.ModifierKeyFlagsToString(modifierKeyFlags), pollingInfo.elementIdentifierName);
                         }
                     }
@@ -793,16 +885,18 @@ namespace Rewired.UI.ControlMapper {
                     string name = pollingInfo.elementIdentifierName;
 
                     // Get the positive/negative name for axes
-                    if(pollingInfo.elementType == ControllerElementType.Axis) {
-                        if(axisRange == AxisRange.Positive) name = pollingInfo.elementIdentifier.positiveName;
-                        else if(axisRange == AxisRange.Negative) name = pollingInfo.elementIdentifier.negativeName;
+                    if (pollingInfo.elementType == ControllerElementType.Axis)
+                    {
+                        if (axisRange == AxisRange.Positive) name = pollingInfo.elementIdentifier.positiveName;
+                        else if (axisRange == AxisRange.Negative) name = pollingInfo.elementIdentifier.negativeName;
                     }
 
                     return name;
                 }
             }
 
-            public InputMapping(string actionName, InputFieldInfo fieldInfo, ControllerMap map, ActionElementMap aem, ControllerType controllerType, int controllerId) {
+            public InputMapping(string actionName, InputFieldInfo fieldInfo, ControllerMap map, ActionElementMap aem, ControllerType controllerType, int controllerId)
+            {
                 this.actionName = actionName;
                 this.fieldInfo = fieldInfo;
                 this.map = map;
@@ -811,16 +905,19 @@ namespace Rewired.UI.ControlMapper {
                 this.controllerId = controllerId;
             }
 
-            public ElementAssignment ToElementAssignment(ControllerPollingInfo pollingInfo) {
+            public ElementAssignment ToElementAssignment(ControllerPollingInfo pollingInfo)
+            {
                 this.pollingInfo = pollingInfo;
                 return ToElementAssignment();
             }
-            public ElementAssignment ToElementAssignment(ControllerPollingInfo pollingInfo, ModifierKeyFlags modifierKeyFlags) {
+            public ElementAssignment ToElementAssignment(ControllerPollingInfo pollingInfo, ModifierKeyFlags modifierKeyFlags)
+            {
                 this.pollingInfo = pollingInfo;
                 this.modifierKeyFlags = modifierKeyFlags;
                 return ToElementAssignment();
             }
-            public ElementAssignment ToElementAssignment() {
+            public ElementAssignment ToElementAssignment()
+            {
                 return new ElementAssignment(
                     controllerType,
                     pollingInfo.elementType,
@@ -836,7 +933,8 @@ namespace Rewired.UI.ControlMapper {
             }
         }
 
-        private class AxisCalibrator {
+        private class AxisCalibrator
+        {
 
             public AxisCalibrationData data;
             public readonly Joystick joystick;
@@ -847,108 +945,129 @@ namespace Rewired.UI.ControlMapper {
 
             public bool isValid { get { return axis != null; } }
 
-            public AxisCalibrator(Joystick joystick, int axisIndex) {
+            public AxisCalibrator(Joystick joystick, int axisIndex)
+            {
                 this.data = new AxisCalibrationData();
                 this.joystick = joystick;
                 this.axisIndex = axisIndex;
-                if(joystick != null && axisIndex >= 0 && joystick.axisCount > axisIndex) {
+                if (joystick != null && axisIndex >= 0 && joystick.axisCount > axisIndex)
+                {
                     axis = joystick.Axes[axisIndex];
                     data = joystick.calibrationMap.GetAxis(axisIndex).GetData();
                 }
                 firstRun = true;
             }
 
-            public void RecordMinMax() {
-                if(axis == null) return;
+            public void RecordMinMax()
+            {
+                if (axis == null) return;
 
                 float valueRaw = axis.valueRaw;
-                if(firstRun || valueRaw < data.min) data.min = valueRaw;
-                if(firstRun || valueRaw > data.max) data.max = valueRaw;
+                if (firstRun || valueRaw < data.min) data.min = valueRaw;
+                if (firstRun || valueRaw > data.max) data.max = valueRaw;
 
                 firstRun = false;
             }
 
-            public void RecordZero() {
-                if(axis == null) return;
+            public void RecordZero()
+            {
+                if (axis == null) return;
                 data.zero = axis.valueRaw;
             }
 
-            public void Commit() {
-                if(axis == null) return;
+            public void Commit()
+            {
+                if (axis == null) return;
                 AxisCalibration calibration = joystick.calibrationMap.GetAxis(axisIndex);
-                if(calibration == null) return;
+                if (calibration == null) return;
 
                 // Make sure min/max isn't the same or joystick cannot move
-                if(Mathf.Abs(data.max - data.min) < 0.1) return; // too close, joystick would be useless
+                if (Mathf.Abs(data.max - data.min) < 0.1) return; // too close, joystick would be useless
 
                 calibration.SetData(data);
             }
         }
 
-        private class IndexedDictionary<TKey, TValue> {
+        private class IndexedDictionary<TKey, TValue>
+        {
 
             private List<Entry> list;
 
-            public int Count {
-                get {
+            public int Count
+            {
+                get
+                {
                     return list.Count;
                 }
             }
 
-            public IndexedDictionary() {
+            public IndexedDictionary()
+            {
                 list = new List<Entry>();
             }
 
-            public TValue this[int index] {
-                get {
+            public TValue this[int index]
+            {
+                get
+                {
                     return list[index].value;
                 }
             }
 
-            public TValue Get(TKey key) {
+            public TValue Get(TKey key)
+            {
                 int index = IndexOfKey(key);
-                if(index < 0) throw new System.Exception("Key does not exist!");
+                if (index < 0) throw new System.Exception("Key does not exist!");
                 return list[index].value;
             }
 
-            public bool TryGet(TKey key, out TValue value) {
+            public bool TryGet(TKey key, out TValue value)
+            {
                 value = default(TValue);
                 int index = IndexOfKey(key);
-                if(index < 0) return false;
+                if (index < 0) return false;
                 value = list[index].value;
                 return true;
             }
 
-            public void Add(TKey key, TValue value) {
-                if(ContainsKey(key)) throw new System.Exception("Key " + key.ToString() + " is already in use!");
+            public void Add(TKey key, TValue value)
+            {
+                if (ContainsKey(key)) throw new System.Exception("Key " + key.ToString() + " is already in use!");
                 list.Add(new Entry(key, value));
             }
 
-            public int IndexOfKey(TKey key) {
+            public int IndexOfKey(TKey key)
+            {
                 int count = list.Count;
-                for(int i = 0; i < count; i++) {
-                    if(EqualityComparer<TKey>.Default.Equals(list[i].key, key)) return i;
+                for (int i = 0; i < count; i++)
+                {
+                    if (EqualityComparer<TKey>.Default.Equals(list[i].key, key)) return i;
                 }
                 return -1;
             }
 
-            public bool ContainsKey(TKey key) {
+            public bool ContainsKey(TKey key)
+            {
                 int count = list.Count;
-                for(int i = 0; i < count; i++) {
-                    if(EqualityComparer<TKey>.Default.Equals(list[i].key, key)) return true;
+                for (int i = 0; i < count; i++)
+                {
+                    if (EqualityComparer<TKey>.Default.Equals(list[i].key, key)) return true;
                 }
                 return false;
             }
 
-            public void Clear() {
+            public void Clear()
+            {
                 list.Clear();
             }
 
-            private class Entry {
+            private class Entry
+            {
                 public TKey key;
                 public TValue value;
 
-                public Entry(TKey key, TValue value) {
+                public Entry(TKey key, TValue value)
+                {
                     this.key = key;
                     this.value = value;
                 }

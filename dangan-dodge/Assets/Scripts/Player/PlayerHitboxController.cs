@@ -1,29 +1,33 @@
 ﻿using UnityEngine;
 
-public class PlayerHitboxController : MonoBehaviour {
+public class PlayerHitboxController : MonoBehaviour
+{
 
     public GameObject explosionParticles;
 
     private BasePlayerVariables vars;
-	private int hitPlayerId;
+    private int hitPlayerId;
 
     private GameController gameController;
 
-    void Start () {
-		vars = GetComponentInParent<BasePlayerVariables>();
-		hitPlayerId = vars.playerId;
+    void Start()
+    {
+        vars = GetComponentInParent<BasePlayerVariables>();
+        hitPlayerId = vars.playerId;
         gameController = FindObjectOfType<GameController>();
     }
 
-    void OnTriggerEnter2D(Collider2D collidingBullet) {
+    void OnTriggerEnter2D(Collider2D collidingBullet)
+    {
         // TODO: Consider making this unit testable by extracting logic to an outside class/method
 
-		BaseBulletVariables bulletVars = collidingBullet
-			.gameObject
-			.GetComponent(typeof(BaseBulletVariables)) as BaseBulletVariables;
+        BaseBulletVariables bulletVars = collidingBullet
+            .gameObject
+            .GetComponent(typeof(BaseBulletVariables)) as BaseBulletVariables;
 
         // A bullet that isn't owned by the player
-        if (bulletVars != null && bulletVars.ownerPlayerId != hitPlayerId) {
+        if (bulletVars != null && bulletVars.ownerPlayerId != hitPlayerId)
+        {
 
             GameStats.playerScores.TryGetValue(bulletVars.ownerPlayerId, out int currentScore);
             currentScore += 1;
@@ -34,12 +38,13 @@ public class PlayerHitboxController : MonoBehaviour {
 
             // Clear all bullets on death and create explosion particles
             GameObject[] bullets = GameObject.FindGameObjectsWithTag("Bullet");
-            foreach (GameObject bullet in bullets) {
+            foreach (GameObject bullet in bullets)
+            {
                 Destroy(bullet);
             }
 
             GameObject particleObject = Instantiate
-                (explosionParticles, 
+                (explosionParticles,
                 gameObject.transform.position,
                 Quaternion.identity);
             particleObject.GetComponent<ParticleSystem>().Play();

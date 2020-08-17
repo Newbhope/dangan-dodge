@@ -1,15 +1,14 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using System.Collections.Generic;
-using System;
-using UnityEngine.EventSystems;
 
 /**
  * Overall script for the game and arena
  * */
-public class GameController : MonoBehaviour {
+public class GameController : MonoBehaviour
+{
 
     public int countdownNumber;
     public float countdownInterval;
@@ -33,7 +32,8 @@ public class GameController : MonoBehaviour {
 
     private List<BasePlayerVariables> playerVars;
 
-    void Start() {
+    void Start()
+    {
         playerVars = new List<BasePlayerVariables> {
             playerOne.GetComponent<BasePlayerVariables>(),
             playerTwo.GetComponent<BasePlayerVariables>()
@@ -52,7 +52,8 @@ public class GameController : MonoBehaviour {
 
     // UI Stuff
 
-    internal void UpdateScoreUi() {
+    internal void UpdateScoreUi()
+    {
         GameStats.playerScores.TryGetValue(0, out int playerOneScore);
         playerOneScoreText.text = "Score: " + playerOneScore;
 
@@ -60,7 +61,8 @@ public class GameController : MonoBehaviour {
         playerTwoScoreText.text = "Score: " + playerTwoScore;
     }
 
-    internal void UpdateEnergyUi() {
+    internal void UpdateEnergyUi()
+    {
         int p1EnergyValue = playerVars[0].Energy;
         playerOneEnergy.text = p1EnergyValue.ToString();
         playerOneEnergyMeter.value = p1EnergyValue;
@@ -71,8 +73,10 @@ public class GameController : MonoBehaviour {
     }
 
     // This is probably optimizng too much. Unused code now
-    internal void UpdateEnergyUi(int playerId, int energy) {
-        switch(playerId) {
+    internal void UpdateEnergyUi(int playerId, int energy)
+    {
+        switch (playerId)
+        {
             case 0:
                 playerOneEnergy.text = energy.ToString();
                 break;
@@ -84,9 +88,11 @@ public class GameController : MonoBehaviour {
 
     // Game Manager Stuff
 
-    IEnumerator StartRound() {
+    IEnumerator StartRound()
+    {
         Time.timeScale = 0;
-        for (int currentNumber = countdownNumber; currentNumber > 0; currentNumber--) {
+        for (int currentNumber = countdownNumber; currentNumber > 0; currentNumber--)
+        {
             countdownText.text = currentNumber.ToString();
             yield return new WaitForSecondsRealtime(countdownInterval);
         }
@@ -96,29 +102,38 @@ public class GameController : MonoBehaviour {
         Time.timeScale = 1;
     }
 
-    IEnumerator RestartRound() {
+    IEnumerator RestartRound()
+    {
         yield return new WaitForSeconds(roundEndPauseTime);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
 
-    public void CheckGameOver() {
+    public void CheckGameOver()
+    {
         Dictionary<int, int> scores = GameStats.playerScores;
         //TODO: configurable score
         //there has to be a better way to do this
-        if (scores.ContainsValue(7)) {
-            foreach (var pair in scores) {
-                if (pair.Value == 7) {
+        if (scores.ContainsValue(7))
+        {
+            foreach (var pair in scores)
+            {
+                if (pair.Value == 7)
+                {
                     gameOverText.text = "Player " + pair.Key + " Wins!";
                 }
             }
-        } else {
+        }
+        else
+        {
             StartCoroutine(RestartRound());
         }
     }
 
-    public void PausePressed() {
-        switch (Time.timeScale) {
+    public void PausePressed()
+    {
+        switch (Time.timeScale)
+        {
             case 1:
                 Time.timeScale = 0;
                 pauseMenu.SetActive(true);
@@ -132,7 +147,8 @@ public class GameController : MonoBehaviour {
         }
     }
 
-    public void OnClickTitle() {
+    public void OnClickTitle()
+    {
         SceneManager.LoadScene("MainMenu");
     }
 }

@@ -49,7 +49,8 @@
 #pragma warning disable 0067
 #endregion
 
-namespace Rewired.Demos {
+namespace Rewired.Demos
+{
     using System;
     using UnityEngine;
     using UnityEngine.EventSystems;
@@ -60,7 +61,8 @@ namespace Rewired.Demos {
     /// </summary>
     [AddComponentMenu("")]
     [RequireComponent(typeof(RectTransform))]
-    public sealed class UIPointer : UIBehaviour {
+    public sealed class UIPointer : UIBehaviour
+    {
 
         [Tooltip("Should the hardware pointer be hidden?")]
         [SerializeField]
@@ -76,40 +78,46 @@ namespace Rewired.Demos {
         /// <summary>
         /// Sets the pointer to the last sibling in the parent hierarchy. Do not enable this on multiple UIPointers under the same parent transform or they will constantly fight each other for dominance.
         /// </summary>
-        public bool autoSort { get { return _autoSort; } set { if(value == _autoSort) return; _autoSort = value; if(value) transform.SetAsLastSibling(); } }
+        public bool autoSort { get { return _autoSort; } set { if (value == _autoSort) return; _autoSort = value; if (value) transform.SetAsLastSibling(); } }
 
-        protected override void Awake() {
+        protected override void Awake()
+        {
             base.Awake();
 
 #if UNITY_5_2_PLUS
             // Disable raycasting on all Graphics in the pointer
             Graphic[] graphics = GetComponentsInChildren<Graphic>();
-            foreach(Graphic g in graphics) {
+            foreach (Graphic g in graphics)
+            {
                 g.raycastTarget = false;
             }
 #endif
 #if UNITY_5_PLUS
             // Hide the hardware pointer
-            if(_hideHardwarePointer) Cursor.visible = false;
+            if (_hideHardwarePointer) Cursor.visible = false;
 #endif
-            if(_autoSort) transform.SetAsLastSibling();
+            if (_autoSort) transform.SetAsLastSibling();
 
             GetDependencies();
         }
 
-        private void Update() {
-            if(_autoSort && transform.GetSiblingIndex() < transform.parent.childCount - 1) {
+        private void Update()
+        {
+            if (_autoSort && transform.GetSiblingIndex() < transform.parent.childCount - 1)
+            {
                 transform.SetAsLastSibling();
             }
         }
 
-        protected override void OnTransformParentChanged() {
+        protected override void OnTransformParentChanged()
+        {
             base.OnTransformParentChanged();
             GetDependencies();
         }
 
-        protected override void OnCanvasGroupChanged() {
- 	        base.OnCanvasGroupChanged();
+        protected override void OnCanvasGroupChanged()
+        {
+            base.OnCanvasGroupChanged();
             GetDependencies();
         }
 
@@ -117,9 +125,10 @@ namespace Rewired.Demos {
         /// Updates the pointer position.
         /// </summary>
         /// <param name="screenPosition">The screen position of the pointer.</param>
-        public void OnScreenPositionChanged(Vector2 screenPosition) {
-            if(_canvasRectTransform == null) return;
-            
+        public void OnScreenPositionChanged(Vector2 screenPosition)
+        {
+            if (_canvasRectTransform == null) return;
+
             Rect rootCanvasRect = _canvasRectTransform.rect;
             Vector2 viewportPos = Camera.main.ScreenToViewportPoint(screenPosition);
 
@@ -128,7 +137,8 @@ namespace Rewired.Demos {
             (transform as RectTransform).anchoredPosition = viewportPos;
         }
 
-        private void GetDependencies() {
+        private void GetDependencies()
+        {
             Canvas canvas = transform.root.GetComponentInChildren<Canvas>();
             _canvasRectTransform = canvas != null ? canvas.GetComponent<RectTransform>() : null;
         }

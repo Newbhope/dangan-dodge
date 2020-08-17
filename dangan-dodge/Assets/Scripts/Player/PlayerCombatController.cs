@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using Rewired;
+﻿using Rewired;
+using UnityEngine;
 
 /**
  * Class that calls into each bullet spawner with the fire key
@@ -9,7 +9,8 @@ using Rewired;
  * 
  * Also calls into bomb spawner with bomb key.
  **/
-public class PlayerCombatController : MonoBehaviour {
+public class PlayerCombatController : MonoBehaviour
+{
 
     public int superOneCost;
     public int ultraCost;
@@ -22,7 +23,8 @@ public class PlayerCombatController : MonoBehaviour {
     private BombSpawner bombSpawner;
     private int bombsLeft;
 
-    void Awake() {
+    void Awake()
+    {
         vars = this.gameObject.GetComponent<BasePlayerVariables>();
         player = ReInput.players.GetPlayer(vars.playerId);
 
@@ -33,14 +35,18 @@ public class PlayerCombatController : MonoBehaviour {
     }
 
     // Player inputs should always be in Update() since FixedUpdate() doesn't poll fast enough
-    void Update() {
+    void Update()
+    {
         // To prevent actions while paused
-        if (Time.timeScale > 0.1) {
-            if (player.GetButton("Fire")) {
+        if (Time.timeScale > 0.1)
+        {
+            if (player.GetButton("Fire"))
+            {
                 baseBulletSpawner.Spawn();
             }
 
-            if (player.GetButtonDown("Bomb") && bombsLeft > 0) {
+            if (player.GetButtonDown("Bomb") && bombsLeft > 0)
+            {
                 bombSpawner.Spawn(bombsLeft);
                 bombsLeft--;
                 Debug.Log(bombsLeft);

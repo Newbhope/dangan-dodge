@@ -3,15 +3,14 @@
 #pragma warning disable 0618
 #pragma warning disable 0649
 
-namespace Rewired.UI.ControlMapper {
+namespace Rewired.UI.ControlMapper
+{
 
-    using UnityEngine;
-    using System.Collections;
     using System.Collections.Generic;
-    using System.Text.RegularExpressions;
-    using Rewired;
+    using UnityEngine;
 
-    public class LanguageData : ScriptableObject {
+    public class LanguageData : ScriptableObject
+    {
 
         [SerializeField]
         private string _yes = "Yes";
@@ -147,22 +146,25 @@ namespace Rewired.UI.ControlMapper {
         private Dictionary<string, string> customDict;
 
         // Public Methods / Properties
-        
-        public void Initialize() {
-            if(_initialized) return;
+
+        public void Initialize()
+        {
+            if (_initialized) return;
             customDict = CustomEntry.ToDictionary(_customEntries);
             _initialized = true;
         }
 
-        public string GetCustomEntry(string key) {
-            if(string.IsNullOrEmpty(key)) return string.Empty;
+        public string GetCustomEntry(string key)
+        {
+            if (string.IsNullOrEmpty(key)) return string.Empty;
             string value;
-            if(!customDict.TryGetValue(key, out value)) return string.Empty;
+            if (!customDict.TryGetValue(key, out value)) return string.Empty;
             return value;
         }
 
-        public bool ContainsCustomEntryKey(string key) {
-            if(string.IsNullOrEmpty(key)) return false;
+        public bool ContainsCustomEntryKey(string key)
+        {
+            if (string.IsNullOrEmpty(key)) return false;
             return customDict.ContainsKey(key);
         }
 
@@ -176,7 +178,7 @@ namespace Rewired.UI.ControlMapper {
         public string none { get { return _none; } }
         public string okay { get { return _okay; } }
         public string done { get { return _done; } }
-        public string default_ { get { return _default; } }  
+        public string default_ { get { return _default; } }
         public string assignControllerWindowTitle { get { return _assignControllerWindowTitle; } }
         public string assignControllerWindowMessage { get { return _assignControllerWindowMessage; } }
         public string controllerAssignmentConflictWindowTitle { get { return _controllerAssignmentConflictWindowTitle; } }
@@ -203,9 +205,11 @@ namespace Rewired.UI.ControlMapper {
         public string assignedControllersGroupLabel { get { return _assignedControllersGroupLabel; } }
         public string settingsGroupLabel { get { return _settingsGroupLabel; } }
         public string mapCategoriesGroupLabel { get { return _mapCategoriesGroupLabel; } }
-        public string restoreDefaultsWindowMessage {
-            get {
-                if(Rewired.ReInput.players.playerCount > 1) return _restoreDefaultsWindowMessage_multiPlayer;
+        public string restoreDefaultsWindowMessage
+        {
+            get
+            {
+                if (Rewired.ReInput.players.playerCount > 1) return _restoreDefaultsWindowMessage_multiPlayer;
                 else return _restoreDefaultsWindowMessage_onePlayer;
             }
         }
@@ -215,63 +219,80 @@ namespace Rewired.UI.ControlMapper {
         public string calibrateWindow_invertToggleLabel { get { return _calibrateWindow_invertToggleLabel; } }
         public string calibrateWindow_calibrateButtonLabel { get { return _calibrateWindow_calibrateButtonLabel; } }
 
-        public string GetControllerAssignmentConflictWindowMessage(string joystickName, string otherPlayerName, string currentPlayerName) {
+        public string GetControllerAssignmentConflictWindowMessage(string joystickName, string otherPlayerName, string currentPlayerName)
+        {
             return string.Format(_controllerAssignmentConflictWindowMessage, joystickName, otherPlayerName, currentPlayerName);
         }
-        public string GetJoystickElementAssignmentPollingWindowMessage(string actionName) {
+        public string GetJoystickElementAssignmentPollingWindowMessage(string actionName)
+        {
             return string.Format(_joystickElementAssignmentPollingWindowMessage, actionName);
         }
-        public string GetJoystickElementAssignmentPollingWindowMessage_FullAxisFieldOnly(string actionName) {
+        public string GetJoystickElementAssignmentPollingWindowMessage_FullAxisFieldOnly(string actionName)
+        {
             return string.Format(_joystickElementAssignmentPollingWindowMessage_fullAxisFieldOnly, actionName);
         }
-        public string GetKeyboardElementAssignmentPollingWindowMessage(string actionName) {
+        public string GetKeyboardElementAssignmentPollingWindowMessage(string actionName)
+        {
             return string.Format(_keyboardElementAssignmentPollingWindowMessage, actionName);
         }
-        public string GetMouseElementAssignmentPollingWindowMessage(string actionName) {
+        public string GetMouseElementAssignmentPollingWindowMessage(string actionName)
+        {
             return string.Format(_mouseElementAssignmentPollingWindowMessage, actionName);
         }
-        public string GetMouseElementAssignmentPollingWindowMessage_FullAxisFieldOnly(string actionName) {
+        public string GetMouseElementAssignmentPollingWindowMessage_FullAxisFieldOnly(string actionName)
+        {
             return string.Format(_mouseElementAssignmentPollingWindowMessage_fullAxisFieldOnly, actionName);
         }
-        public string GetElementAlreadyInUseBlocked(string elementName) {
+        public string GetElementAlreadyInUseBlocked(string elementName)
+        {
             return string.Format(_elementAlreadyInUseBlocked, elementName);
         }
-        public string GetElementAlreadyInUseCanReplace(string elementName, bool allowConflicts) {
-            if(!allowConflicts) return string.Format(_elementAlreadyInUseCanReplace, elementName);
+        public string GetElementAlreadyInUseCanReplace(string elementName, bool allowConflicts)
+        {
+            if (!allowConflicts) return string.Format(_elementAlreadyInUseCanReplace, elementName);
             return string.Format(_elementAlreadyInUseCanReplace_conflictAllowed, elementName);
         }
-        public string GetMouseAssignmentConflictWindowMessage(string otherPlayerName, string thisPlayerName) {
+        public string GetMouseAssignmentConflictWindowMessage(string otherPlayerName, string thisPlayerName)
+        {
             return string.Format(_mouseAssignmentConflictWindowMessage, otherPlayerName, thisPlayerName);
         }
-        public string GetCalibrateAxisStep1WindowMessage(string axisName) {
+        public string GetCalibrateAxisStep1WindowMessage(string axisName)
+        {
             return string.Format(_calibrateAxisStep1WindowMessage, axisName);
         }
-        public string GetCalibrateAxisStep2WindowMessage(string axisName) {
+        public string GetCalibrateAxisStep2WindowMessage(string axisName)
+        {
             return string.Format(_calibrateAxisStep2WindowMessage, axisName);
         }
 
         // Classes
 
         [System.Serializable]
-        private class CustomEntry {
+        private class CustomEntry
+        {
             public string key;
             public string value;
 
-            public CustomEntry() {
+            public CustomEntry()
+            {
             }
 
-            public CustomEntry(string key, string value) {
+            public CustomEntry(string key, string value)
+            {
                 this.key = key;
                 this.value = value;
             }
 
-            public static Dictionary<string, string> ToDictionary(CustomEntry[] array) {
-                if(array == null) return new Dictionary<string, string>();
-                Dictionary<string, string> dict = new Dictionary<string,string>();
-                for(int i = 0; i < array.Length; i++) {
-                    if(array[i] == null) continue;
-                    if(string.IsNullOrEmpty(array[i].key) || string.IsNullOrEmpty(array[i].value)) continue;
-                    if(dict.ContainsKey(array[i].key)) {
+            public static Dictionary<string, string> ToDictionary(CustomEntry[] array)
+            {
+                if (array == null) return new Dictionary<string, string>();
+                Dictionary<string, string> dict = new Dictionary<string, string>();
+                for (int i = 0; i < array.Length; i++)
+                {
+                    if (array[i] == null) continue;
+                    if (string.IsNullOrEmpty(array[i].key) || string.IsNullOrEmpty(array[i].value)) continue;
+                    if (dict.ContainsKey(array[i].key))
+                    {
                         Debug.LogError("Key \"" + array[i].key + "\" is already in dictionary!");
                         continue;
                     }

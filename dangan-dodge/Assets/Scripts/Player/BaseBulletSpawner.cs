@@ -1,13 +1,13 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 /**
  * Class used to make base "Bullets". 
  * Will use its own fire rate separate from other spawner types
  **/
-public class BaseBulletSpawner : MonoBehaviour {
-	public float fireRate;
-	public int movementSpeed;
+public class BaseBulletSpawner : MonoBehaviour
+{
+    public float fireRate;
+    public int movementSpeed;
     public int additionalBulletAngleSpread;
     public int extraBulletsPerSide;
 
@@ -15,32 +15,37 @@ public class BaseBulletSpawner : MonoBehaviour {
     public GameObject superBulletPrefab;
 
     private Transform playerTransform;
-	private BasePlayerVariables vars;
-	private int playerNumber;
+    private BasePlayerVariables vars;
+    private int playerNumber;
     private SpriteRenderer spriteRenderer;
 
     private float nextFireTime;
 
-	public void Start() {
-		playerTransform = GetComponentInParent<Transform>();
-		vars = GetComponentInParent<BasePlayerVariables>();
-		playerNumber = vars.playerId;
+    public void Start()
+    {
+        playerTransform = GetComponentInParent<Transform>();
+        vars = GetComponentInParent<BasePlayerVariables>();
+        playerNumber = vars.playerId;
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
-	public void Spawn() {
-		if (Time.time > nextFireTime && playerTransform != null) {
-			nextFireTime = Time.time + fireRate;
+    public void Spawn()
+    {
+        if (Time.time > nextFireTime && playerTransform != null)
+        {
+            nextFireTime = Time.time + fireRate;
 
             SpawnBullet(additionalBulletAngleSpread);
-            for (int i = 1; i <= extraBulletsPerSide; i++) {
+            for (int i = 1; i <= extraBulletsPerSide; i++)
+            {
                 SpawnBullet(additionalBulletAngleSpread + i * 2);
                 SpawnBullet(additionalBulletAngleSpread - i * 2);
             }
         }
-	}
+    }
 
-    private void SpawnBullet(int angle) {
+    private void SpawnBullet(int angle)
+    {
         Vector2 spawnDirection = new Vector2(1, 0) * movementSpeed;
         spawnDirection.y += angle;
 

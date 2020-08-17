@@ -1,9 +1,10 @@
-﻿using UnityEngine;
-using Rewired;
+﻿using Rewired;
+using UnityEngine;
 
 [RequireComponent(typeof(BasePlayerVariables))]
-public class PlayerMovementController : MonoBehaviour {
-	public float movementSpeed;
+public class PlayerMovementController : MonoBehaviour
+{
+    public float movementSpeed;
 
     private Rigidbody2D body;
 
@@ -18,17 +19,19 @@ public class PlayerMovementController : MonoBehaviour {
         player = ReInput.players.GetPlayer(vars.playerId);
     }
 
-    void FixedUpdate() {
+    void FixedUpdate()
+    {
         // Translate ranges from -1.0 to 1.0
         Vector2 inputVector = new Vector2(player.GetAxis("Move Horizontal"), player.GetAxis("Move Vertical"));
-        
+
         // Diagonal movement is faster than horizontal if the input vector isn't normalized
         Vector2 movementVector = inputVector.normalized * movementSpeed * 0.35f;
 
         body.MovePosition(body.position + movementVector);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision) {
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
         body.velocity = Vector2.zero;
     }
 }
