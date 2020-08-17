@@ -32,3 +32,17 @@ Uses 25 points of the super meter to unleash a large fast moving bullet
 
 ### Super Meter
 Starts at 50 at the start of each round. You can build up more meter by having an opponent's bullet be inside the blue energy shield surrounding your ship
+
+## Online Play
+
+Currently, online play is done through Parsec https://parsecgaming.com/
+I highly reccomend both players to download the desktop client. I've had some lag issues with the browser client.
+There are some hoops to go through at the moment since Parsec integration isn't fully supported yet.
+
+1. Launch Parsec
+2. Share desktop (hosting the game isn't supported yet since keyboard inputs only come from the host)
+3. Share link to your opponent
+4. Once the opponent connects, enable mouse and keyboard control for them
+5. Make sure not to hit your opponent's controls!
+
+You can use the regular hosting mode if your opponent has a controller, and you are fine with always being P2.
