@@ -28,15 +28,16 @@ public class GameController : MonoBehaviour
     public Text gameOverText;
     public GameObject pauseMenu;
     public Button resumeButton;
-    public Button why;
+    // TODO: controls
+    public Button brokenControlButton;
 
     private List<BasePlayerVariables> playerVars;
 
     void Start()
     {
         playerVars = new List<BasePlayerVariables> {
-            playerOne.GetComponent<BasePlayerVariables>(),
-            playerTwo.GetComponent<BasePlayerVariables>()
+            playerOne.GetComponentInParent<BasePlayerVariables>(),
+            playerTwo.GetComponentInParent<BasePlayerVariables>()
         };
 
         UpdateScoreUi();
@@ -44,8 +45,9 @@ public class GameController : MonoBehaviour
 
 
         // START TEST CODE
-        playerOne.GetComponent<BasePlayerVariables>().Energy = 50;
-        playerTwo.GetComponent<BasePlayerVariables>().Energy = 50;
+        foreach (BasePlayerVariables playerVar in playerVars) {
+            playerVar.Energy = 50;
+        }
         UpdateEnergyUi();
         // END TEST CODE
     }
@@ -141,7 +143,6 @@ public class GameController : MonoBehaviour
                 break;
             case 0:
                 Time.timeScale = 1;
-                why.Select();
                 pauseMenu.SetActive(false);
                 break;
         }

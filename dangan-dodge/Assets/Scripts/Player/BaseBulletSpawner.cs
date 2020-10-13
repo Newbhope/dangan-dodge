@@ -51,12 +51,12 @@ public class BaseBulletSpawner : MonoBehaviour
 
         GameObject spawnedBulletObject = Instantiate(
                 bulletPrefab,
-                playerTransform.position,
+                objectTransform.position,
                 Quaternion.identity);
 
         spawnedBulletObject.GetComponent<BaseBulletVariables>().ownerPlayerId = playerNumber;
         spawnedBulletObject.GetComponent<SpriteRenderer>().color = spriteRenderer.color;
-        spawnedBulletObject.GetComponent<Rigidbody2D>().velocity = transform.TransformDirection(spawnDirection);
+        spawnedBulletObject.GetComponent<Rigidbody2D>().velocity = base.transform.TransformDirection(spawnDirection);
     }
 
     internal void SpawnUltra() {
@@ -65,18 +65,18 @@ public class BaseBulletSpawner : MonoBehaviour
         }
         GameObject spawnedBulletObject = Instantiate(
                 superBulletPrefab,
-                playerTransform.position,
+                objectTransform.position,
                 Quaternion.identity);
     }
 
     internal void SpawnSuperBullet() {
         GameObject superBullet = Instantiate(
             superBulletPrefab,
-            playerTransform.position,
+            objectTransform.position,
             Quaternion.identity);
 
         superBullet.GetComponent<BaseBulletVariables>().ownerPlayerId = playerNumber;
         superBullet.GetComponent<SpriteRenderer>().color = spriteRenderer.color;
-        superBullet.GetComponent<Rigidbody2D>().velocity = transform.TransformDirection(new Vector2(1, 0) * movementSpeed / 2);
+        superBullet.GetComponent<Rigidbody2D>().velocity = base.transform.TransformDirection(new Vector2(1, 0) * bulletMovementSpeed / 2);
     }
 }

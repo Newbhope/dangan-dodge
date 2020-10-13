@@ -23,9 +23,8 @@ public class PlayerCombatController : MonoBehaviour
     private BombSpawner bombSpawner;
     private int bombsLeft;
 
-    void Awake()
-    {
-        vars = this.gameObject.GetComponent<BasePlayerVariables>();
+    void Awake() {
+        vars = GetComponentInParent<BasePlayerVariables>();
         player = ReInput.players.GetPlayer(vars.playerId);
 
         baseBulletSpawner = GetComponent<BaseBulletSpawner>();

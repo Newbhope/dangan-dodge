@@ -1,10 +1,10 @@
 ﻿using Rewired;
 using UnityEngine;
 
-[RequireComponent(typeof(BasePlayerVariables))]
-public class PlayerMovementController : MonoBehaviour
-{
-    public float movementSpeed;
+// [RequireComponent(typeof(BasePlayerVariables))]
+// This is in the parent now which makes the RequireComponent not useful sadly
+public class PlayerMovementController : MonoBehaviour {
+	public float movementSpeed;
 
     private Rigidbody2D body;
 
@@ -12,7 +12,7 @@ public class PlayerMovementController : MonoBehaviour
     private Player player;
 
     private void Awake() {
-        BasePlayerVariables vars = GetComponent<BasePlayerVariables>();
+        BasePlayerVariables vars = GetComponentInParent<BasePlayerVariables>();
         body = GetComponent<Rigidbody2D>();
 
         // Get the Rewired Player object for this player and keep it for the duration of the character's lifetime

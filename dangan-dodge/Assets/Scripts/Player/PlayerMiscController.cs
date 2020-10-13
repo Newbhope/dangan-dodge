@@ -1,9 +1,8 @@
 ﻿using Rewired;
 using UnityEngine;
 
-[RequireComponent(typeof(BasePlayerVariables))]
-public class PlayerMiscController : MonoBehaviour
-{
+// [RequireComponent(typeof(BasePlayerVariables))]
+public class PlayerMiscController : MonoBehaviour {
 
     private Player player;
     private GameController arenaController;
@@ -11,7 +10,7 @@ public class PlayerMiscController : MonoBehaviour
     void Awake()
     {
         // Do I want multiple people to be able to control the pause menu?
-        BasePlayerVariables vars = GetComponent<BasePlayerVariables>();
+        BasePlayerVariables vars = GetComponentInParent<BasePlayerVariables>();
         player = ReInput.players.GetPlayer(vars.playerId);
         arenaController = FindObjectOfType<GameController>();
     }
