@@ -98,6 +98,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   otherPlayer: {fileID: 0}
+  bulletsToFire: 7
+  fireRate: 0.5
 --- !u!114 &7171920857377149937
 MonoBehaviour:
   m_ObjectHideFlags: 0

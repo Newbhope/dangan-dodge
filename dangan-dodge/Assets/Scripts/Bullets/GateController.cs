@@ -3,9 +3,13 @@
 public class GateController : MonoBehaviour
 {
     public GameObject otherPlayer;
+    public int bulletsToFire;
+    public float fireRate;
 
+    private int bulletsFired = 0;
     private BaseBulletSpawner baseBulletSpawner;
-    
+
+    private float nextFireTime;
 
     public void Start() {
         baseBulletSpawner = GetComponent<BaseBulletSpawner>();
@@ -30,9 +34,26 @@ public class GateController : MonoBehaviour
         }
 
 
+        if (transform.localPosition.x <= 2)
+        {
+            transform.Translate(0.005f, 0, 0);
+        }
 
-        // shoot
-        baseBulletSpawner.Spawn();
+        if (transform.localPosition.x >= 2)
+        {
+            // shoot
+            if (bulletsFired < bulletsToFire && Time.time > nextFireTime)
+            {
+                nextFireTime = Time.time + fireRate;
+                baseBulletSpawner.Spawn();
+                bulletsFired++;
+            }
+        }
+
+        if (bulletsFired == bulletsToFire)
+        {
+            transform.Translate(-0.025f, 0, 0);
+        }
     }
 
 
