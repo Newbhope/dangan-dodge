@@ -15,7 +15,7 @@ public class BombSpawner : MonoBehaviour
 
     public void Start()
     {
-        BasePlayerVariables vars = this.gameObject.GetComponent<BasePlayerVariables>();
+        BasePlayerVariables vars = this.gameObject.GetComponentInParent<BasePlayerVariables>();
         bombsLeft = vars.bombsLeft;
         Vector3 originalPosition = originalBombIcon.transform.position;
         bombIcons.Add(originalBombIcon);

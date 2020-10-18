@@ -4052,9 +4052,9 @@ MonoBehaviour:
           customCalculationSourceData:
           - sourceType: 1
             sourceElement: 3
-            sourceAxisRange: 1
+            sourceAxisRange: 2
             deadzone: 0
-            invert: 0
+            invert: 1
           - sourceType: 1
             sourceElement: 9
             sourceAxisRange: 0
@@ -4084,9 +4084,9 @@ MonoBehaviour:
           customCalculationSourceData:
           - sourceType: 1
             sourceElement: 3
-            sourceAxisRange: 2
+            sourceAxisRange: 1
             deadzone: 0
-            invert: 1
+            invert: 0
           - sourceType: 1
             sourceElement: 10
             sourceAxisRange: 0

@@ -4,29 +4,30 @@
 #pragma warning disable 0649
 #pragma warning disable 0414
 
-namespace Rewired.Editor
-{
-    using Rewired.Platforms;
+namespace Rewired.Editor {
+
+    using UnityEngine;
     using UnityEditor;
+    using System.IO;
+    using Rewired;
+    using Rewired.Platforms;
+    using Rewired.Utils;
 
     [InitializeOnLoad]
     [System.ComponentModel.Browsable(false)]
     [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
-    public static class UnityEditorBridge
-    {
+    public static class UnityEditorBridge {
 
         private static EditorPlatform editorPlatform;
         private static Platform platform;
         private static WebplayerPlatform webplayerPlatform;
         private static bool isEditor;
 
-        private static void Initialize()
-        {
+        private static void Initialize() {
             DeterminePlatform();
         }
 
-        private static void DeterminePlatform()
-        {
+        private static void DeterminePlatform() {
             editorPlatform = EditorPlatform.None;
             platform = Platform.Unknown;
             webplayerPlatform = WebplayerPlatform.None;

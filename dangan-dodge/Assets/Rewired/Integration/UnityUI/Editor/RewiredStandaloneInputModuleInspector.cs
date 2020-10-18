@@ -3,19 +3,19 @@
 #pragma warning disable 0618
 #pragma warning disable 0649
 
-namespace Rewired.Editor
-{
-    using Rewired.Integration.UnityUI;
+namespace Rewired.Editor {
+
+    using UnityEngine;
     using UnityEditor;
+    using Rewired;
+    using Rewired.Integration.UnityUI;
 
     [System.ComponentModel.Browsable(false)]
     [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
     [CustomEditor(typeof(RewiredStandaloneInputModule))]
-    public sealed class RewiredStandaloneInputModuleInspector : CustomInspector_External
-    {
+    public sealed class RewiredStandaloneInputModuleInspector : CustomInspector_External {
 
-        private void OnEnable()
-        {
+        private void OnEnable() {
             internalEditor = new RewiredStandaloneInputModuleInspector_Internal(this);
             internalEditor.OnEnable();
         }

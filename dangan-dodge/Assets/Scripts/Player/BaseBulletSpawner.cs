@@ -14,7 +14,7 @@ public class BaseBulletSpawner : MonoBehaviour
     public GameObject bulletPrefab;
     public GameObject superBulletPrefab;
 
-    private Transform playerTransform;
+    private Transform objectTransform;
     private BasePlayerVariables vars;
     private int playerNumber;
     private SpriteRenderer spriteRenderer;
@@ -23,7 +23,7 @@ public class BaseBulletSpawner : MonoBehaviour
 
     public void Start()
     {
-        playerTransform = GetComponentInParent<Transform>();
+        objectTransform = GetComponentInParent<Transform>();
         vars = GetComponentInParent<BasePlayerVariables>();
         playerNumber = vars.playerId;
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
@@ -31,7 +31,7 @@ public class BaseBulletSpawner : MonoBehaviour
 
     public void Spawn()
     {
-        if (Time.time > nextFireTime && playerTransform != null)
+        if (Time.time > nextFireTime && objectTransform != null)
         {
             nextFireTime = Time.time + fireRate;
 
@@ -77,6 +77,6 @@ public class BaseBulletSpawner : MonoBehaviour
 
         superBullet.GetComponent<BaseBulletVariables>().ownerPlayerId = playerNumber;
         superBullet.GetComponent<SpriteRenderer>().color = spriteRenderer.color;
-        superBullet.GetComponent<Rigidbody2D>().velocity = base.transform.TransformDirection(new Vector2(1, 0) * bulletMovementSpeed / 2);
+        superBullet.GetComponent<Rigidbody2D>().velocity = base.transform.TransformDirection(new Vector2(1, 0) * movementSpeed / 2);
     }
 }

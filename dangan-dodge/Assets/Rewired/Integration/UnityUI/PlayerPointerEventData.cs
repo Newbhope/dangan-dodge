@@ -4,17 +4,16 @@
 #pragma warning disable 0618
 #pragma warning disable 0649
 
-namespace Rewired.Integration.UnityUI
-{
-    using Rewired.UI;
+namespace Rewired.Integration.UnityUI {
     using System.Text;
+    using UnityEngine;
     using UnityEngine.EventSystems;
+    using Rewired.UI;
 
     /// <summary>
     /// Each touch event creates one of these containing all the relevant information.
     /// </summary>
-    public class PlayerPointerEventData : PointerEventData
-    {
+    public class PlayerPointerEventData : PointerEventData {
 
         /// <summary>
         /// The Player id of the Player that generated this event.
@@ -47,15 +46,13 @@ namespace Rewired.Integration.UnityUI
         public int buttonIndex { get; set; }
 
         public PlayerPointerEventData(EventSystem eventSystem)
-            : base(eventSystem)
-        {
+            : base(eventSystem) {
             playerId = -1;
             inputSourceIndex = -1;
             buttonIndex = -1;
         }
 
-        public override string ToString()
-        {
+        public override string ToString() {
             var sb = new StringBuilder();
             sb.AppendLine("<b>Player Id</b>: " + playerId);
             sb.AppendLine("<b>Mouse Source</b>: " + mouseSource);
