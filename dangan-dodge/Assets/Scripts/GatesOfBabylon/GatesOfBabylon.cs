@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class GatesOfBabylon : MonoBehaviour
 {
-    // Start is called before the first frame update
+    GateController[] controllers;
+
     void Start()
     {
-        
+        controllers = GetComponentsInChildren<GateController>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ActivateGates()
     {
-        
+        foreach (GateController controller in controllers)
+        {
+            controller.ActivateGate();
+        }
     }
 }

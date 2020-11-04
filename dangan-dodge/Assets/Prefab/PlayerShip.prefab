@@ -79,7 +79,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   superOneCost: 25
-  ultraCost: 0
+  ultraCost: 100
+  gatesOfBabylon: {fileID: 0}
 --- !u!114 &114176899883188426
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -93,7 +94,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireRate: 0.4
-  movementSpeed: 0
+  movementSpeed: 5
   additionalBulletAngleSpread: 0
   extraBulletsPerSide: 1
   bulletPrefab: {fileID: 1068068838267708, guid: 24b438590a72b6943813ca972fdae957,

@@ -46,7 +46,7 @@ public class GameController : MonoBehaviour
 
         // START TEST CODE
         foreach (BasePlayerVariables playerVar in playerVars) {
-            playerVar.Energy = 50;
+            playerVar.Energy = 200;
         }
         UpdateEnergyUi();
         // END TEST CODE

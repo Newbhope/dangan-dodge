@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class GateController : MonoBehaviour
 {
@@ -17,11 +18,9 @@ public class GateController : MonoBehaviour
 
     private int bulletsFired = 0;
     private BaseBulletSpawner baseBulletSpawner;
-
     private float nextFireTime;
 
     private bool readyToFire = false;
-    private bool doneFiring = false;
 
     public void Start() {
         baseBulletSpawner = GetComponent<BaseBulletSpawner>();
@@ -50,23 +49,28 @@ public class GateController : MonoBehaviour
             // get arc tangent or something
         }
 
-        LerpMove();
+        if (readyToFire == true)
+        {
+            LerpMove();
+        }
 
         //RawMove();
     }
 
     private void LerpMove()
     {
-        if (transform.position.x < end.position.x)
+        // Move to end position
+        if (Math.Abs(transform.position.x - end.position.x) > 0.1)
         {
             float distCovered = (Time.time - startTime) * speed;
             float fractionOfJourney = distCovered / journeyLength;
-            Vector3 test = Vector3.Lerp(start.position, end.position, fractionOfJourney);
-            Vector3 newPosition = new Vector2(test.x, transform.position.y);
-            transform.position = newPosition;
+            Vector3 lerpPosition = Vector3.Lerp(start.position, end.position, fractionOfJourney);
+            Vector3 newGatePosition = new Vector2(lerpPosition.x, transform.position.y);
+            transform.position = newGatePosition;
         }
 
-        if (transform.position.x >= end.position.x)
+        // At end position
+        if (Math.Abs(transform.position.x - end.position.x) <= 0.1)
         {
             if (bulletsFired < bulletsToFire && Time.time > nextFireTime)
             {
@@ -77,17 +81,30 @@ public class GateController : MonoBehaviour
             }
         }
 
+        // Move to start position
         if (bulletsFired == bulletsToFire)
         {
             float distCovered = (Time.time - middleTime) * speed;
             float fractionOfJourney = distCovered / journeyLength;
-            Vector3 test = Vector3.Lerp(end.position, start.position, fractionOfJourney);
-            Vector2 newPosition = new Vector2(test.x, transform.position.y);
-            transform.position = newPosition;
+            Vector3 lerpPosition = Vector3.Lerp(end.position, start.position, fractionOfJourney);
+            Vector2 newGatePosition = new Vector2(lerpPosition.x, transform.position.y);
+            transform.position = newGatePosition;
 
-            // TODO: reset gates
+            // Reset
+            if (Math.Abs(transform.position.x - start.position.x) < 0.1)
+            {
+                bulletsFired = 0;
+                readyToFire = false;
+            }
         }
 
+    }
+
+    public void ActivateGate()
+    {
+        readyToFire = true;
+        bulletsFired = 0;
+        startTime = Time.time;
     }
 
     private void RawMove()

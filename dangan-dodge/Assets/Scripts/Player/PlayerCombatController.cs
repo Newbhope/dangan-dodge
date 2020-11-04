@@ -15,6 +15,8 @@ public class PlayerCombatController : MonoBehaviour
     public int superOneCost;
     public int ultraCost;
 
+    public GameObject gatesOfBabylon;
+
     private Player player;
     private BasePlayerVariables vars;
 
@@ -52,11 +54,10 @@ public class PlayerCombatController : MonoBehaviour
             }
 
             // Metered moves
-            if (player.GetButtonLongPressUp("Super1")) {
-                if (vars.Energy >= ultraCost) {
-                    baseBulletSpawner.SpawnUltra();
-                    vars.Energy -= ultraCost;
-                }
+            if (player.GetButtonLongPressUp("Super1") && vars.Energy >= ultraCost) {
+                GatesOfBabylon gateController = gatesOfBabylon.GetComponent<GatesOfBabylon>();
+                gateController.ActivateGates();
+                vars.Energy -= ultraCost;
             } else if (player.GetButtonUp("Super1") && vars.Energy >= superOneCost) {
                 baseBulletSpawner.SpawnSuperBullet();
                 vars.Energy -= superOneCost;
