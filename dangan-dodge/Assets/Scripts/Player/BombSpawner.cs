@@ -52,7 +52,7 @@ public class BombSpawner : MonoBehaviour
         }
         Destroy(bombIcons[bombsLeft - 1]);
 
-        GameObject particleGameObject = Instantiate(particles, gameObject.transform);
+        GameObject particleGameObject = Instantiate(particles, gameObject.transform.position, gameObject.transform.rotation);
         particleGameObject.GetComponent<ParticleSystem>().Play();
     }
 }
