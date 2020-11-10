@@ -8,13 +8,13 @@ public class PlayerHitboxController : MonoBehaviour
     private BasePlayerVariables vars;
     private int hitPlayerId;
 
-    private GameController gameController;
+    private GameManager gameController;
 
     void Start()
     {
         vars = GetComponentInParent<BasePlayerVariables>();
         hitPlayerId = vars.playerId;
-        gameController = FindObjectOfType<GameController>();
+        gameController = FindObjectOfType<GameManager>();
     }
 
     void OnTriggerEnter2D(Collider2D collidingBullet)

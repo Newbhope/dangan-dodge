@@ -7,7 +7,7 @@ using UnityEngine.UI;
 /**
  * Overall script for the game and arena
  * */
-public class GameController : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
 
     public int countdownNumber;
@@ -122,7 +122,7 @@ public class GameController : MonoBehaviour
             {
                 if (pair.Value == 7)
                 {
-                    gameOverText.text = "Player " + pair.Key + " Wins!";
+                    gameOverText.text = "Player " + (pair.Key + 1) + " Wins!";
                 }
             }
         }

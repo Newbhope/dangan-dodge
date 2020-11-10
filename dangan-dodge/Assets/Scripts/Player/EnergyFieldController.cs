@@ -5,13 +5,13 @@ public class EnergyFieldController : MonoBehaviour
 
     public int energyPerFrame;
 
-    private GameController gameController;
+    private GameManager gameController;
     private BasePlayerVariables vars;
 
     void Start()
     {
         vars = GetComponentInParent<BasePlayerVariables>();
-        gameController = FindObjectOfType<GameController>();
+        gameController = FindObjectOfType<GameManager>();
     }
 
     private void OnTriggerStay2D(Collider2D collision)

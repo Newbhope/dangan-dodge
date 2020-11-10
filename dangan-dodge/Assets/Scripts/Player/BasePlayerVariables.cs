@@ -21,10 +21,10 @@ public class BasePlayerVariables : MonoBehaviour
     }
     private int energy;
 
-    private GameController gameController;
+    private GameManager gameController;
 
     void Awake()
     {
-        gameController = FindObjectOfType<GameController>();
+        gameController = FindObjectOfType<GameManager>();
     }
 }

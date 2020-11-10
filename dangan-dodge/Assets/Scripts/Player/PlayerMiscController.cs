@@ -5,14 +5,14 @@ using UnityEngine;
 public class PlayerMiscController : MonoBehaviour {
 
     private Player player;
-    private GameController arenaController;
+    private GameManager arenaController;
 
     void Awake()
     {
         // Do I want multiple people to be able to control the pause menu?
         BasePlayerVariables vars = GetComponentInParent<BasePlayerVariables>();
         player = ReInput.players.GetPlayer(vars.playerId);
-        arenaController = FindObjectOfType<GameController>();
+        arenaController = FindObjectOfType<GameManager>();
     }
 
     // FixedUpdate doesn't operate when timescale is 0, but Update is called every frame regardless
