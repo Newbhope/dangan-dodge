@@ -9,7 +9,7 @@ using UnityEngine.UI;
  * */
 public class GameManager : MonoBehaviour
 {
-
+    // Number to start countdown from
     public int countdownNumber;
     public float countdownInterval;
     public Text countdownText;

@@ -1,9 +1,10 @@
-﻿using Rewired;
+﻿using Photon.Pun;
+using Rewired;
 using UnityEngine;
 
 // [RequireComponent(typeof(BasePlayerVariables))]
 // This is in the parent now which makes the RequireComponent not useful sadly
-public class PlayerMovementController : MonoBehaviour {
+public class PlayerMovementController : MonoBehaviourPun {
 	public float movementSpeed;
 
     private Rigidbody2D body;
@@ -21,15 +22,21 @@ public class PlayerMovementController : MonoBehaviour {
 
     void FixedUpdate()
     {
-        // Translate ranges from -1.0 to 1.0
-        Vector2 inputVector = new Vector2(player.GetAxis("Move Horizontal"), player.GetAxis("Move Vertical"));
+        // the null check is a "hack" to get around error messages in local multiplayer. I'll be using this for now until something better comes up
+        if (photonView == null || photonView.IsMine)
+        {
+            // Translate ranges from -1.0 to 1.0
+            Vector2 inputVector = new Vector2(player.GetAxis("Move Horizontal"), player.GetAxis("Move Vertical"));
 
-        // Diagonal movement is faster than horizontal if the input vector isn't normalized
-        Vector2 movementVector = inputVector.normalized * movementSpeed * 0.35f;
+            // Diagonal movement is faster than horizontal if the input vector isn't normalized
+            Vector2 movementVector = inputVector.normalized * movementSpeed * 0.35f;
 
-        body.MovePosition(body.position + movementVector);
+            body.MovePosition(body.position + movementVector);
+        }
+
     }
 
+    // huh what is this for
     private void OnCollisionEnter2D(Collision2D collision)
     {
         body.velocity = Vector2.zero;
