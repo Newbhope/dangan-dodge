@@ -9,6 +9,7 @@ TagManager:
   - Bullet
   - Arena
   - ResumeButton
+  - PlayerListText
   layers:
   - Default
   - TransparentFX
