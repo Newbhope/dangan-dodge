@@ -35,6 +35,8 @@ public class MenuNetworkManager : MonoBehaviourPunCallbacks
     {
         progressLabel.SetActive(false);
         controlPanel.SetActive(true);
+
+        PhotonNetwork.LogLevel = PunLogLevel.Informational;
     }
 
     /// <summary>
