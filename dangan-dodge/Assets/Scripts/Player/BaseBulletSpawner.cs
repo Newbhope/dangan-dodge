@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Photon.Pun;
+using UnityEngine;
 
 /**
  * Class used to make base "Bullets". 
@@ -49,8 +50,8 @@ public class BaseBulletSpawner : MonoBehaviour
         Vector2 spawnDirection = new Vector2(1, 0) * movementSpeed;
         spawnDirection.y += angle;
 
-        GameObject spawnedBulletObject = Instantiate(
-                bulletPrefab,
+        GameObject spawnedBulletObject = PhotonNetwork.Instantiate(
+                "BaseBulletOnline",
                 objectTransform.position,
                 Quaternion.identity);
 

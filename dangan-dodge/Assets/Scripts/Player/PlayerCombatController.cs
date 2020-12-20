@@ -1,4 +1,5 @@
-﻿using Rewired;
+﻿using Photon.Pun;
+using Rewired;
 using UnityEngine;
 
 /**
@@ -9,7 +10,7 @@ using UnityEngine;
  * 
  * Also calls into bomb spawner with bomb key.
  **/
-public class PlayerCombatController : MonoBehaviour
+public class PlayerCombatController : MonoBehaviourPun
 {
 
     public int superOneCost;
@@ -39,7 +40,7 @@ public class PlayerCombatController : MonoBehaviour
     void Update()
     {
         // To prevent actions while paused
-        if (Time.timeScale > 0.1)
+        if (Time.timeScale > 0.1 && (photonView == null || photonView.IsMine))
         {
             if (player.GetButton("Fire"))
             {

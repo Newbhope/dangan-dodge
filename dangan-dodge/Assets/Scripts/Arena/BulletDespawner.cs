@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Photon.Pun;
+using UnityEngine;
 
 public class BulletDespawner : MonoBehaviour
 {
@@ -6,7 +7,7 @@ public class BulletDespawner : MonoBehaviour
     {
         if (other != null && other.tag == "Bullet")
         {
-            Destroy(other.gameObject);
+            PhotonNetwork.Destroy(other.gameObject);
         }
     }
 }

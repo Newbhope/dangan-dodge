@@ -26,7 +26,7 @@ public class MenuNetworkManager : MonoBehaviourPunCallbacks
     [SerializeField]
     private GameObject progressLabel;
 
-    public void OnEnable()
+    new public void OnEnable()
     {
         PhotonNetwork.AddCallbackTarget(this);
     }
@@ -104,7 +104,7 @@ public class MenuNetworkManager : MonoBehaviourPunCallbacks
     }
 
 
-    public void OnDisable()
+    new public void OnDisable()
     {
         PhotonNetwork.RemoveCallbackTarget(this);
     }

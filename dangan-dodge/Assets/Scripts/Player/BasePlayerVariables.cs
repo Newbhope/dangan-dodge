@@ -16,7 +16,10 @@ public class BasePlayerVariables : MonoBehaviour
         set
         {
             energy = value;
-            gameController.UpdateEnergyUi();
+            if (gameController != null)
+            {
+                gameController.UpdateEnergyUi();
+            }
         }
     }
     private int energy;
