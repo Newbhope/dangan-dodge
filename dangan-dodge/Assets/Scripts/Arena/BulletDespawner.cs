@@ -5,7 +5,9 @@ public class BulletDespawner : MonoBehaviour
 {
     void OnTriggerExit2D(Collider2D other)
     {
-        if (other != null && other.tag == "Bullet")
+        PhotonView bulletPhotonView = other.gameObject.GetPhotonView();
+
+        if (other != null && other.tag == "Bullet" && PhotonNetwork.IsMasterClient && bulletPhotonView.IsMine)
         {
             PhotonNetwork.Destroy(other.gameObject);
         }
