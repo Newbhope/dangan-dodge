@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using Photon.Pun;
+using UnityEngine;
 
-public class BasePlayerVariables : MonoBehaviour
+public class BasePlayerVariables : MonoBehaviourPunCallbacks
 {
     public int playerId;
     public int bombsLeft;
@@ -29,5 +30,21 @@ public class BasePlayerVariables : MonoBehaviour
     void Awake()
     {
         gameController = FindObjectOfType<GameManager>();
+    }
+
+    [PunRPC]
+    void RPCDie(PhotonMessageInfo info)
+    {
+        // Need this here to kill uh stuff you don't own
+
+        // Clear all bullets on death and create explosion particles
+        GameObject[] bullets = GameObject.FindGameObjectsWithTag("Bullet");
+        foreach (GameObject bullet in bullets)
+        {
+            PhotonNetwork.Destroy(bullet);
+        }
+        // Destroy the player prefab also instead of just the square prefab
+        PhotonNetwork.Destroy(this.transform.parent.gameObject);
+        Debug.LogError("plzzzz");
     }
 }

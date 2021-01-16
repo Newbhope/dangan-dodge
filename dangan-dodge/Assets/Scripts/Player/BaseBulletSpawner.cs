@@ -5,7 +5,7 @@ using UnityEngine;
  * Class used to make base "Bullets". 
  * Will use its own fire rate separate from other spawner types
  **/
-public class BaseBulletSpawner : MonoBehaviour
+public class BaseBulletSpawner : MonoBehaviourPun
 {
     public float fireRate;
     public int movementSpeed;
@@ -50,10 +50,13 @@ public class BaseBulletSpawner : MonoBehaviour
         Vector2 spawnDirection = new Vector2(1, 0) * movementSpeed;
         spawnDirection.y += angle;
 
+        object[] test = { playerNumber };
         GameObject spawnedBulletObject = PhotonNetwork.Instantiate(
                 "BaseBulletOnline",
                 objectTransform.position,
-                Quaternion.identity);
+                Quaternion.identity,
+                0,
+                test);
 
         spawnedBulletObject.GetComponent<BaseBulletVariables>().ownerPlayerId = playerNumber;
         spawnedBulletObject.GetComponent<SpriteRenderer>().color = spriteRenderer.color;

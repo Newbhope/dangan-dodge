@@ -64,7 +64,6 @@ public class CharacterSelectMenu : MonoBehaviourPunCallbacks
     [PunRPC]
     void RPCFight(PhotonMessageInfo info)
     {
-        Debug.Log(string.Format("ChatMessage {0} {1}", "lol", "test"));
         PhotonNetwork.AutomaticallySyncScene = true;
         PhotonNetwork.LoadLevel("Online");
     }

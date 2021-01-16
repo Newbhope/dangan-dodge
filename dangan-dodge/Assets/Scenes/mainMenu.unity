@@ -1281,7 +1281,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Danmaku Dodge
+  m_Text: Dangan Dodge
 --- !u!222 &1688365152
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1829,7 +1829,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1618071491
-  m_SortingLayer: -1
+  m_SortingLayer: -2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 10df2c801a703e641b2d6ba6a4c42a08, type: 3}
   m_Color: {r: 0.4811321, g: 0.13843894, b: 0.20406099, a: 1}

@@ -236,7 +236,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1104026911}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &51290790
 GameObject:
@@ -500,7 +500,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1618071491
-  m_SortingLayer: -1
+  m_SortingLayer: -2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: acd8278e920cf5e46bbef8a57bd04ae5, type: 3}
   m_Color: {r: 0.2901961, g: 0.2901961, b: 0.2901961, a: 1}
@@ -913,6 +913,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9028621086379901152, guid: fa412900266664e7497d7d8d4483f6a1,
+        type: 3}
+      propertyPath: viewIdField
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114304242573088468, guid: fa412900266664e7497d7d8d4483f6a1, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: fa412900266664e7497d7d8d4483f6a1, type: 3}
@@ -1076,7 +1081,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4187014882824860, guid: fa412900266664e7497d7d8d4483f6a1, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4187014882824860, guid: fa412900266664e7497d7d8d4483f6a1, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1228,6 +1233,11 @@ PrefabInstance:
       propertyPath: m_Radius
       value: 0.45
       objectReference: {fileID: 0}
+    - target: {fileID: 9028621086379901152, guid: fa412900266664e7497d7d8d4483f6a1,
+        type: 3}
+      propertyPath: viewIdField
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fa412900266664e7497d7d8d4483f6a1, type: 3}
 --- !u!1 &316272974 stripped
@@ -1253,6 +1263,7 @@ GameObject:
   - component: {fileID: 373735745}
   - component: {fileID: 373735744}
   - component: {fileID: 373735746}
+  - component: {fileID: 373735747}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -1314,6 +1325,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0218251907b6e9e4fa75b2dfd1cf666f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &373735747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 373735743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  observableSearch: 2
+  Synchronization: 3
+  OwnershipTransfer: 0
+  ObservedComponents: []
+  viewIdField: 3
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &405062339
 GameObject:
   m_ObjectHideFlags: 0
@@ -1795,7 +1828,7 @@ PrefabInstance:
     - target: {fileID: 1143211425646655956, guid: 1f2bcf3e2b90842f1b2b89687ee899a8,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1143211425646655956, guid: 1f2bcf3e2b90842f1b2b89687ee899a8,
         type: 3}
@@ -2687,10 +2720,10 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1316574674}
-  - {fileID: 34625725}
   - {fileID: 154103510}
   - {fileID: 541562403}
+  - {fileID: 1316574674}
+  - {fileID: 34625725}
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2749,7 +2782,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0.92156863, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -3224,7 +3257,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1104026911}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1328562754
 GameObject:

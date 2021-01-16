@@ -22,8 +22,7 @@ public class PlayerMovementController : MonoBehaviourPun {
 
     void FixedUpdate()
     {
-        // the null check is a "hack" to get around error messages in local multiplayer. I'll be using this for now until something better comes up
-        if (photonView == null || photonView.IsMine)
+        if (photonView.IsMine)
         {
             // Translate ranges from -1.0 to 1.0
             Vector2 inputVector = new Vector2(player.GetAxis("Move Horizontal"), player.GetAxis("Move Vertical"));

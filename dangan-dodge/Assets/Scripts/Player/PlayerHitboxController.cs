@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using Photon.Pun;
+using UnityEngine;
 
-public class PlayerHitboxController : MonoBehaviour
+public class PlayerHitboxController : MonoBehaviourPunCallbacks
 {
 
     public GameObject explosionParticles;
@@ -9,12 +10,14 @@ public class PlayerHitboxController : MonoBehaviour
     private int hitPlayerId;
 
     private GameManager gameController;
+    private GameNetworkManager gameNetworkManager;
 
     void Start()
     {
         vars = GetComponentInParent<BasePlayerVariables>();
         hitPlayerId = vars.playerId;
         gameController = FindObjectOfType<GameManager>();
+        gameNetworkManager = FindObjectOfType<GameNetworkManager>();
     }
 
     void OnTriggerEnter2D(Collider2D collidingBullet)
@@ -33,24 +36,29 @@ public class PlayerHitboxController : MonoBehaviour
             currentScore += 1;
             GameStats.playerScores[bulletVars.ownerPlayerId] = currentScore;
 
-            gameController.UpdateScoreUi();
-            gameController.CheckGameOver();
 
-            // Clear all bullets on death and create explosion particles
+            // This might be needed since I was testing with an outdated client
+
             GameObject[] bullets = GameObject.FindGameObjectsWithTag("Bullet");
             foreach (GameObject bullet in bullets)
             {
-                Destroy(bullet);
+                PhotonNetwork.Destroy(bullet);
             }
 
-            GameObject particleObject = Instantiate
-                (explosionParticles,
+            // TODO: fix
+            GameObject particleObject = PhotonNetwork.Instantiate(
+                explosionParticles.name,
                 gameObject.transform.position,
                 Quaternion.identity);
             particleObject.GetComponent<ParticleSystem>().Play();
 
-            // Destroy the player prefab also instead of just the square prefab
-            Destroy(this.transform.parent.gameObject);
+
+            gameController.UpdateScoreUi();
+            gameController.CheckGameOver();
+
+            PhotonNetwork.Destroy(this.transform.parent.gameObject);
+
+            gameNetworkManager.photonView.RPC("RPCDie", RpcTarget.All);
         }
     }
 }

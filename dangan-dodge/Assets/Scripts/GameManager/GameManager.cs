@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿using Photon.Pun;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -7,7 +9,7 @@ using UnityEngine.UI;
 /**
  * Overall script for the game and arena
  * */
-public class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviourPunCallbacks
 {
     // Number to start countdown from
     public int countdownNumber;
@@ -46,6 +48,26 @@ public class GameManager : MonoBehaviour
 
         // START TEST CODE
         foreach (BasePlayerVariables playerVar in playerVars) {
+            playerVar.Energy = 200;
+        }
+        UpdateEnergyUi();
+        // END TEST CODE
+    }
+
+    internal void OnlineInitialize(GameObject playerOne, GameObject playerTwo)
+    {
+        playerVars = new List<BasePlayerVariables> {
+            playerOne.GetComponentInParent<BasePlayerVariables>(),
+            playerTwo.GetComponentInParent<BasePlayerVariables>()
+        };
+
+        UpdateScoreUi();
+        StartCoroutine(StartRound());
+
+
+        // START TEST CODE
+        foreach (BasePlayerVariables playerVar in playerVars)
+        {
             playerVar.Energy = 200;
         }
         UpdateEnergyUi();
@@ -107,7 +129,14 @@ public class GameManager : MonoBehaviour
     IEnumerator RestartRound()
     {
         yield return new WaitForSeconds(roundEndPauseTime);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        this.photonView.RPC("RPCFight", RpcTarget.All);
+    }
+
+    [PunRPC]
+    void RPCFight(PhotonMessageInfo info)
+    {
+        PhotonNetwork.AutomaticallySyncScene = true;
+        PhotonNetwork.LoadLevel(SceneManager.GetActiveScene().name);
     }
 
 
@@ -150,6 +179,13 @@ public class GameManager : MonoBehaviour
 
     public void OnClickTitle()
     {
-        SceneManager.LoadScene("MainMenu");
+        PhotonNetwork.LeaveRoom();
+    }
+
+    public override void OnLeftRoom()
+    {
+        base.OnLeftRoom();
+        PhotonNetwork.Disconnect();
+        PhotonNetwork.LoadLevel("MainMenu");
     }
 }
