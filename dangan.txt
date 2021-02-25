@@ -1,0 +1,1 @@
+A 1v1 bullet hell game taking inspiration from fighting games like Street Fighter. Instead of dodging and shooting bullets at a boss, you and your opponent create the bullet patterns. You build up super meter by staying next to bullets for as long as possible, and you can use that meter to unleash hell on your opponent.
